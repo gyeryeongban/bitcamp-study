@@ -1,4 +1,4 @@
 # bitcamp-study
 
-## 1일차
+## Day 1
 - 아무거나
