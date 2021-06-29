@@ -1,5 +1,8 @@
 # bitcamp-study
 
 ## Day 1
-- 아무거나 1
-- 아무거나 2
+- Clone: $ git clone
+- Pull: $ git pull
+- Write backup list: $ git add .
+- Write commit message: $ git commit -m ""
+- Backup to server: $ git push
