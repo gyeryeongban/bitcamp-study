@@ -17,3 +17,19 @@
 	- ex) gcc
 	- Interpreter: 기계어가 아니기 도우미 프로그램이 필요
 	- ex) JavaScript 실행을 위해 node.js 필요
+
+## Day 3
+- Create project
+	- bin
+		- main <- .class file
+	- src
+		- main <- application file
+			- java <- java source
+			- resources <- common file
+		- test <- unit test File
+			- java <- java source
+			- resources <- common file
+- Compile
+	- $ javac -d bin/main -encoding UTF-8 src/main/···
+- Run
+	- $ java -cp bin/main ···
