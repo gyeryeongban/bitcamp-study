@@ -37,3 +37,29 @@
 	- $ javac -d bin/main -encoding UTF-8 src/main/···
 - Run
 	- $ java -cp bin/main ···
+
+## Day 4
+- Step 1
+	- project
+		- source file
+		- class file
+- Step 2
+	- git repo/ project
+		- bin
+		- src
+- Step 3
+	- git repo
+		- root project
+			- sub project
+- Step 4
+	- git repo
+		- project
+			- root project
+				- sub project
+- Build Tool
+	- Ant
+		- build script file: build.xml
+	- Maven
+		- build script file: pom.xml
+	- Gradle
+		- build script file: build.gradle
