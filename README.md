@@ -1,7 +1,7 @@
 # bitcamp-study
 
 ## Day 1
-- Clone: '$ git clone'
+- Clone: `$ git clone`
 - Pull: '$ git pull'
 - Write Backup List: '$ git add .'
 - Write Commit Message: '$ git commit -m ""'
