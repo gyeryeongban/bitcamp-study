@@ -2,10 +2,10 @@
 
 ## Day 1
 - Clone: `$ git clone`
-- Pull: '$ git pull'
-- Write Backup List: '$ git add .'
-- Write Commit Message: '$ git commit -m ""'
-- Backup to Server: '$ git push'
+- Pull: `$ git pull`
+- Write Backup List: `$ git add .`
+- Write Commit Message: `$ git commit -m ""`
+- Backup to Server: `$ git push`
 
 ## Day 2
 - Mechan Language and CPU
@@ -34,9 +34,9 @@
 			- java <- java source
 			- resources <- common file
 - Compile
-	- '$ javac -d bin/main -encoding UTF-8 src/main/···'
+	- `$ javac -d bin/main -encoding UTF-8 src/main/···`
 - Run
-	- '$ java -cp bin/main ···'
+	- `$ java -cp bin/main ···`
 
 ## Day 4
 - Create Project
@@ -66,35 +66,35 @@
 		- Build Script File: build.gradle
 - How to Use Gradle Build Tool
 	- Gradle Basic Task
-		- '$ gradle init' : Prepare Project File
-		- '$ gradlew' : Install Gradle and Create File
+		- `$ gradle init` : Prepare Project File
+		- `$ gradlew` : Install Gradle and Create File
 	- 'Java' Gradle Plug-in
-		- '$ gradle compileJava'
+		- `$ gradle compileJava`
 			- Compile src/main/java
 			- Copy .class File in build/classes/java/main
-		- '$ gradle compileTestJava'
+		- `$ gradle compileTestJava`
 			- Compile src/test/java
 			- Copy .class File in build/classes/java/test
-		- '$ gradle processResources'
+		- `$ gradle processResources`
 			- Copy src/main/resources -> build/resources/main
-		- '$ gradle processTestResources'
+		- `$ gradle processTestResources`
 			- Copy src/test/resources -> build/resources/test
-		- '$ gradle clean'
-			- Delete build Folder
-		- '$ gradle classes'
+		- `$ gradle clean`
+			- Delete Build Folder
+		- `$ gradle classes`
 			- Run compileJava + processResources
-		- '$ gradle testClasses'
+		- `$ gradle testClasses`
 			- Run classes + compileTestJava + processTestResources
-		- '$ gradle check'
-			- Run test + Unit Test
-		- '$ gradle javadoc'
-			- Create 'API Document.html'
-		- '$ gradle build'
+		- `$ gradle check`
+			- Run test + unit test
+		- `$ gradle javadoc`
+			- Create API Document.html
+		- `$ gradle build`
 			- Run check + assemble
 	- 'Application' Gradle Plug-in
-		- '$ gradle run'
+		- `$ gradle run`
 			- 1. Run 'Java' Plug-in classes
 			- 2. Run Class Specified in Application setting
-		- '$ gradle build'
+		- `$ gradle build`
 			- Create Distribution File in build/distributions
 			- Create Script File
