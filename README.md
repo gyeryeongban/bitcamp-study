@@ -1,16 +1,16 @@
 # bitcamp-study
 
 ## Day 1
-- Clone: $ git clone
-- Pull: $ git pull
-- Write backup list: $ git add .
-- Write commit message: $ git commit -m ""
-- Backup to server: $ git push
+- Clone: '$ git clone'
+- Pull: '$ git pull'
+- Write Backup List: '$ git add .'
+- Write Commit Message: '$ git commit -m ""'
+- Backup to Server: '$ git push'
 
 ## Day 2
-- Mechan language and CPU
+- Mechan Language and CPU
 	- Diffrent CPU: CPU마다 명령 규칙이 다르기 때문
-- Mechan language and OS
+- Mechan Language and OS
 	- Diffrent OS: 운영 체제마다 기계어를 배치하는 방법이 다르기 때문
 - Compiler vs Interpreter
 	- Compiler: 명령문을 기계어로 번역
@@ -19,11 +19,11 @@
 	- ex) JavaScript 실행을 위해 node.js 필요
 
 ## Day 3
-- Filename extension
-	- .java <- source
-	- .exe <- mechan language
-	- .class <- bytecode/ p-code
-- Create project
+- Filename Extension
+	- .java <- Source
+	- .exe <- Mechan Language
+	- .class <- Bytecode/ P-code
+- Create Project
 	- bin
 		- main <- .class file
 	- src
@@ -34,32 +34,67 @@
 			- java <- java source
 			- resources <- common file
 - Compile
-	- $ javac -d bin/main -encoding UTF-8 src/main/···
+	- '$ javac -d bin/main -encoding UTF-8 src/main/···'
 - Run
-	- $ java -cp bin/main ···
+	- '$ java -cp bin/main ···'
 
 ## Day 4
-- Step 1
-	- project
-		- source file
-		- class file
-- Step 2
-	- git repo/ project
-		- bin
-		- src
-- Step 3
-	- git repo
-		- root project
-			- sub project
-- Step 4
-	- git repo
-		- project
-			- root project
-				- sub project
+- Create Project
+	- Step 1
+		- Project
+			- Source File
+			- Class File
+	- Step 2
+		- Git Repo/ Project
+			- bin
+			- src
+	- Step 3
+		- Git Repo
+			- Root Project
+				- Sub Project
+	- Step 4
+		- Git Repo
+			- Project
+				- Root Project
+					- Sub Project
 - Build Tool
 	- Ant
-		- build script file: build.xml
+		- Build Script File: build.xml
 	- Maven
-		- build script file: pom.xml
+		- Build Script File: pom.xml
 	- Gradle
-		- build script file: build.gradle
+		- Build Script File: build.gradle
+- How to Use Gradle Build Tool
+	- Gradle Basic Task
+		- '$ gradle init' : Prepare Project File
+		- '$ gradlew' : Install Gradle and Create File
+	- 'Java' Gradle Plug-in
+		- '$ gradle compileJava'
+			- Compile src/main/java
+			- Copy .class File in build/classes/java/main
+		- '$ gradle compileTestJava'
+			- Compile src/test/java
+			- Copy .class File in build/classes/java/test
+		- '$ gradle processResources'
+			- Copy src/main/resources -> build/resources/main
+		- '$ gradle processTestResources'
+			- Copy src/test/resources -> build/resources/test
+		- '$ gradle clean'
+			- Delete build Folder
+		- '$ gradle classes'
+			- Run compileJava + processResources
+		- '$ gradle testClasses'
+			- Run classes + compileTestJava + processTestResources
+		- '$ gradle check'
+			- Run test + Unit Test
+		- '$ gradle javadoc'
+			- Create 'API Document.html'
+		- '$ gradle build'
+			- Run check + assemble
+	- 'Application' Gradle Plug-in
+		- '$ gradle run'
+			- 1. Run 'Java' Plug-in classes
+			- 2. Run Class Specified in Application setting
+		- '$ gradle build'
+			- Create Distribution File in build/distributions
+			- Create Script File
