@@ -19,6 +19,10 @@
 	- ex) JavaScript 실행을 위해 node.js 필요
 
 ## Day 3
+- Filename extension
+	- .java <- source
+	- .exe <- mechan language
+	- .class <- bytecode/ p-code
 - Create project
 	- bin
 		- main <- .class file
