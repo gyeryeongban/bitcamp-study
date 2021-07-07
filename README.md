@@ -245,3 +245,109 @@
 	- 32bit: Almost 7~8자리 (Default = 7)
 	- 64bit: Almost 16자리
 	- ** 유효 자릿수를 넘어가면 잘리거나 반올림 됨
+- 폰트
+	- a. Raster 폰트 (Bitmap 폰트)
+		- 크기를 늘리면 계단현상 발생
+		- 폰트를 도트(점) 정보로 저장
+		- 출력 속도가 빠름
+		- 단순한 그림이나 복잡한 그림이 파일 크기가 같음
+		- 왜? 천연색일 경우 각 점을 3바이트로 표현하기 때문
+	- b. Vector 폰트 (Truetype 폰트)
+		- 크기를 늘려도 깔끔하게 출력
+		- 폰트를 명령어로 저장
+		- 그릴 때 마다 명령어를 실행해야 하기 때문에 출력 속도가 느림
+		- 그림이 복잡할수록 명령어가 복잡하기 때문에 파일 크기가 커짐
+
+## Day 8
+- 문자 변수 (UCS-2 문자 코드 값 저장)
+	- 해당 코드의 문자를 폰트 파일에서 찾아 출력
+- 데이터 타입
+	- 정수
+		- byte
+			- -128 ~ 127
+		- short
+			- -32768 ~ 32767
+		- int
+			- 약 -21억 ~ 약 21억
+		- long
+			- 약 -922경 ~ 약 922경
+		-float
+			- 유효 자릿수 7자리 (단정도)
+		- double
+			- 유효 자릿수 16자리 (배정도)
+		- char
+			- 0 ~ 65535 (유니코드)
+- 자바 원시 타입 변수 (Primitive Variable)
+	- 정수, 부동소수점, 논리, 문자코드의 값을
+- 레퍼런스 변수(Referece Variable)
+	- 자바 원시 타입의 값을 제외한 모든 값
+- 논리
+    - boolean a;
+		- 자바 언어 명세서에는 메모리의 크기가 정의되어 있지X
+		- 다만, JVM 명세서에는 int로 다룬다고 나와있음
+- 레퍼런스 변수
+    - String a;
+		- 자바 언어 명세서에는 메모리의 크기가 정의되어 있지X
+		- 메모리 주소를 저장할 만큼 큰 크기
+    - Date a;
+		- 자바 언어
+- l-value and r-value
+	- l-value은 반드시 메모리여야 함
+		- ex) 20 = 30;
+	- 리터럴
+		- ex) a = 1;
+	- 변수
+		- ex) int a2 = a;
+	- 표현식 (Expreeion)
+		- ex) a2 = a + 11;
+		- 문장을 실행 후 결과 값을 리턴하는 명령어
+- System.in and Scanner
+	- String str = keyboard.nextLine();
+		- a. 키보드에서 한 줄 입력될 때까지 기다림
+		- b. 한 줄이 입력되면 문자열을 뽑아서 리턴
+		- c. 저장
+- Reference
+	- 데이터가 저장된 메모리의 주소를 저장하는 메모리
+- 문자열 (주소)
+	- String: 문자열이 저장된 메모리의 주소를 저장
+- 날짜 (주소)
+	- Date: 날짜 값이 저장된 메모리의 주소를 저장
+- JVM and Memory
+	- a. JVM -사용할 메모리를 요구-> OS
+	- b. OS -사용할 수 있는 메모리를 확보하여 JVM에게 할당-> JVM
+	- c. JVM -실행하는 동안 사용-> 내부 메모리 (RAM)
+- Use Scanner
+	- 1개의 토큰(token)을 읽을 때까지 기다림
+	- * 토큰: 양쪽에서 공백(White Space)으로 분리된 문자열(단어)
+	- 공백 앞까지만 출력
+		- next()
+		- nextInt()
+		- nextFloat()
+		- nextBoolean()
+- 공백으로 인식
+	- Space
+	- Tab
+	- newline
+- nextXXX()를 사용할 때 주의할 점
+	- 한 개의 토큰을 읽음
+	- 			↓
+	- 공백을 만날 때까지 읽음
+	- 단어 앞의 공백은 제거
+	- 빈 문자열을 읽으려면 nextLine() 사용
+- How to use nextXXX()
+	- 20 aaa true 입력
+		- nextInt(): 20 return
+		- next(): aaa
+		- nextBoolean(): true
+		- => 공백을 만나면 제거
+- System.in and Scanner
+	- Reference로 Object에 신호를 보냄
+	- ex) 리모콘(Reference)로 에어컨(Object)을 켬
+	- 	  잔디에 물 뿌리는 기계(Scanner)에 호스(System.in)를 연결해서 물을 뿌림
+	- Scanner 스스로 데이터를 읽을 수 없음
+	- ex) 잔디에 물 뿌리는 기계가 물을 가져오진 못하는 것과 같이 물은 호스가 가져오고 기계를 호스를 연결시켜 뿌리는 역할만 함
+- Scanner() 괄호 안
+	- 키보드 입력기
+		- System.in
+	- 파일
+	- 랜카드
