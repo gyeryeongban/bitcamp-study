@@ -291,6 +291,10 @@
 		- 메모리 주소를 저장할 만큼 큰 크기
     - Date a;
 		- 자바 언어
+- 레퍼런스 -업그레이드-> 스캐너
+	- 시스템의 표준 입력 장치인 키보드를 Inputsteam 변수에 저장
+	- Inputsteam: 데이터가 들어오는 것
+	- Outputsteam: 데이터가 나가는 것
 - l-value and r-value
 	- l-value은 반드시 메모리여야 함
 		- ex) 20 = 30;
