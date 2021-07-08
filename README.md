@@ -337,7 +337,7 @@
 	- newline
 - nextXXX()를 사용할 때 주의할 점
 	- 한 개의 토큰을 읽음
-	- 		↓
+	- 	↓
 	- 공백을 만날 때까지 읽음
 	- 단어 앞의 공백은 제거
 	- 빈 문자열을 읽으려면 nextLine() 사용
@@ -350,7 +350,7 @@
 - System.in and Scanner
 	- Reference로 Object에 신호를 보냄
 	- ex) 리모콘(Reference)로 에어컨(Object)을 켬
-	- 	  잔디에 물 뿌리는 기계(Scanner)에 호스(System.in)를 연결해서 물을 뿌림
+	- 	잔디에 물 뿌리는 기계(Scanner)에 호스(System.in)를 연결해서 물을 뿌림
 	- Scanner 스스로 데이터를 읽을 수 없음
 	- ex) 잔디에 물 뿌리는 기계가 물을 가져오진 못하는 것과 같이 물은 호스가 가져오고 기계를 호스를 연결시켜 뿌리는 역할만 함
 - Scanner() 괄호 안
