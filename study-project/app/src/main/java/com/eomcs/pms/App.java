@@ -24,13 +24,36 @@ public class App {
 
     final int MAX = 3;
 
-    int[] no = new int[MAX];
-    String[] name = new String[MAX];
-    String[] email = new String[MAX];
-    String[] password = new String[MAX];
-    String[] photo = new String[MAX];
-    String[] tel = new String[MAX];
-    Date[] registeredDate = new Date[MAX];
+    int n01, no2, no3;
+    String name1, name2, name3;
+    String email1, email2, email3;
+    String pwd1, pwd2, pwd3;
+    String photo1, photo2, proto3;
+    String tel1, tel2, tel3;
+    Date rDate1, rDate2, rDate3;
+
+    // int[] no = new int[MAX];
+    // String[] name = new String[MAX];
+    // String[] email = new String[MAX];
+    // String[] password = new String[MAX];
+    // String[] photo = new String[MAX];
+    // String[] tel = new String[MAX];
+    // Date[] registeredDate = new Date[MAX];
+
+    System.out.print("번호? ");
+      int no1 = Integer.parseInt(keyboardScan.nextLine());
+      System.out.print("이름? ");
+      String name = keyboardScan.nextLine();
+      System.out.print("이메일? ");
+      String email = keyboardScan.nextLine();
+      System.out.print("암호? ");
+      String pwd = keyboardScan.nextLine();
+      System.out.print("사진? ");
+      String photo = keyboardScan.nextLine();
+      System.out.print("전화? ");
+      String tel = keyboardScan.nextLine();
+      Date rDate = new Date();
+      System.out.println();
 
     for (int i = 0; i < MAX; i++) {
       System.out.print("번호? ");
