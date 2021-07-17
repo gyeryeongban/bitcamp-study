@@ -971,6 +971,109 @@ plus: 메서드명
 - new 명령으로 생성하는 변수(= 인스턴스 변수)를 둠
 
 ## :pushpin: Day 14
+### 메서드: JVM 메모리
+#### 실행 순서와 메모리
+- 1. `$ java -classpath bin ···`
+	- JVM은 클래스 정보를 Method Area 영역에 로드
+- 2. `main()` 호출
+	- JVM Stack 영역에 `main()` 메서드가 사용할 로컬 변수를 준비
+- 3. `swap()` 호출
+	- JVM Stack 영역에 `swap()` 메서드가 사용할 로컬 변수를 준비
+- 4. `swap()` 실행 완료
+	- JVM Stack 영역에 있던 `swap()`이 사용한 메모리를 제거
+- 5. `main()` 실행 완료
+	- JVM Stack 영역에 있던 `main()`이 사용한 메모리를 제거
+- 6. JVM 실행 종료
+	- OS가 JVM에게 사용하라고 빌려줬던 모든 메모리를 회수
+#### JVM이 메모리를 다루는 방법
+- Method Area
+	- 클래스 명령 코드
+	- static 변수
+- Heap
+	- new 명령으로 만든 메모리 (인스턴스 = 객체)
+	- Garbage Collector(GC)가 관리하는 영역
+- JVM Stack
+	- 메서드의 로컬 변수
+	- 스레드 별로 JVM Stack 메모리를 따로 관리
+	- 각 메서드마다 프레임 단위로 관리
+	- 메서드 호출이 끝나면 그 메서드가 사용한 프레임 메모리 제거
+	- 스택(Stack) 메모리
+	- 스택 방식 => Last In First Out (LIFO; 후입선출)
+	- ex) 접시 쌓기
+	- 메서드가 호출될 때 로컬 변수가 준비
+	- 맨 마지막에 호출한 메서드가 먼저 삭제
+	- JVM이 종료하면 JVM이 사용했던 모든 메모리를 OS가 회수
+### 메서드: Heap 메모리 영역
+- 1. `main()` 호출
+	- JVM Stack: args, arr 변수 생성
+- 2. `getArray()` 호출
+	- JVM Stack: arr 변수 생성
+	- Heap: `new int[]` 배열 생성
+- 3. `getArray()` 호출 끝
+	- JVM Stack: `getArray()` 관련 메모리(arr 변수) 제거
+	- `new int[]` 배열 주소 리턴
+- 4. `main()` 호출 끝
+	- JVM Stack: `main()` 관련 메모리 제거
+- 5. JVM 종료
+	- JVM이 사용한 모든 메모리(Method Area, JVM Stack, Heap 등)를 OS 반납
+### 배열의 생성
+- 호출하는 쪽에서 결과를 담을 배열을 주는 경우
+- 메서드 쪽에서 결과를 담을 배열을 만들어 리턴하는 경우
+### 메서드: 인스턴스와 Heap 메모리 영역
+- Heap 메모리에 어떤 변수를 만들어야 하는지 적어 놓은 설계도
+- new 명령을 사용하여 메모리를 만들라고 하면 => MyObject
+- 1. `main()` 호출
+	- JVM Stack: args, ref 변수 생성
+- 2. `getMyObject()` 호출
+	- JVM Stack: ref 변수 생성
+	- Method Area: MyObject 클래스를 로딩
+	- Heap: MyObject 설계도에 따라 인스턴스 생성
+- 3. `getMyObject()` 호출 끝
+	- JVM Stack: `getMyObject()` 관련 메모리(ref 변수) 제거
+	- MyObject의 인스턴스의 주소 리턴
+- 4. `main()` 호출 끝
+	- JVM Stack: `main()` 관련 메모리 제거
+- 5. JVM 종료
+	- JVM이 사용한 모든 메모리(Method Area, JVM Stack, Heap 등)를 OS 반납
+### 메서드: 스택 메모리 응용 I
+#### JVM Stack 메모리의 사용
+- 0. 시작
+- 1. main()
+- 2. main() -> m1()
+- 3. main() -> m1() -> m2()
+- 4. main() -> m1()
+- 5. main() -> m1() -> m3()
+- 6. main() -> m1()
+- 7. main()
+- 8. 종료
+### 메서드: 스택 메모리 응용 II - 재귀호출
+- 작은 수를 계산 할 때는 재귀호출을 사용
+- => 코드도 간단하고 이해하기도 쉬움
+#### JVM Stack 메모리의 사용
+- 0. 시작
+- 1. main()
+- 2. main() => sum(5)
+-           => 5 + sum(4)
+-                  => 4 + sum(3)
+-                         => 3 + sum(2)
+-                                => 2 + sum(1)
+-                                       => 1
+- 3. main()
+- 4. 종료
+#### 재귀호출 (Recursive Call)
+- 메서드가 호출 => 스택에 그 메소드가 사용할 변수가 생성
+- 수학식을 코드를 표현하기가 편함
+- 코드가 간결
+- 반복문을 사용하는 경우보다 메모리를 많이 사용
+- 메서드 호출이 너무 깊게 들어가지 않는 상황에서 사용
+### 메서드: 스택 오버플로우 오류
+- 스택 오버플로우(Stack Overflow)
+| JVM 스택 메모리가 꽉 차서 더이상 메서드 실행을 위해 로컬 변수를 만들 수 없는 상태
+- 멈춰야 할 조건 누락 -> 스택 메모리 극한으로 증가 -> 메모리 부족 사태
+- 호출하는 메서드의 로컬 변수가 클 때 스택 메모리가 빨리 참
+- 호출 단계가 많은 큰 수를 다룰 때는 재귀호출 대신 반복문을 사용
+- 메서드 호출 회수에 영향 X
+- 메서드에서 생성하는 로컬 변수의 크기에 영향 O
 
 ## :pushpin: Day 15
 ### 클래스 문법
