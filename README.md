@@ -9,10 +9,10 @@
 
 ## :pushpin: Day 2
 ### Mechan Language and CPU
-**Diffrent CPU**
+- **Diffrent CPU**
 - CPU마다 명령 규칙이 다르기 때문
 ### Mechan Language and OS
-**Diffrent OS**
+- **Diffrent OS**
 - 운영 체제마다 기계어를 배치하는 방법이 다르기 때문
 ### Compiler vs Interpreter
 - Compiler: 명령문을 기계어로 번역
@@ -28,9 +28,9 @@
 - .exe <- Mechan Language
 - .class <- Bytecode/ P-code
 ### Create Project
-**bin**
+- **bin**
 - main <- .class file
-**src**
+- **src**
 - main <- application file
 	- java <- java source
 	- resources <- common file
@@ -40,83 +40,81 @@
 
 ## :pushpin: Day 4
 ### Create Project
-**Step 1**
+- **Step 1**
 - Project
 	- Source File
 	- Class File
-**Step 2**
+- **Step 2**
 - Git Repo/ Project
 	- bin
 	- src
-**Step 3**
+- **Step 3**
 - Git Repo
 	- Root Project
 		- Sub Project
-**Step 4**
+- **Step 4**
 - Git Repo
 	- Project
 		- Root Project
 			- Sub Project
 ### Build Tool
-**Ant**
+- **Ant**
 - Build Script File: build.xml
-**Maven**
+- **Maven**
 - Build Script File: pom.xml
-**Gradle**
+- **Gradle**
 - Build Script File: build.gradle
 ### How to Use Gradle Build Tool
-**Gradle Basic Task**
-`$ gradle init`
+- **Gradle Basic Task**
+- `$ gradle init`
 	- Prepare Project File
-`$ gradlew`
+- `$ gradlew`
 	- Install Gradle and Create File
-**'Java' Gradle Plug-in**
-`$ gradle compileJava`
+- **'Java' Gradle Plug-in**
+- `$ gradle compileJava`
 	- Compile src/main/java
 	- Copy .class File in build/classes/java/main
-`$ gradle compileTestJava`
+- `$ gradle compileTestJava`
 	- Compile src/test/java
 	- Copy .class File in build/classes/java/test
-`$ gradle processResources`
+- `$ gradle processResources`
 	- Copy src/main/resources -> build/resources/main
-`$ gradle processTestResources`
+- `$ gradle processTestResources`
 	- Copy src/test/resources -> build/resources/test
-`$ gradle clean`
+- `$ gradle clean`
 	- Delete Build Folder
-`$ gradle classes`
+- `$ gradle classes`
 	- Run compileJava + processResources
-`$ gradle testClasses`
+- `$ gradle testClasses`
 	- Run classes + compileTestJava + processTestResources
-`$ gradle check`
+- `$ gradle check`
 	- Run test + unit test
-`$ gradle javadoc`
+- `$ gradle javadoc`
 	- Create API Document.html
-`$ gradle build`
+- `$ gradle build`
 	- Run check + assemble
-**'Application' Gradle Plug-in**
-`$ gradle run`
+- **'Application' Gradle Plug-in**
+- `$ gradle run`
 	- a. Run 'Java' Plug-in classes
 	- b. Run Class Specified in Application setting
-`$ gradle build`
+- `$ gradle build`
 	- Create Distribution File in build/distributions
 	- Create Script File
 
 ## :pushpin: Day 5
 ### Function, Class, Package
-**Function**
+- **Function**
 - 기능 단위로 문자를 묶어서 관리
-- ↓
-**Class**
+- **Class**
 - 메서드를 역할이나 용도에 따라 분류하여 묶어서 관리
-- ↓
-**Package**
+- **Package**
 - 클래스를 쓰임새(역할)에 따라 디렉토리로 분류하여 관리
 ### Javadoc
-**Create HTML Document**
+- **Create HTML Document**
 - Description of Code in /** */ -> Run Javadoc -> HTML Document
 - `$ javadoc -encoding utf-8 -charset utf-8 ···`
 ### Pulg-in
-**Create Eclipse Project**
+- **Create Eclipse Project**
 - Add 'Eclipse' Plug-in
 	- [build.gradle]
 	```
@@ -124,7 +122,6 @@
 		id 'eclipse'
 		}
 	```
-	-  ↓
 	- .project
 		- Eclipse에게 프로젝트 이름과 유형(Java)에 대한 정보를 제공
 		- 이 파일이 없으면 프로젝트 폴더로 간주X
@@ -137,36 +134,34 @@
 
 ## :pushpin: Day 6
 ### literal, Variables, Array
-**Literal**
+- **Literal**
 - 값을 표현한 것
-- ↓
-**Variables**
+- **Variables**
 - 값을 담는 메모리
-- ↓
-**Array**
+- **Array**
 - 여러 개의 값을 담는 메모리
 - 변수 목록
 ### Literal
-**정수**
+- **정수**
 - 2진수: 0b
 - 16진수: 0x
-**부동 소수점**
+- **부동 소수점**
 - 3.14 = 31.4e-1 = 314e-2 = 0.314e1 = 0.0314e2
-**논리**
+- **논리**
 - 소문자로 표현
-**문자**
+- **문자**
 - ''
 - 제어 문자
 	- \t, \v, \n
-**문자열**
+- **문자열**
 - ""
 ### print(), println(), printf()
-**print()**
+- **print()**
 - 출력
-**println()**
+- **println()**
 - 출력 + 줄바꿈
 - 값X -> 줄바꿈만 수행
-**printf(출력 형식, 값)**
+- **printf(출력 형식, 값)**
 - 형식 지정X -> print()와 같음
 - 출력 형식
 	- %s: 지정한 자리에 문자열을 삽입
@@ -175,10 +170,10 @@
 	- %c: 정수 값을 문자로 만들어 삽입
 	- %b: true/false 값을 문자열로 만들어 삽입
 ### 메모리와 값
-**메모리 종류**
+- **메모리 종류**
 - HDD
 - RAM
-**값**
+- **값**
 - HDD: 값을 자성 방향으로 표현하여 저장
 	- N/S극 or S/N극
 - RAM: 값을 전기 신호로 표현하여 저장
@@ -186,7 +181,7 @@
 ### 값 -> 2진수
 - 어떤 값이든 2진수로 표현 가능하면 HDD/RAM (=저장장치)에 값을 저장할 수 있음
 - But, 규칙 필요 => 규칙이 서로 다르면 값을 주고받을 수 없기 때문
-**정수 -> 2진수 규칙**
+- **정수 -> 2진수 규칙**
 - a. Sign-Magnitude (부호 절대값)
 	- 부동 소수점이 가수부를 2진수로 표현할 때 사용
 - b. 1의 보수 (음수 값을 표현할 때)
@@ -202,35 +197,32 @@
 	- 부동 소수점을 2진수로 표현할 때 이 규칙에 따라 지수부를 표현
 ### 값과 메모리
 - 1byte = 8bit
--	↓
 - 0 ~ (2^8 - 1)
--	↓
 - 0 ~ 255
--	↓
 - -128 ~ 127
 
 ## :pushpin: Day 7
 ### 명령어 실행 순서
 - HDD -loding-> RAM -> Cache -> CPU
 ### 값 -> 2진수
-**전기 비트 (전기 신호)**
+- **전기 비트 (전기 신호)**
 - On, Off
-**자기 비트 (자기 신호)**
+- **자기 비트 (자기 신호)**
 - N/S극, S/N극
 ### 정규화
 - IEEE-754: 정규화 규칙을 정의한 문서
 - 정해진 규칙에 따라 정리
 - 가수부와 지수부를 분리
 - 부동 소수점으로 표현하면 앞에 0은 생략 => 앞은 무조건 1
-**10진수 정규화**
+- **10진수 정규화**
 - 변환없이 정규화
-**2진수 정규화**
+- **2진수 정규화**
 - 2진수 -변환-> 정규화
 - 소수점 앞/뒤로 나눠 2진수로 변환
 	- 소수점 뒤 => 2진수 변환
 	- 1.0이 나올 때까지 * 2
 ### 문자 -> 2진수 규칙
-**Character Set (문자 집합)**
+- **Character Set (문자 집합)**
 - ASCII
 	- 7bit
 - ISO-8859-1 (ISO-latin-1~15)
@@ -247,9 +239,9 @@
 	- 8 ~ 32bit
 ### 유효 자릿수
 - 유효 자릿수를 넘어가면 잘리거나 반올림 됨
-**32bit**
+- **32bit**
 - Almost 7 ~ 8자리 (Default = 7)
-**64bit**
+- **64bit**
 - Almost 16자리
 ### 폰트
 - a. Raster 폰트 (Bitmap 폰트)
@@ -268,7 +260,7 @@
 ### 문자 변수 (UCS-2 문자 코드 값 저장)
 - 해당 코드의 문자를 폰트 파일에서 찾아 출력
 ### 자바 원시 타입 변수 (Primitive Variable)
-**정수**
+- **정수**
 - byte
 	- -128 ~ 127
 - short
@@ -277,42 +269,42 @@
 	- 약 -21억 ~ 약 21억
 - long
 	- 약 -922경 ~ 약 922경
-**부동 소수점**
+- **부동 소수점**
 - float
 	- 유효 자릿수 7자리 (단정도)
 - double
 	- 유효 자릿수 16자리 (배정도)
-**논리**
+- **논리**
 - boolean
 	- int 타입의 메모리 사용 (4byte)
 	- 배열은 byte 타입의 메모리 사용 (1byte)
 	- 자바 언어 명세서에는 메모리의 크기가 정의되어 있지X
 	- 다만, JVM 명세서에는 int로 다룬다고 나와있음
-**문자**
+- **문자**
 - char
 	- 0 ~ 65535 (유니코드)
 ### 레퍼런스 변수(Referece Variable)
 - 자바 원시 타입의 값을 제외한 모든 값
-**String**
+- **String**
 - 자바 언어 명세서에는 메모리의 크기가 정의되어 있지X
 - 메모리 주소를 저장할 만큼 큰 크기
-**Date**
+- **Date**
 - 자바 언어 명세서에는 메모리의 크기가 정의되어 있지X
 - 메모리 주소를 저장할 만큼 큰 크기
 ### 레퍼런스 -업그레이드-> 스캐너
 - 시스템의 표준 입력 장치인 키보드를 Inputsteam 변수에 저장
-**Inputsteam**
+- **Inputsteam**
 - 데이터가 들어오는 것
-**Outputsteam**
+- **Outputsteam**
 - 데이터가 나가는 것
 ### l-value and r-value
 - l-value은 반드시 메모리여야 함
 ex) `20 = 30;`
-**리터럴**
+- **리터럴**
 ex) `a = 1;`
-**변수**
+- **변수**
 ex) `int a2 = a;`
-**표현식 (Expreeion)**
+- **표현식 (Expreeion)**
 - 문장을 실행 후 결과 값을 리턴하는 명령어
 ex) `a2 = a + 11;`
 ### System.in and Scanner
@@ -324,10 +316,10 @@ String str = keyboard.nextLine();
 - c. 저장
 ### Reference
 - 데이터가 저장된 메모리의 주소를 저장하는 메모리
-**문자열 (주소)**
+- **문자열 (주소)**
 - String: 문자열이 저장된 메모리의 주소를 저장
 - 프로그래밍 입문 단계 => 문자열을 저장하는 메모리
-**날짜 (주소)**
+- **날짜 (주소)**
 - Date: 날짜 값이 저장된 메모리의 주소를 저장
 - 프로그래밍 입문 단계 => 날짜를 저장하는 메모리
 ### JVM and Memory
@@ -353,7 +345,7 @@ String str = keyboard.nextLine();
 - 단어 앞의 공백은 제거
 - 빈 문자열을 읽으려면 `nextLine()` 사용
 ### How to use `nextXXX()`
-`20 aaa true` 입력
+- `20 aaa true` 입력
 - `nextInt()` -> 20 return
 - `next()` -> aaa
 - `nextBoolean()` -> true
@@ -373,7 +365,7 @@ String str = keyboard.nextLine();
 ## :pushpin: Day 9
 ### Array
 - 같은 종류의 메모리를 쉽게 만드는 방법
-**문법**
+- **문법**
 ```
 메모리종류[ ] 메모리이름 = new 메모리종류[개수];
 데이터타입[ ] 변수명 = new 데이터타입[개수];
@@ -381,13 +373,13 @@ String str = keyboard.nextLine();
 // 정수를 담을 메모리를 5개 만들고 배열의 이름을 arr로 하자
 int[ ] arr = new int[5];
 ```
-**개수**
+- **개수**
 - int 타입의 최대 값과 같음
 - 2147483647개
-**크기**
+- **크기**
 - int 타입의 최대 값에서 2를 뺀 값
 - Integer.MAX_VALUE - 2
-**메모리에 접근**
+- **메모리에 접근**
 - 문법
 ```
 배열변수[인덱스] = 값;
@@ -395,7 +387,7 @@ arr1[0] = 100;
 ```
 - 배열의 인덱스는 0부터 시작
 - 인덱스의 범위는 0 ~ (배열개수 - 1)
-**선언문 분석**
+- **선언문 분석**
 `arr1`
 - 배열 메모리의 주소를 담는 변수
 - 이렇게 메모리의 주소를 보관하는 변수 => 레퍼런스
@@ -406,48 +398,48 @@ arr1[0] = 100;
 `new`
 - 사용할 메모리를 확보하는 명령
 - 리턴 값은 확보된 메모리의 시작 주소
-**초기화**
+- **초기화**
 - 정수 배열(byte[ ], short[ ], int[ ], long[ ]): 0
 - 부동 소수점 배열(float[ ], double[ ]): 0.0
 - 논리 배열(boolean[ ]): false
 - 문자 배열(char[ ]): '\u0000'
 - 주소 변수(Object[ ]): null
 ### 조회용으로만 사용할 변수라면 상수로 선언
-**상수**
+- **상수**
 - 변경할 수 없는 값
 - final이라는 한정자를 변수타입 앞에 붙여주면 그 변수는 변경할 수 없는 값이 됨
 	- ex) final 변수타입 변수명 = 값;
-**변수명**
+- **변수명**
 - 전체 다 대문자
 - 구분을 위해 중간에 _를 사용
 ### 클래스
-**java.util.Date**
+- **java.util.Date**
 - 날짜 정보를 다루는 물건을 생성
 - a. `new java.sql.Date(밀리초)`
 - b. `java.sql.Date.valueOf(날짜 문자열)`
 - c. `java.util.Date()`
-**java.lang.Integer**
+- **java.lang.Integer**
 - `Integer.parseInt(Scanner.nextLine())`
 ### 반복문
 ```
 for (변수 초기화; 조건; 증감문) {}
 ```
-**순서**
+- **순서**
 - 변수 초기화 -> 조건 -> {} -> 증감문 -> ···
 - 변수 초기화는 1번만 실행
 ### 연산자(operator) and 피연산자(operand)
 ```
 i = i + 1;
 ```
-**연산자(operator)**
+- **연산자(operator)**
 - =, +
-**피연산자(operand)**
+- **피연산자(operand)**
 - i, 1
 ### 비교
-**변수명.equals("")**
+- **변수명.equals("")**
 - 입력 받은 값이 "" 안에 들어가는 값과 같을 때
 - "" 안을 비워두면 공백으로 인식
-**변수명.equalsIgnoreCase("알파벳")**
+- **변수명.equalsIgnoreCase("알파벳")**
 - 입력 받은 알파벳이 "" 안에 들어가는 값과 같을 때
 - 대소문자를 구분하지 않음
 
