@@ -7,7 +7,7 @@
 - Write Commit Message: `$ git commit -m ""`
 - Backup to Server: `$ git push`
 
-## :pushpin:Day 2
+## :pushpin: Day 2
 - Mechan Language and CPU
 	- Diffrent CPU: CPU마다 명령 규칙이 다르기 때문
 - Mechan Language and OS
@@ -18,7 +18,7 @@
 	- Interpreter: 기계어가 아니기 때문에 도우미 프로그램이 필요
 		- ex) JavaScript 실행을 위해 node.js 필요
 
-## Day 3
+## :pushpin: Day 3
 - Filename Extension
 	- .java <- Source
 	- .exe <- Mechan Language
@@ -38,7 +38,7 @@
 - Run
 	- `$ java -cp bin/main ···`
 
-## Day 4
+## :pushpin: Day 4
 - Create Project
 	- Step 1
 		- Project
@@ -99,7 +99,7 @@
 			- Create Distribution File in build/distributions
 			- Create Script File
 
-## Day 5
+## :pushpin: Day 5
 - Function, Class, Package
 	- Function
 		- 기능 단위로 문자를 묶어서 관리
@@ -131,7 +131,7 @@
 			- .settings
 				- 기타 설정 정보를 갖고있는 파일을 보관
 
-## Day 6
+## :pushpin: Day 6
 - literal, Variables, Array
 	- Literal
 		- 값을 표현한 것
@@ -205,7 +205,7 @@
 	-	↓
 	- -128~127
 
-## Day 7
+## :pushpin: Day 7
 - 명령어 실행 순서
 	- HDD -loding-> RAM -> Cache -> CPU
 - 값 -> 2진수
@@ -258,7 +258,7 @@
 		- 그릴 때 마다 명령어를 실행해야 하기 때문에 출력 속도가 느림
 		- 그림이 복잡할수록 명령어가 복잡하기 때문에 파일 크기가 커짐
 
-## Day 8
+## :pushpin: Day 8
 - 문자 변수 (UCS-2 문자 코드 값 저장)
 	- 해당 코드의 문자를 폰트 파일에서 찾아 출력
 - 데이터 타입
@@ -359,7 +359,7 @@
 	- 파일
 	- 랜카드
 
-## Day 9
+## :pushpin: Day 9
 - Array
 	- 같은 종류의 메모리를 쉽게 만드는 방법
 	- 문법
@@ -433,7 +433,7 @@
 		- 입력 받은 알파벳이 "" 안에 들어가는 값과 같을 때
 		- 대소문자를 구분하지 않음
 
-## Day 10
+## :pushpin: Day 10
 - 배열
 	```
 	int[] arr = new int[5];
@@ -637,7 +637,7 @@
 - 문장과 표현식의 관계
 	- statement 중에서 결과를 리턴하는 statement를 expression이라 부름
 
-## Day 11
+## :pushpin: Day 11
 - **if ~ else 문**
 	- else if 라는 문법은 없음
 	```
@@ -792,7 +792,8 @@ count % 2 == 1
 - **비트 이동의 유효 범위**
 	- int 타입: 0 ~ 31까지 유효
 	- long 타입: 0 ~ 63까지 유효
-## Day 12
+
+## :pushpin: Day 12
 - **main() 메서드의 활용**
 - 문자열 입력
 	- int로 변환
@@ -834,7 +835,7 @@ int b = 20;
 	- promptInt(): Int
 	- promptDate(): Date
 
-## Day 13
+## :pushpin: Day 13
 - **메서드 문법**
 - 1. 명령어 블록을 실행할 때 값을 넘겨주지 않고 결과도 받지 않음
 ```
@@ -936,9 +937,9 @@ plus: 메서드명
 - **Heap**
 	- new 명령으로 생성하는 변수(= 인스턴스 변수)를 둠
 
-## Day 14
+## :pushpin: Day 14
 
-## Day 15
+## :pushpin: Day 15
 - **클래스 문법**
 - **용도**
 	- 1. 서로 관련된 일을 하는 메서드들을 관리하기 쉽게 한 클래스에 모아두는 것
