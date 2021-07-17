@@ -9,10 +9,10 @@
 
 ## :pushpin: Day 2
 ### Mechan Language and CPU
-- **Diffrent CPU**
+#### Diffrent CPU
 - CPU마다 명령 규칙이 다르기 때문
 ### Mechan Language and OS
-- **Diffrent OS**
+#### Diffrent OS
 - 운영 체제마다 기계어를 배치하는 방법이 다르기 때문
 ### Compiler vs Interpreter
 - Compiler: 명령문을 기계어로 번역
