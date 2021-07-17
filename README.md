@@ -4,7 +4,7 @@
 - Clone: `$ git clone`
 - Pull: `$ git pull`
 - Write Backup List: `$ git add .`
-- Write Commit Message: `$ git commit -m ""`
+- Write Commit Message: `$ git commit -m " "`
 - Backup to Server: `$ git push`
 
 ## :pushpin: Day 2
@@ -118,9 +118,9 @@
 - Add 'Eclipse' Plug-in
 	- [build.gradle]
 	```
-		plugins {
-		id 'eclipse'
-		}
+	plugins {
+	id 'eclipse'
+	}
 	```
 	- .project
 		- Eclipse에게 프로젝트 이름과 유형(Java)에 대한 정보를 제공
@@ -150,11 +150,11 @@
 #### 논리
 - 소문자로 표현
 #### 문자
-- ''
+- ' '
 - 제어 문자
 	- \t, \v, \n
 #### 문자열
-- ""
+- " "
 ### print(), println(), printf()
 #### print()
 - 출력
@@ -299,14 +299,14 @@
 - 데이터가 나가는 것
 ### l-value and r-value
 - l-value은 반드시 메모리여야 함
-ex) `20 = 30;`
+- ex) `20 = 30;`
 #### 리터럴
-ex) `a = 1;`
+- ex) `a = 1;`
 #### 변수
-ex) `int a2 = a;`
+- ex) `int a2 = a;`
 #### 표현식 (Expreeion)
 - 문장을 실행 후 결과 값을 리턴하는 명령어
-ex) `a2 = a + 11;`
+- ex) `a2 = a + 11;`
 ### System.in and Scanner
 ```
 String str = keyboard.nextLine();
@@ -340,7 +340,6 @@ String str = keyboard.nextLine();
 - newline
 ### `nextXXX()`를 사용할 때 주의할 점
 - 한 개의 토큰을 읽음
-- 	↓
 - 공백을 만날 때까지 읽음
 - 단어 앞의 공백은 제거
 - 빈 문자열을 읽으려면 `nextLine()` 사용
@@ -388,22 +387,22 @@ arr1[0] = 100;
 - 배열의 인덱스는 0부터 시작
 - 인덱스의 범위는 0 ~ (배열개수 - 1)
 #### 선언문 분석
-`arr1`
+- `arr1`
 - 배열 메모리의 주소를 담는 변수
 - 이렇게 메모리의 주소를 보관하는 변수 => 레퍼런스
-`new int[5]`
+- `new int[5]`
 - 연속된 5개의 int 타입 메모리를 준비하라는 명령
 - 사용할 메모리를 확보한 후 그 메모리의 찾아 갈 수 있도록 시작 주소를 리턴
 - 이렇게 값을 저장하기 위해 확보된 메모리 => 인스턴스
-`new`
+- `new`
 - 사용할 메모리를 확보하는 명령
 - 리턴 값은 확보된 메모리의 시작 주소
 #### 초기화
-- 정수 배열(byte[ ], short[ ], int[ ], long[ ]): 0
-- 부동 소수점 배열(float[ ], double[ ]): 0.0
-- 논리 배열(boolean[ ]): false
-- 문자 배열(char[ ]): '\u0000'
-- 주소 변수(Object[ ]): null
+- 정수 배열(`byte[ ]`, `short[ ]`, `int[ ]`, `long[ ]`): 0
+- 부동 소수점 배열(`float[ ]`, `double[ ]`): 0.0
+- 논리 배열(`boolean[ ]`): false
+- 문자 배열(`char[ ]`): '\u0000'
+- 주소 변수(`Object[ ]`): null
 ### 조회용으로만 사용할 변수라면 상수로 선언
 #### 상수
 - 변경할 수 없는 값
@@ -415,11 +414,15 @@ arr1[0] = 100;
 ### 클래스
 #### java.util.Date
 - 날짜 정보를 다루는 물건을 생성
-- a. `new java.sql.Date(밀리초)`
-- b. `java.sql.Date.valueOf(날짜 문자열)`
-- c. `java.util.Date()`
+```
+new java.sql.Date(밀리초)
+java.sql.Date.valueOf(날짜 문자열)
+java.util.Date()
+```
 #### java.lang.Integer
-- `Integer.parseInt(Scanner.nextLine())`
+```
+Integer.parseInt(Scanner.nextLine())
+```
 ### 반복문
 ```
 for (변수 초기화; 조건; 증감문) {}
@@ -436,11 +439,11 @@ i = i + 1;
 #### 피연산자(operand)
 - i, 1
 ### 비교
-#### 변수명.equals("")
-- 입력 받은 값이 "" 안에 들어가는 값과 같을 때
-- "" 안을 비워두면 공백으로 인식
+#### 변수명.equals(" ")
+- 입력 받은 값이 " " 안에 들어가는 값과 같을 때
+- " " 안을 비워두면 공백으로 인식
 #### 변수명.equalsIgnoreCase("알파벳")
-- 입력 받은 알파벳이 "" 안에 들어가는 값과 같을 때
+- 입력 받은 알파벳이 " " 안에 들어가는 값과 같을 때
 - 대소문자를 구분하지 않음
 
 ## :pushpin: Day 10
@@ -560,11 +563,11 @@ System.out.println(temp);
 - c. % 연산 구현
 	- % 연산 -> 여러 번
 	- & 연산 -> 한 번
-	- 짝수 or 홀수
+	- **짝수 or 홀수**
 	```
 	System.out.println((값 & 0x1) == 0 ? "짝수" : "홀수");
 	```
-	- 2, 4, 8, 16으로 나눈 나머지
+	- **2, 4, 8, 16으로 나눈 나머지**
 	```
 	// 2로 나눈 나머지
 	System.out.println(값 % 2);
@@ -648,18 +651,18 @@ float v4 = Float.valueOf("3.14f");
 ```
 // 1
 else {
-	if (age < 14)
-		System.out.println("어린이입니다.");
+if (age < 14)
+System.out.println("어린이입니다.");
 }
 
 // 2
 else
-	if (age < 14)
-		System.out.println("어린이입니다.");
+if (age < 14)
+System.out.println("어린이입니다.");
 
 // 3
 else if (age < 14)
-	System.out.println("어린이입니다.");
+System.out.println("어린이입니다.");
 ```
 ### nextInt()
 - 사용자가 콘솔 창에 입력할 수 있도록 커서를 대기시키고 싶다면 `nextInt()`를 실행
@@ -697,7 +700,7 @@ count % 2 == 1
 ```
 ### 흐름 제어문
 #### switch 문법
-`switch (값) {}`
+- `switch (값) {}`
 - 값으로 가능한 데이터 타입은?
 	- int 정수(byte,short,int,char), 문자열, 특별한 상수 Enum 타입
 - case 값으로 변수 사용 불가 => 리터럴만 가능
@@ -723,8 +726,8 @@ count % 2 == 1
 - 라벨명: 반복문1 { 반복문2 {break 라벨명;} }
 	```
 	라벨 문법:
-		라벨: 문장;
-		라벨: {문장1, 문장2, ...}
+	라벨: 문장;
+	라벨: {문장1, 문장2, ...}
 	```
 	- `break 라벨명;`: 라벨에 소속된 문장을 나감
 #### do ~ while 반복문
@@ -733,13 +736,13 @@ count % 2 == 1
 - 0번 이상 반복: while
 ```
 do
-	문장1;
+문장1;
 while (조건);
 
 do {
-	문장1;
-	문장2;
-	문장3;
+문장1;
+문장2;
+문장3;
 } while (조건);
 ```
 #### for 반복문의 초기화 변수
@@ -806,7 +809,7 @@ Integer.parseInt()
 Integer.valueOf()
 ```
 - Date로 변환
-`Date.valueOf()`
+- `Date.valueOf()`
 ### 메서드 사용법: 메서드 활용
 #### 장점
 - 기능 단위로 관리하기 쉽게 묶음
@@ -842,44 +845,43 @@ int b = 20;
 - 1. 명령어 블록을 실행할 때 값을 넘겨주지 않고 결과도 받지 않음
 ```
 void 메서드명() {
-	문장1;
-	문장2;
+문장1;
+문장2;
 }
 ```
 - 2. 명령어 블록을 실행할 때 값을 넘겨주고 결과는 받지 않음
 ```
 void 메서드명(변수선언1, 변수선언2, ...) {
-	문장1;
-	문장2;
+문장1;
+문장2;
 }
 ```
 - 3. 명령어 블록을 실행할 때 값을 넘겨주지 않고 결과는 받음
 ```
 리턴타입 메서드명() {
-	문장1;
-	문장2;
+문장1;
+문장2;
 }
 ```
 - 4. 명령어 블록을 실행할 때 값을 넘겨주고 결과를 받음
 ```
 리턴타입 메서드명(변수선언1, 변수선언2, ...) {
-	문장1;
-	문장2;
+문장1;
+문장2;
 }
 ```
 ### 메서드(method) = 함수(function)
 #### 메서드 정의(method definition)
 ```
 int plus(int a, int b) {
-	int sum = a + b;
-	return sum;
-
+int sum = a + b;
+return sum;
+}
 // 의미
 int: 리턴 타입
 plus: 메서드명
 a, b: 파라미터 (parameter)
 {}: 메서드 몸체 (method body)
-}
 ```
 #### 메서드 호출(method call)
 ```
@@ -955,8 +957,8 @@ plus: 메서드명
 ```
 Member member = new Member();
 
-Member: 클래스명 (변수의 데이터 타입)
+/* Member: 클래스명 (변수의 데이터 타입)
 member: Member 인스턴스의 주소를 저장하는 변수 = "Member의 레퍼런스"
 new: 클래스 설계도에 따라 Heap 영역에 변수를 만들라는 명령
-Member: 클래스명
+Member: 클래스명 */
 ```
