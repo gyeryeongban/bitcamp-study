@@ -1,13 +1,13 @@
 # bitcamp-study
 
-## Day 1
+## :pushpin: Day 1
 - Clone: `$ git clone`
 - Pull: `$ git pull`
 - Write Backup List: `$ git add .`
 - Write Commit Message: `$ git commit -m ""`
 - Backup to Server: `$ git push`
 
-## Day 2
+## :pushpin:Day 2
 - Mechan Language and CPU
 	- Diffrent CPU: CPU마다 명령 규칙이 다르기 때문
 - Mechan Language and OS
@@ -937,6 +937,8 @@ plus: 메서드명
 	- new 명령으로 생성하는 변수(= 인스턴스 변수)를 둠
 
 ## Day 14
+
+## Day 15
 - **클래스 문법**
 - **용도**
 	- 1. 서로 관련된 일을 하는 메서드들을 관리하기 쉽게 한 클래스에 모아두는 것
