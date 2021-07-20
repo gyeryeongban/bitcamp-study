@@ -1,26 +1,32 @@
 package com.eomcs.quiz;
 
+// 출처: codefights.com
+//
+// 배열의 전체 길이를 L이라고 하자.
+// 배열을 절반(L/2)으로 나눌 때, 앞쪽 부분과 뒤쪽 부분의 위치를 바꿔라.
+// 예)
+// [2, 4, 5, 6, 4, 3, 7, 8] => [4, 3, 7, 8, 2, 4, 5, 6]
+//
+// 한 줄에 버그가 있다. 고쳐라!
 public class Test {
 
-  public static int divisorsPairs(int[] sequence) {
+  static void changeValuePosition(int[] values) {
+    int temp;
+    int size;
 
-    int size = 0;
-
-    for (int i = 0; i < sequence.length; i++) {
-      for (int j = i; j < sequence.length; j++) {
-        if (sequence[i] % sequence[j] == 0 || sequence[j] % sequence[i] == 0) {
-          System.out.printf("%d <--> %d\n", sequence[i], sequence[j]);
-          size++;
-        }
-      }
+    for (int i = 0; i < (values.length / 2); i++) {
+      temp = values[values.length / 2];
+      values[values.length / 2] = 
     }
-    return size;
   }
 
   public static void main(String[] args) {
-    int[] values = {8, 4, 2, 3, 6, 10, 5};
-    System.out.println(divisorsPairs(values));
+    int[] values = {2, 4, 5, 6, 4, 3, 7, 8};
+    changeValuePosition(values);
 
+    for (int v : values) {
+      System.out.print(v + ",");
+    }
   }
 
 }
