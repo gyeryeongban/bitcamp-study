@@ -1133,28 +1133,28 @@ Member member = new Member();
 
 ## :pushpin: Day 18
 ### Static Field
+#### 영역
+- Method Area
 #### Lifecycle
 ##### 생성
 - 클래스가 로딩
 ##### 소멸
 - 클래스가 언로드
 - JVM 종료
-#### 영역
-- Method Area
 ### Non-Static Field
+#### 영역
+- Heap
 #### Lifecycle
 ##### 생성
 - new App() 실행
 ##### 소멸
 - 가비지 컬렉터가 수집
 - JVM 종료
-#### 영역
-- Heap
 ### Local Field
+#### 영역
+- JVM Stack
 #### Lifecycle
 ##### 생성
 - 메서드가 호출
 ##### 소멸
 - 메서드 호출 끝
-#### 영역
-- JVM Stack
