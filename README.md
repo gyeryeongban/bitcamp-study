@@ -1158,3 +1158,27 @@ Member member = new Member();
 - 메서드가 호출
 ##### 소멸
 - 메서드 호출 끝
+### Static Method
+- 인스턴스 없이 호출
+- 클래스명.메서드명()
+- 클래스 메서드라 부름
+### Instance Method
+- 인스턴스가 있어야만 호출
+- 레퍼런스.메서드명()
+- 메서드를 호출할 때 지정한 인스턴스 주소는 `this` 라는 내장 변수에 보관
+### Class 문법
+#### BoardHandler
+- 메서드 분류
+- 기능 중심
+#### Board
+- 새 데이터 타입 설계
+- 데이터 중심
+### 명령의 의미
+#### `new BoardHandler()`
+- 1. BoardHandler의 인스턴스 생성
+- 2. BoardHandler 설계도에 따라 변수를 준비하라
+- 3. BoardHandler의 메서드가 실행하는 동안 사용할 변수를 준비하라
+#### `new Board()`
+- 1. Board의 인스턴스 생성
+- 2. Board 설계도에 따라 인스턴스 변수를 준비하라
+- 3. Board 데이터를 저장할 변수를 준비하라
