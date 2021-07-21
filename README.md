@@ -1130,3 +1130,5 @@ Member member = new Member();
 	- 소스 코드를 유지 보수하기 쉬움
 	- 재사용성이 높아짐
 - 2. 새 데이터 타입 설계
+
+## :pushpin: Day 18

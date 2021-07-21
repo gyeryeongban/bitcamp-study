@@ -10,6 +10,10 @@ public class App {
 
   public static void main(String[] args) {
 
+    BoardHandler boardHandler = new BoardHandler();
+    BoardHandler boardHandler2 = new BoardHandler();
+    BoardHandler boardHandler3 = new BoardHandler();
+
     while (true) {
       String input = Prompt.inputString("명령> ");
 
@@ -35,10 +39,22 @@ public class App {
         TaskHandler.list();
 
       } else if (input.equals("/board/add")) {
-        BoardHandler.add();
+        BoardHandler.add(boardHandler);
 
       }  else if (input.equals("/board/list")) {
-        BoardHandler.list();
+        BoardHandler.list(boardHandler);
+
+      } else if (input.equals("/board/add")) {
+        BoardHandler.add(boardHandler2);
+
+      }  else if (input.equals("/board/list")) {
+        BoardHandler.list(boardHandler2);
+
+      } else if (input.equals("/board/add")) {
+        BoardHandler.add(boardHandler3);
+
+      }  else if (input.equals("/board/list")) {
+        BoardHandler.list(boardHandler3);
 
       } else {
         System.out.println("실행할 수 없는 명령입니다.");

@@ -11,26 +11,26 @@ public class BoardHandler {
 
   //다른 패키지에 있는 App 클래스가 다음 메서드를 호출할 수 있도록 공개한다.
   public static void add(BoardHandler that) {
-    System.out.println("[새 게시글]");
+    System.out.println("[새 게시물]");
 
     Board board = new Board();
 
     board.no = Prompt.inputInt("번호? ");
     board.title = Prompt.inputString("제목? ");
-    board.registeredDate = new Date(System.currentTimeMillis());
+    board.content = Prompt.inputString("내용? ");
     board.owner = Prompt.inputString("작성자? ");
+    board.registeredDate = new Date(System.currentTimeMillis());
 
     that.boards[that.size++] = board;
   }
-
   public static void list(BoardHandler that) {
-    System.out.println("[게시글 목록]");
+    System.out.println("[게시물 목록]");
     for (int i = 0; i < that.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d\n",
           that.boards[i].no, 
-          that.boards[i].title,
-          that.boards[i].registeredDate,
+          that.boards[i].title,  
           that.boards[i].owner,
+          that.boards[i].registeredDate,
           that.boards[i].viewCount);
     }
   }
