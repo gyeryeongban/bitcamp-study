@@ -67,4 +67,78 @@ public class TaskHandler {
     }
   }
 
+  public void detail() {
+    System.out.println("[작업 상세보기]");
+    int no = Prompt.inputInt("번호? ");
+
+    Task task = null;
+
+    for (int i = 0; i < this.size; i++) {
+      if (this.tasks[i].no == no) {
+        task = this.tasks[i];
+        break;
+      }
+    }
+
+    if (task == null) {
+      System.out.println("해당 번호의 작업이 없습니다.");
+      return;
+    }
+
+    System.out.printf("내용: %s\n", task.content);
+    System.out.printf("마감일: %s\n", task.deadline);
+    System.out.printf("담당자: %s\n", task.owner);
+
+    for (int i = 0; i < this.size; i++) {
+      String stateLabel = null;
+      switch (tasks[i].status) {
+        case 1:
+          stateLabel = "진행중";
+          break;
+        case 2:
+          stateLabel = "완료";
+          break;
+        default:
+          stateLabel = "신규";
+      }
+      System.out.printf("상태: %s\n", stateLabel);
+    }
+  }
+
+  public void update() {
+    System.out.println("[작업 변경]");
+    int no = Prompt.inputInt("번호? ");
+
+    Task task = null;
+
+    for (int i = 0; i < this.size; i++) {
+      if (this.tasks[i].no == no) {
+        task = this.tasks[i];
+        break;
+      }
+    }
+
+    if (task == null) {
+      System.out.println("해당 번호의 작업이 없습니다.");
+      return;
+    }
+
+    String content = Prompt.inputString(String.format("내용(%s)? ", task.content));
+    String owner = Prompt.inputString(String.format("담당자(%s)? ", task.owner));
+
+    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("작업 변경을 취소하였습니다.");
+      return;
+    }
+
+    task.content = content;
+    task.owner = owner;
+    System.out.println("작업을 변경하였습니다.");
+  }
+
+  public void delete() {
+
+  }
+
 }

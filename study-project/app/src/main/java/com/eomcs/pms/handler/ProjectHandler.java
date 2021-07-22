@@ -66,5 +66,67 @@ public class ProjectHandler {
     }
   }
 
+  public void detail() {
+    System.out.println("[프로젝트 상세보기]");
+    int no = Prompt.inputInt("번호? ");
+
+    Project project = null;
+
+    for (int i = 0; i < this.size; i++) {
+      if (this.projects[i].no == no) {
+        project = this.projects[i];
+        break;
+      }
+    }
+
+    if (project == null) {
+      System.out.println("해당 번호의 프로젝트가 없습니다.");
+      return;
+    }
+
+    System.out.printf("프로젝트명: %s\n", project.title);
+    System.out.printf("시작일: %s\n", project.startDate);
+    System.out.printf("종료일: %s\n", project.endDate);
+    System.out.printf("담당자: %s\n", project.owner);
+    System.out.printf("팀원: %s\n", project.members);
+  }
+
+  public void update() {
+    System.out.println("[프로젝트 변경]");
+    int no = Prompt.inputInt("번호? ");
+
+    Project project = null;
+
+    for (int i = 0; i < this.size; i++) {
+      if (this.projects[i].no == no) {
+        project = this.projects[i];
+        break;
+      }
+    }
+
+    if (project == null) {
+      System.out.println("해당 번호의 프로젝트가 없습니다.");
+      return;
+    }
+
+    String title = Prompt.inputString(String.format("제목(%s)? ", project.title));
+    String owner = Prompt.inputString(String.format("담당자(%s)? ", project.owner));
+    String members = Prompt.inputString(String.format("팀원(%s)? ", project.members));
+
+    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("프로젝트 변경을 취소하였습니다.");
+      return;
+    }
+
+    project.title = title;
+    project.owner = owner;
+    project.owner = members;
+    System.out.println("프로젝트를 변경하였습니다.");
+  }
+
+  public void delete() {
+
+  }
 
 }

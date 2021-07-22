@@ -24,4 +24,13 @@ public class Exam0200 {
   static void test1(Test p) {
     p.b = 3000;
   }
+
 }
+
+
+
+
+
+
+
+

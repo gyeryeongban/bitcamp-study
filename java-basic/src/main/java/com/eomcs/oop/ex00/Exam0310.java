@@ -5,6 +5,6 @@ public class Exam0310 {
     // 1) 클래스 메서드 호출
     // => 클래스 이름으로 호출
     Test2.x1();
-    System.out.println(Test.a);
+    System.out.println(Test2.a);
   }
 }

@@ -8,7 +8,7 @@ public class Test {
     int d = c + 100;
   }
 
-  void m(int c) {
+  void m2(int c) {
     int d = c + 100;
   }
 }

@@ -1182,3 +1182,5 @@ Member member = new Member();
 - 1. Board의 인스턴스 생성
 - 2. Board 설계도에 따라 인스턴스 변수를 준비하라
 - 3. Board 데이터를 저장할 변수를 준비하라
+
+## :pushpin: Day 19
