@@ -106,8 +106,6 @@ public class BoardHandler {
 
     int boardIndex = -1;
 
-    // Board 인스턴스가 들어 있는 배열을 뒤져서
-    // 게시글 번호와 일치하는 Board 인스턴스를 찾는다. 
     for (int i = 0; i < this.size; i++) {
       if (this.boards[i].no == no) {
         boardIndex = i;
@@ -130,10 +128,8 @@ public class BoardHandler {
       this.boards[i - 1] = this.boards[i];
     }
     this.boards[--this.size] = null;
-
     System.out.println("게시글을 삭제하였습니다.");
   }
-
 }
 
 

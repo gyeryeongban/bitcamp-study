@@ -1184,3 +1184,5 @@ Member member = new Member();
 - 3. Board 데이터를 저장할 변수를 준비하라
 
 ## :pushpin: Day 19
+
+## :pushpin: Day 20

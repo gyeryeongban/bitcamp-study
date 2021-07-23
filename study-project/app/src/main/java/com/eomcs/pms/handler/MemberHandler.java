@@ -98,7 +98,7 @@ public class MemberHandler {
   }
 
   public void delete() {
-    System.out.println("[회원 상세보기]");
+    System.out.println("[회원 삭제]");
     int no = Prompt.inputInt("번호? ");
 
     int memberIndex = -1;
@@ -122,10 +122,9 @@ public class MemberHandler {
     }
 
     for (int i = memberIndex + 1; i < this.size; i++) {
-      this.members[i - 1] = this.members[i];
+      this.members[i- 1] = this.members[i];
     }
     this.members[--this.size] = null;
-
     System.out.println("회원을 삭제하였습니다.");
   }
 

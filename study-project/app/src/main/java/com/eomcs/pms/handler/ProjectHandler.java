@@ -126,7 +126,34 @@ public class ProjectHandler {
   }
 
   public void delete() {
+    System.out.println("[프로젝트 삭제]");
+    int no = Prompt.inputInt("번호? ");
 
+    int projectIndex = -1;
+
+    for (int i = 0; i < this.size; i++) {
+      if (this.projects[i].no == no) {
+        projectIndex = i;
+        break;
+      }
+    }
+
+    if (projectIndex == -1) {
+      System.out.println("해당 번호의 프로젝트가 없습니다.");
+      return;
+    }
+
+    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("프로젝트 삭제를 취소하였습니다.");
+      return;
+    }
+
+    for (int i = projectIndex + 1; i < this.size; i++) {
+      this.projects[projectIndex - 1] = this.projects[projectIndex];
+    }
+    this.projects[--this.size] = null;
+    System.out.println("프로젝트를 삭제하였습니다.");
   }
 
 }
