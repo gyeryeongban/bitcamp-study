@@ -1184,5 +1184,18 @@ Member member = new Member();
 - 3. Board 데이터를 저장할 변수를 준비하라
 
 ## :pushpin: Day 19
-
+### 클래스 멤버의 종류
+- 변수
+- 메서드
+### 주소 값 위치
+## static
+- 파라미터
+```
+Calculator.plus(c1, 1);
+```
+## instance
+- 맨 앞
+```
+c1.plus(1);
+```
 ## :pushpin: Day 20
