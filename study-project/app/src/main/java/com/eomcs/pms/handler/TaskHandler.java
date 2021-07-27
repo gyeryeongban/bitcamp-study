@@ -11,7 +11,7 @@ public class TaskHandler {
   Task[] tasks = new Task[MAX_LENGTH];
   int size = 0;
 
-  MemberHandler memberHandler;
+  public MemberHandler memberHandler;
 
   public TaskHandler(MemberHandler memberHandler) {
     this.memberHandler = memberHandler;
