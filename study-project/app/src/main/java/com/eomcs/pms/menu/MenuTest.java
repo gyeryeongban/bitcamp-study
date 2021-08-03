@@ -1,6 +1,7 @@
 package com.eomcs.pms.menu;
 
 public class MenuTest {
+
   public static void main(String[] args) {
     MenuGroup rootMenu = new MenuGroup("메인", true);
     MenuGroup boardMenu = new MenuGroup("게시판");
@@ -44,5 +45,7 @@ public class MenuTest {
     memberMenu.add(memberDeleteMenu);
 
     rootMenu.execute();
+
   }
+
 }

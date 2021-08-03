@@ -2027,6 +2027,14 @@ c1.plus(1);
 
 ## :pushpin: Day 27
 
+### 클래스 관계
+
+1. 상속
+2. 연관 (association)
+3. 집합 (aggregation)
+4. 합성 (composition)
+5. 의존 (dependency)
+
 ### 리스너 호출 규칙
 
 - 리스너의 메서드가 각각 다르다면 정의하는 입장에서 호출할 메서드를 결정할 수 없어서 코딩을 할 수 없는 문제가 발생
