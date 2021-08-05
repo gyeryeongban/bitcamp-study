@@ -2107,3 +2107,11 @@ c1.plus(1);
 - 교체 및 유지 보수 편리
 
 4. Creator
+
+### GRASP
+
+- OOP 기초 설계 패턴
+
+### GoF Design Patterns
+
+- OOP 응용 설계 패턴
