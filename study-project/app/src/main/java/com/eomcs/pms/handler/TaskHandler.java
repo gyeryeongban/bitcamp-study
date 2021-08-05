@@ -6,11 +6,11 @@ import com.eomcs.util.Prompt;
 
 public class TaskHandler {
 
-  TaskList2 taskList = new TaskList2();
-  MemberList2 memberList;
+  TaskList taskList = new TaskList();
+  MemberList memberList;
 
 
-  public TaskHandler(MemberList2 memberList) {
+  public TaskHandler(MemberList memberList) {
     this.memberList = memberList;
   }
 

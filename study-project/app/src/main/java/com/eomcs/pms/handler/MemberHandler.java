@@ -6,9 +6,9 @@ import com.eomcs.util.Prompt;
 
 public class MemberHandler {
 
-  MemberList2 memberList = new MemberList2();
+  MemberList memberList = new MemberList();
 
-  public MemberList2 getMemberList() {
+  public MemberList getMemberList() {
     return memberList;
   }
 
