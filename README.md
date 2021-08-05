@@ -2089,3 +2089,21 @@ c1.plus(1);
 2. 해당 클래스의 인스턴스 변수 생성
 
 ## :pushpin: Day 29
+
+### 캡슐화
+
+> 복잡한 코드를 감춰서 단순화 시키자
+
+### 캡슐화의 이점
+
+- 메서드를 이용하는 측에 영향을 주지 않으면서 기능의 구현을 변경 가능
+
+### GRASP
+
+1. Information Expert
+2. Low Coupling
+3. High Cohesion
+
+- 교체 및 유지 보수 편리
+
+4. Creator
