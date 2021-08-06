@@ -2,6 +2,8 @@
 
 ## :pushpin: Day 1
 
+### Git Cmd
+
 - Clone: `$ git clone`
 - Pull: `$ git pull`
 - Write Backup List: `$ git add .`
@@ -30,6 +32,8 @@
   - ex) JavaScript 실행을 위해 node.js 필요
 
 ## :pushpin: Day 3
+
+### Cmd
 
 - Compile: `$ javac -d bin/main -encoding UTF-8 src/main/···`
 - Run: `$ java -cp bin/main ···`
@@ -1712,7 +1716,7 @@ Member member = new Member();
 
 ### 주소 값 위치
 
-## static
+#### static
 
 - 파라미터
 
@@ -1720,7 +1724,7 @@ Member member = new Member();
 Calculator.plus(c1, 1);
 ```
 
-## instance
+#### instance
 
 - 맨 앞
 
@@ -1845,11 +1849,11 @@ c1.plus(1);
 
 - 수퍼 클래스를 상속 받아서 서브 클래스를 만드는 것
 
-### Generalization (일반화)
+#### Generalization (일반화)
 
 - 서브 클래스들의 공통 코드를 추출하여 수퍼 클래스를 만드는 것
 
-### 상속 - 추상클래스
+### 상속 - 추상 클래스
 
 > 서브 클래스에 공통 기능을 상속해주는 용도로 만든 클래스를 직접 사용하지 못하도록 막기위해 만든 문법
 
@@ -2108,11 +2112,13 @@ c1.plus(1);
 
 4. Creator
 
-### GRASP
+### 설계 패턴
+
+#### GRASP
 
 - OOP 기초 설계 패턴
 
-### GoF Design Patterns
+#### GoF Design Patterns
 
 - OOP 응용 설계 패턴
 

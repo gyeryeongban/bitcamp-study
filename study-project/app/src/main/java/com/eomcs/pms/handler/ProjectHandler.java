@@ -39,10 +39,9 @@ public class ProjectHandler {
   public void list() {
     System.out.println("[프로젝트 목록]");
 
-    Object[] list = projectList.toArray();
+    Project[] list = projectList.toArray();
 
-    for (Object obj : list) {
-      Project project = (Project) obj;
+    for (Project project : list) {
       System.out.printf("%d, %s, %s, %s, %s, [%s]\n",
           project.no, 
           project.title, 

@@ -31,10 +31,9 @@ public class MemberHandler {
   public void list() {
     System.out.println("[회원 목록]");
 
-    Object[] list = memberList.toArray();
+    Member[] list = memberList.toArray();
 
-    for (Object obj : list) {
-      Member member = (Member) obj;
+    for (Member member : list) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           member.no, 
           member.name, 
