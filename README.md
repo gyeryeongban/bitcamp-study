@@ -2115,3 +2115,5 @@ c1.plus(1);
 ### GoF Design Patterns
 
 - OOP 응용 설계 패턴
+
+## :pushpin: Day 30
