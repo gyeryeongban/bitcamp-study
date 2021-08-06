@@ -2210,11 +2210,11 @@ c1.plus(1);
 
 - 다중 상속 불가
 
-### <<concrete>>
+### Concrete
 
 - 완성된 클래스
 
-### <<stereotype>>
+### Stereotype
 
 - 고정관념
 - 라벨 (역할, 문법)
