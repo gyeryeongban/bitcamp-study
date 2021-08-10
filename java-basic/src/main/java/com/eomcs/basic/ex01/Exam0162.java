@@ -7,6 +7,7 @@ public class Exam0162 {
 
     // 배열의 클래스 정보
     String[] obj2 = new String[10];
+
     Class classInfo = obj2.getClass();
     System.out.println(classInfo.getName()); //[Ljava.lang.String;
 
