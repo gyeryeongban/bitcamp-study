@@ -2551,3 +2551,5 @@ c1.plus(1);
 - StringBuffer 객체 = mutable 객체
 - 인스턴스의 데이터를 변경 가능
 - 원래의 문자열을 변경하고 싶을 때 사용하는 클래스
+
+## :pushpin: Day 33
