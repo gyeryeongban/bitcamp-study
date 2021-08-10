@@ -55,7 +55,7 @@ public class Exam0174 {
     Engine engine = new Engine(3000, 16);
     Car car = new Car("비트자동차", "비트비트", engine);
 
-    // 자동차 복제
+    // 자동차 복제 
     // => Car의 clone()에서 Engine 객체도 복제할 것이다.
     Car car2 = car.clone();
 
