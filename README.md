@@ -2553,3 +2553,95 @@ c1.plus(1);
 - 원래의 문자열을 변경하고 싶을 때 사용하는 클래스
 
 ## :pushpin: Day 33
+
+### Wrapper 클래스
+
+> primitive 값을 객체화하는 용도로 사용하기 위해 만든 클래스
+
+- primitive type의 값을 객체로 포장하는 역할 수행
+- Wrapper 클래스의 인스턴스를 생성할 때는 생성자 대신 클래스 메서드를 사용
+- primitive type에 상관없이 Object 타입의 파라미터로 값을 받을 수 있음 => 모든 객체를 받을 수 있음
+
+#### Wrapper 클래스의 주요 용도
+
+- primitive data type의 값을 객체로 주고 받을 때 사용
+- primitive data type의 값을 객체에 담아 전달하고 싶다면 언제든 wrapper 클래스의 인스턴스를 생성하면 됨
+
+#### Wrapper 클래스의 가장 큰 목적
+
+- primitive 값을 포함하여 모든 값을 쉽게 주고 받기 위함
+- wapper 클래스가 없다면, 각 타입에 대한 메서드가 따로 있어야 함
+- wrapper 클래스를 사용하면 객체로 다룰 수 있음
+
+### Type
+
+- 클래스
+- 추상 클래스
+- 인터페이스
+
+#### primitive type
+
+- byte
+- short
+- int
+- long
+- float
+- double
+- boolean
+- char
+
+#### Wrapper 클래스 (java.lang)
+
+- Byte
+- Short
+- Integer
+- Long
+- Float
+- Double
+- Boolean
+- Char
+
+### primitive type <-> Wrapper
+
+#### int -> Integer
+
+1. Integer.valueOf(int)
+2. ~~new Integer(int)~~ **Deprecated**
+3. Obj.intValue()
+
+### auto-boxing과 auto-unboxing
+
+- 코드의 문맥에 따라 Boxing과 Unboxing을 자동으로 수행
+- primitive data type 값을 Wrapper 클래스의 인스턴스에 바로 할당 가능
+
+#### auto-boxing
+
+> Wrapper 객체 자동 생성
+
+##### boxing
+
+- primitive type의 값을 인스턴스에 담는 일
+
+##### 컴파일러 변환
+
+```
+printInt(obj.intValue())
+```
+
+- Wrapper 객체의 주소가 레퍼런스에 저장됨
+
+#### auto-unboxing
+
+> Wrapper 객체에 들어있는 값을 자동으로 꺼냄
+
+##### unboxing
+
+- 인스턴스의 담긴 primitive 값을 다시 꺼내는 일
+
+##### 컴파일러 변환
+
+```
+printObject(Integer.valueOf(int))
+```
+
+- Wrapper 객체에 보관된 int 값을 꺼내 변수에 저장
