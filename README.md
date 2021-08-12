@@ -2856,3 +2856,5 @@ printObject(Integer.valueOf(int))
 #### default 문법 단점
 
 - 구현할 클래스에게 메서드 구현을 강제할 수 없음
+
+## :pushpin: Day 35
