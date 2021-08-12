@@ -1,5 +1,5 @@
 // 인터페이스 간접 구현 : 추상 클래스 상속 받기
-package com.eomcs.oop.ex09.g;
+package com.eomcs.oop.ex09.h;
 
 // 자동차의 기능을 갖추려면 CarSpec을 만족시켜야 하는데,
 // 직접 CarSpec 인터페이스를 구현하는 대신에
