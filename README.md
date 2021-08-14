@@ -3121,3 +3121,5 @@ printObject(Integer.valueOf(int))
 
 - 로컬 변수 -> 인스턴스 변수 -> 바깥 객체의 인스턴스 변수
 - 컴파일러는 변수를 찾은 후에 해당 변수의 문법에 맞게 코드를 변경
+
+## :pushpin: Day 36
