@@ -1,6 +1,6 @@
 package com.eomcs.pms.handler;
 
-public class LinkedList implements List {
+public class LinkedList extends AbstractList {
 
   static class Node {
     Object item;
@@ -13,7 +13,6 @@ public class LinkedList implements List {
 
   Node head;
   Node tail;
-  int size;
 
   public void add(Object item) {
     // 새 노드를 만든다. 생성자를 호출할 때, 노드에 담을 Board 객체 주소를 넘긴다. 
@@ -50,29 +49,36 @@ public class LinkedList implements List {
     Node node = head;
     Node prev = null;
 
-    while (node != null) {
-      if (node.item == item) { // 노드에 들어 있는 객체와 같다면
+
+    for (int i = 0; i < this.size; i++) {
+      if (i == index) { // 노드에 들어 있는 객체와 같다면
+        Object deleted = node.item;
+
         if (node == head) { // 삭제할 노드가 하필이면 첫 번째 노드라면, 
           head = node.next; // head가 두 번째 노드를 가리키게 한다.
         } else { // 삭제할 노드가 첫 번째 노드가 아니라면
           prev.next = node.next; // 이전 노드를 다음 노드와 연결한다.
         }
 
+        // 가비지 관리를 위해 삭제할 노드의 인스턴스 필드를 null로 초기화 한다.
         node.next = null; // 삭제할 노드가 더이상 다음 노드를 가리키지 않게 한다.
+        node.next = null;
 
         if (node == tail) { // 삭제할 노드가 마지막 노드라면
           tail = prev; // tail이 이전 노드를 가리키게 한다.
         }
         size--;
-        return true;
+        return deleted;
+
+      } else { // 삭제할 노드가 아니라면
+        // 현재 노드가 아니라면,
+        prev = node; // 현재 노드를 prev 에 저장하고,
+        node = node.next; // node 는 다음 노드를 가리킨다.
       }
 
-      // 현재 노드가 아니라면,
-      prev = node; // 현재 노드를 prev 에 저장하고,
-      node = node.next; // node 는 다음 노드를 가리킨다.
     }
 
-    return false;
+    return null;
   }
 }
 
