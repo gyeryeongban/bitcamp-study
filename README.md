@@ -3658,3 +3658,5 @@ new 수퍼클래스명(파라미터,...) {}
 > Last In First Out (LIFO)
 
 - ex) 웹 브라우저에 방문 사이트의 URL을 보관할 때
+
+## :pushpin: Day 39

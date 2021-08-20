@@ -47,4 +47,25 @@ public class ArrayList extends AbstractList {
     }
     return -1;
   }
+
+  @Override
+  public Object get(int index) {
+    if (index < 0 || index >= this.size) {
+      return null;
+    }
+  }
+
+  @Override
+  public Object remove(int index) {
+    if (index < 0 || index >= this.size) {
+      return null;
+    }
+
+    for (int i = index + 1; i < this.size; i++) {
+      this.list[i - 1] = this.list[i];
+    }
+    this.list[--this.size] = null;
+
+    return true;
+  }
 }
