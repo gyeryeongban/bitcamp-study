@@ -11,7 +11,7 @@ public class Exam0510 {
   // 예1) 제네릭의 타입 파라미터로 레퍼런스 배열을 생성할 수 없다.
   static <T> T[] create1() {
     T[] arr;
-    //    arr = new T[10]; // 컴파일 오류! new 명령어를 사용할 때 제네릭의 타입 파라미터를 사용할 수 없다.
+    arr = new T[10]; // 컴파일 오류! new 명령어를 사용할 때 제네릭의 타입 파라미터를 사용할 수 없다.
     return null;
   }
 
@@ -28,7 +28,7 @@ public class Exam0510 {
     return (T[]) Array.newInstance(type, 10);
   }
 
-  // 예4) 견본 배열의 타입 정보를 가지고 배열을 생성하기
+  // 예4) 견본 배열에서 타입 정보를 추출하여 배열을 생성하기
   @SuppressWarnings("unchecked")
   static <T> T[] create4(T[] arr) {
     Class<?> arrayTypeInfo = arr.getClass(); // 예) String[]
