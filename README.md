@@ -3714,3 +3714,5 @@ new 수퍼클래스명(파라미터,...) {}
 #### Modeling
 
 > Model을 만드는 작업
+
+## :pushpin: Day 40
