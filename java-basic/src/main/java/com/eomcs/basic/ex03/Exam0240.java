@@ -59,6 +59,10 @@ public class Exam0240 {
     list.add(m2);
     list.add(m3);
 
+    for (int i = 0; i < list.size(); i++) {
+
+    }
+
     // forEach() 메서드에게 넘길 객체
     // => Consumer 규칙에 따라 만들어야 한다.
     // => List 보관된 객체를 반복문을 통해 꺼낼 때 마다 
