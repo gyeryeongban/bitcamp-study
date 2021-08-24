@@ -22,8 +22,7 @@ public class Exam0510 {
     Calculator obj1 = new Calculator() {
       @Override
       public int compute(int x, int y) {
-        // TODO Auto-generated method stub
-        return x*y;
+        return x * y;
       }
     };
 
