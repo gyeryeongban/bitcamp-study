@@ -59,8 +59,7 @@ public class Exam0210 {
     list.add(m3);
 
     for (int i = 0; i < list.size(); i++) {
-      Member m = list.get(i);
-      System.out.printf("이름: %s, 나이: %d\n", m.name, m.age);
+      System.out.println(list.get(i));
     }
   }
 }
