@@ -4014,3 +4014,5 @@ new 수퍼클래스명(파라미터,...) {}
 ### Deque의 Iterator 와 for(:) 문
 
 - Iterator 를 통해 데이터를 조회하고 싶다면, for(:) 문을 사용하는 것이 더 나음
+
+## :pushpin: Day 43
