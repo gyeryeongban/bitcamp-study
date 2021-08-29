@@ -4017,4 +4017,68 @@ new 수퍼클래스명(파라미터,...) {}
 
 ## :pushpin: Day 43
 
+### HashSet
+
+- ex) 코로나 백신예약 -> 주민번호 뒷자리
+- 해시 값을 가지고 저장할 방의 위치를 결정
+- 이미 hashCode(), equals()의 결과 값이 같은 객체가 있기 때문에 중복 저장 X
+
+### ArrayList와 HashSet
+
+### ArratList
+
+> 한 줄에 매달기
+
+#### 위치 정보
+
+- 인덱스
+- ex) O-O-O-O-O
+
+### HashSet
+
+> 여러 줄에 매달기
+
+#### 위치 정보
+
+- 해시 값
+- ex) O-O-O-O-O O-O-O-O-O
+
+### 객체
+
+- 자바에서 객체를 생성 후 저장하는 문법은 X
+- 객체를 리턴 불가
+- 주고 받는 건 객체 주소지, 객체 자체가 X
+
+### HashMap
+
+> 기존 주소를 잃어버리면 가비지
+
+#### 같은 Key인지 비교할 때
+
+- hashCode()의 리턴 값
+- equals()의 리턴 값
+
+#### Key 사용
+
+> 주로 사용
+
+- int
+- String
+
+### Key
+
+- HashCode 값이 다르면 Key 값이 다름
+- 인스턴스 주소가 달라도 값이 같으면 Key 값이 같음
+- 오버라이딩 하지 않으면 값이 같아도 Key 값이 다름
+
+### java.util.Hashtable - value 목록 꺼내기
+
+#### `hasMoreElements()`
+
+- 꺼낼 값 있냐
+
+#### `nextElement()`
+
+- 꺼내줘
+
 ## :pushpin: Day 44
