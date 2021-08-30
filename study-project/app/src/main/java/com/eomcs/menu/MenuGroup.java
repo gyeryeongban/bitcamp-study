@@ -1,6 +1,7 @@
 package com.eomcs.menu;
 
 import java.util.Stack;
+import com.eomcs.pms.handler.AuthHandler;
 import com.eomcs.util.Prompt;
 
 // 역할
@@ -84,7 +85,17 @@ public class MenuGroup extends Menu {
     while (true) {
       System.out.printf("\n[%s]\n", getBreadCrumb());
       for (int i = 0; i < this.size; i++) {
-        System.out.printf("%d. %s\n", i + 1, this.childs[i].title);
+        if (this.childs[i].enableState == Menu.ENABLE_LOGOUT && 
+            AuthHandler.getLoginUser() != null) {
+          // 로그인이 되어 있지 않을 때만 출력하는 메뉴인데 로그인 되어 있으면 출력하지 않는다.
+          continue;
+        } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN && 
+            AuthHandler.getLoginUser() == null) {
+          // 로그인이 되어 있을 때만 출력하는 메뉴인데 로그인 되어 있지 않으면 출력하지 않는다.
+          continue;
+        } 
+        // 그 외에는 출력
+        System.out.printf("%d. %-20s\n", i + 1, this.childs[i].title);
       }
 
       if (!disablePrevMenu) {
@@ -92,25 +103,26 @@ public class MenuGroup extends Menu {
       }
 
       try {
-      int menuNo = Prompt.inputInt("선택> ");
-      if (menuNo == 0 && !disablePrevMenu) {
-        // 현재 메뉴에서 나갈 때 스택에서 제거한다.
-        breadCrumb.pop();
-        return;
-      }
+        int menuNo = Prompt.inputInt("선택> ");
+        if (menuNo == 0 && !disablePrevMenu) {
+          // 현재 메뉴에서 나갈 때 스택에서 제거한다.
+          breadCrumb.pop();
+          return;
+        }
 
-      if (menuNo < 0 || menuNo > this.size) {
-        System.out.println("무효한 메뉴 번호입니다.");
-        continue;
-      }
+        if (menuNo < 0 || menuNo > this.size) {
+          System.out.println("무효한 메뉴 번호입니다.");
+          continue;
+        }
 
-      this.childs[menuNo - 1].execute();
-      
-      } catch(Trowable e) {
-        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하더라도
+        this.childs[menuNo - 1].execute();
+
+      } catch (Throwable e) {
+        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
         // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
-        System.out.println("-------------------------------------");
-        System.out.println("오류 발생: %s\n", e.getClass().getName());
+        System.out.println("--------------------------------------------------------------");
+        System.out.printf("오류 발생: %s\n", e.getClass().getName());
+        System.out.println("--------------------------------------------------------------");
       }
     }
   }
