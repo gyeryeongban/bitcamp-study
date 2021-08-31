@@ -4168,3 +4168,27 @@ new 수퍼클래스명(파라미터,...) {}
 - 입력이 잘못되었을 경우, 나머지 입력을 무시
 
 ## :pushpin: Day 46
+
+### 게시판 로그인 정보 활용
+
+1. **Inheritance** (상속)
+
+- ex) 빵 <- 소보루빵
+
+2. **Association** (연관)
+
+- ex) 사람 -> 핸드폰
+
+3. Dependency (의존)
+
+- ex) 학생 - - -> 강사
+
+4. **Aggregation** (집합)
+
+- ex) 컴퓨터 <>-> 마우스
+- Lifecycle !=
+
+5. Composition (합성) = 강렬함
+
+- ex) 컴퓨터 <·>-> 메인 보드
+- Lifecycle =

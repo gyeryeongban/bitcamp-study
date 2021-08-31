@@ -8,6 +8,7 @@ public class Task {
   private Date deadline;
   private String owner;
   private int status;
+  private Project project;
 
   public int getNo() {
     return no;
