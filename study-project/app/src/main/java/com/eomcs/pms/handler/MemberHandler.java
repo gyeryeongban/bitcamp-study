@@ -1,7 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
@@ -36,11 +35,7 @@ public class MemberHandler {
     Member[] list = memberList.toArray(new Member[0]);
 
     for (Member member : list) {
-      System.out.printf("%d, %s, %s, %s, %s\n", 
-          member.getNo(), 
-          member.getName(), 
-          member.getEmail(), 
-          member.getTel(), 
+      System.out.printf("%d, %s, %s, %s, %s\n", member.getNo(), member.getName(), member.getEmail(), member.getTel(),
           member.getRegisteredDate());
     }
   }
@@ -74,7 +69,7 @@ public class MemberHandler {
       return;
     }
 
-    String name = Prompt.inputString("이름(" + member.getName()  + ")? ");
+    String name = Prompt.inputString("이름(" + member.getName() + ")? ");
     String email = Prompt.inputString("이메일(" + member.getEmail() + ")? ");
     String password = Prompt.inputString("암호? ");
     String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
@@ -118,7 +113,8 @@ public class MemberHandler {
   }
 
   private Member findByNo(int no) {
-    for (Member member : memberList) {
+    Member[] arr = memberList.toArray(new Member[0]);
+    for (Member member : arr) {
       if (member.getNo() == no) {
         return member;
       }
@@ -136,7 +132,8 @@ public class MemberHandler {
   }
 
   public boolean exist(String name) {
-    for (Member member : memberList) {
+    Member[] arr = memberList.toArray(new Member[0]);
+    for (Member member : arr) {
       if (member.getName().equals(name)) {
         return true;
       }
@@ -144,14 +141,19 @@ public class MemberHandler {
     return false;
   }
 
-  public String promptMember(String label) {
+  public static Member promptMember(String label) {
     while (true) {
-      String owner = Prompt.inputString(label);
-      if (this.exist(owner)) {
-        return owner;
-      } else if (owner.length() == 0) {
+      String memberName = Prompt.inputString(label);
+
+      if (memberName.length() == 0) {
         return null;
       }
+
+      Member member = findByName(memberName);
+      if (member != null) {
+        return member;
+      }
+
       System.out.println("등록된 회원이 아닙니다.");
     }
   }
@@ -160,23 +162,16 @@ public class MemberHandler {
     ArrayList<Member> members = new ArrayList<>();
 
     while (true) {
-      String memberName = Prompt.inputString(label);
+      String member = Prompt.inputString(label);
       Member member = findByName(memberName);
       if (member != null) {
         members.add(member);
         continue;
       } else if (memberName.length() == 0) {
         break;
-      } 
+      }
       System.out.println("등록된 회원이 아닙니다.");
     }
     return members;
   }
 }
-
-
-
-
-
-
-

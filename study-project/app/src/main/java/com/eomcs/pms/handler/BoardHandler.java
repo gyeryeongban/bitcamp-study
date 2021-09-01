@@ -21,7 +21,6 @@ public class BoardHandler {
     board.setNo(Prompt.inputInt("번호? "));
     board.setTitle(Prompt.inputString("제목? "));
     board.setContent(Prompt.inputString("내용? "));
-
     board.setWriter(AuthHandler.getLoginUser());
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -31,23 +30,18 @@ public class BoardHandler {
   public void list() {
     System.out.println("[게시글 목록]");
 
-    // 현재 BoardList에 보관된 값을 담을 수 있는 만큼 크기의 배열을 생성한다. 
+    // 현재 BoardList에 보관된 값을 담을 수 있는 만큼 크기의 배열을 생성한다.
     Board[] boards = new Board[boardList.size()];
 
     // 배열을 파라미터로 넘겨서 값을 받아 온다.
     // => 넘겨 주는 배열의 크기가 충분하기 때문에 toArray()는 새 배열을 만들지 않을 것이다.
     boardList.toArray(boards);
 
-    // 이렇게 제네릭이 적용된 List를 사용하면 
+    // 이렇게 제네릭이 적용된 List를 사용하면
     // List에서 값을 꺼낼 때 마다 형변환 할 필요가 없어 프로그래밍이 편리하다.
     for (Board board : boards) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          board.getNo(), 
-          board.getTitle(), 
-          board.getWriter().getName(),
-          board.getRegisteredDate(),
-          board.getViewCount(), 
-          board.getLike());
+      System.out.printf("%d, %s, %s, %s, %d, %d\n", board.getNo(), board.getTitle(), board.getWriter().getName(),
+          board.getRegisteredDate(), board.getViewCount(), board.getLike());
     }
   }
 
@@ -82,8 +76,8 @@ public class BoardHandler {
       return;
     }
 
-    if (board.getWriter().getNo() != AuthHandler.getLoginUser().getNo()) {
-      System.out.println("변경 권한이 없습니다.");
+    if (AuthHandler.getLoginUser().getNo() != board.getWriter().getNo()) {
+      System.out.println("일치");
       return;
     }
 
@@ -112,8 +106,8 @@ public class BoardHandler {
       return;
     }
 
-    if (board.getWriter().getNo() != AuthHandler.getLoginUser().getNo()) {
-      System.out.println("삭제 권한이 없습니다.");
+    if (AuthHandler.getLoginUser().getNo() != board.getWriter().getNo()) {
+      System.out.println("일치");
       return;
     }
 
@@ -140,10 +134,3 @@ public class BoardHandler {
     return null;
   }
 }
-
-
-
-
-
-
-

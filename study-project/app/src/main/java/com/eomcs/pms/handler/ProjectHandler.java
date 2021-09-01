@@ -1,8 +1,8 @@
 package com.eomcs.pms.handler;
 
+import java.lang.reflect.Member;
 import java.sql.Date;
 import java.util.List;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Project;
 import com.eomcs.util.Prompt;
 
@@ -26,26 +26,21 @@ public class ProjectHandler {
     project.setContent(Prompt.inputString("내용? "));
     project.setStartDate(Prompt.inputDate("시작일? "));
     project.setEndDate(Prompt.inputDate("종료일? "));
-    project.setOwner(AuthHandler.getLoginUser());
+    AuthHandler.getLoginUser();
     project.setMembers(memberHandler.promptMembers("팀원?(완료: 빈 문자열) "));
 
     projectList.add(project);
 
-    System.out.println("프로젝트를 저장했습니다!");
+    System.out.println("저장");
   }
 
-  //다른 패키지에 있는 App 클래스가 다음 메서드를 호출할 수 있도록 공개한다.
+  // 다른 패키지에 있는 App 클래스가 다음 메서드를 호출할 수 있도록 공개한다.
   public void list() {
     System.out.println("[프로젝트 목록]");
 
     for (Project project : projectList) {
-      System.out.printf("%d, %s, %s ~ %s, %s, [%s]\n",
-          project.getNo(), 
-          project.getTitle(), 
-          project.getStartDate(), 
-          project.getEndDate(), 
-          project.getOwner().getName(),
-          getMemberNames(project.getMembers()));
+      System.out.printf("%d, %s, %s ~ %s, %s, [%s]\n", project.getNo(), project.getTitle(), project.getStartDate(),
+          project.getEndDate(), project.getOwner().getName(), getMemberNames(project.getMembers()));
     }
   }
 
@@ -91,7 +86,7 @@ public class ProjectHandler {
     }
 
     if (project.getOwner().getNo() != AuthHandler.getLoginUser().getNo()) {
-      System.out.println("변경 권한이 없습니다.");
+      System.out.println("변경 X");
       return;
     }
 
@@ -100,8 +95,7 @@ public class ProjectHandler {
     Date startDate = Prompt.inputDate(String.format("시작일(%s)? ", project.getStartDate()));
     Date endDate = Prompt.inputDate(String.format("종료일(%s)? ", project.getEndDate()));
 
-    List<Member> members = memberHandler.promptMembers(String.format(
-        "팀원(%s)?(완료: 빈 문자열) ", getMemberNames(project.getMembers())));
+    List<Member> members = memberHandler.promptMembers(String.format("팀원(%s)?(완료: 빈 문자열) ", project.getMembers()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -130,7 +124,7 @@ public class ProjectHandler {
     }
 
     if (project.getOwner().getNo() != AuthHandler.getLoginUser().getNo()) {
-      System.out.println("삭제 권한이 없습니다.");
+      System.out.println("삭제 X");
       return;
     }
 
@@ -155,9 +149,24 @@ public class ProjectHandler {
     return null;
   }
 
+  public Project promptProject() {
+    System.out.println("프로젝트: ");
+    for (Project project : projectList) {
+      System.out.printf("  %d. %s\n", project.getNo(), project.getTitle());
+    }
+    while (true) {
+      int projectNo = Prompt.inputInt("프로젝트 번호 선택? (취소: 0) ");
+
+      if (projectNo == 0) {
+        return null;
+      }
+
+      Project selectedProject = findByNo(projectNo);
+      if (selectedProject != null) {
+        return selectedProject;
+      }
+
+      System.out.println("등록된 회원이 아닙니다.");
+    }
+  }
 }
-
-
-
-
-
