@@ -4194,3 +4194,67 @@ new 수퍼클래스명(파라미터,...) {}
 - Lifecycle =
 
 ## :pushpin: Day 47
+
+### Command 디자인 패턴 적용
+
+#### BoardHandler
+
+- 새 메뉴 추가 -call-> 새 메서드 추가
+- 문제점: 새 기능을 추가할 떄 기존 코드를 손댐 = 버그가 생길 가능성을 높임
+
+#### BoardHandler =메서드를 객체화=>
+
+- BoardAddHandler
+- BoardListHandler
+- BoardDetailHandler
+- BoardUpdateHandler
+- BoardDeleteHandler
+- 새 메뉴를 처리할 클래스
+
+#### 기존 -> 개선
+
+- 만약, 하나의 명령 체제를 하나의 메서드가 담당하고 있다면 메서드를 객체화 시키기 딱 좋은 조건
+- => 메서드 객체화 -> 유지 보수 하기가 더 쉬운 구조가 됨 (기존 코드를 손대지 않아도 됨)
+- 클래스를 추가하는 것이 기존 코드를 손대는 것보다 이점이 훨씬 큼
+
+#### 메서드를 객체화?
+
+- 메서드를 별도의 클래스로 분리 =설계 기법=> 'Command' 디자인 패턴
+
+#### <<interface>> Command
+
+- execute() <- - -
+  - BoardAddHandler
+  - BoardListHandler
+  - BoardDetailHandler
+  - BoardUpdateHandler
+  - BoardDeleteHandler
+  - 새 메뉴를 처리할 클래스
+- 명령을 처리하는 클래스는 Command 규칙에 따라 작성
+
+- 게시글 삭제한다고 게시글 번호가 앞당겨지지 X
+- ex) 주민번호 => 죽었다고 당겨지지 X
+
+#### 일반화 적용
+
+- 메서드 공개 범위 디폴트 = private
+- ex) 처음 본 사람에게 예민한 정보 비공개
+
+### 리팩토링
+
+- ProjectAddHandler
+- ProjectUpdateHandler
+- TaskAddHandler
+- TaskUpdateHandler
+
+#### <<abstract>> AbstractMemberHandler
+
+> 서브 클래스에 사용하지 않고 외부 클래스에서 사용하는 기능은 수퍼 클래스에 두지 말고 별도의 클래스로 만들어 분리하는 것이 나음
+
+- MemberAddHandler
+- MemberListHandler
+
+#### MemberPromptHandler
+
+- promptMember()
+- promptMembers()
