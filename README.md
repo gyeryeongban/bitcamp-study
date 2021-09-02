@@ -4269,7 +4269,28 @@ new 수퍼클래스명(파라미터,...) {}
 
 - 대가를 치뤄서 기존 코드를 손 대지 않는 상황
 
-#### Command 디자인 패턴
+### Command 디자인 패턴
 
 - 메서드를 객체화 시킴
 - 객체의 사용 규칙 = 메서드 호출 규칙
+
+#### <<interface>> Command
+
+- execute()
+  - BoardAddHandler -사용-> List<Board>
+  - BoardListHandler -사용-> List<Board>
+  - BoardDetailHandler -사용-> List<Board>
+  - BoardUpdateHandler -사용-> List<Board>
+  - BoardDeleteHandler -사용-> List<Board>
+  - 새메뉴를 처리할 클래스 -사용-> List<Board>
+
+### Map으로 객체 관리
+
+#### HashMap
+
+- Key
+  - "/board/add"
+  - "/board/list"
+- Value
+  - new BoardAddHandler()
+  - new BoardListHandler()
