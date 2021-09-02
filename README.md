@@ -4258,3 +4258,18 @@ new 수퍼클래스명(파라미터,...) {}
 
 - promptMember()
 - promptMembers()
+
+## :pushpin: Day 48
+
+### Test-Driven Development: TDD
+
+> 톄스트에 의해 주도 당하는
+
+#### 클래스 한 개당 메서드 한 개
+
+- 대가를 치뤄서 기존 코드를 손 대지 않는 상황
+
+#### Command 디자인 패턴
+
+- 메서드를 객체화 시킴
+- 객체의 사용 규칙 = 메서드 호출 규칙

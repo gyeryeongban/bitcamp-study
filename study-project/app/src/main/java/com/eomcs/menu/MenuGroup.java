@@ -3,7 +3,7 @@ package com.eomcs.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.eomcs.pms.handler.AuthHandler;
+import com.eomcs.pms.handler.AuthLoginHandler;
 import com.eomcs.util.Prompt;
 
 // 역할
@@ -119,6 +119,7 @@ public class MenuGroup extends Menu {
         // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
         System.out.println("--------------------------------------------------------------");
         System.out.printf("오류 발생: %s\n", e.getClass().getName());
+        e.printStackTrace();
         System.out.println("--------------------------------------------------------------");
       }
     }
@@ -147,11 +148,11 @@ public class MenuGroup extends Menu {
     ArrayList<Menu> menuList = new ArrayList<>();
     for (int i = 0; i < this.size; i++) {
       if (this.childs[i].enableState == Menu.ENABLE_LOGOUT && 
-          AuthHandler.getLoginUser() == null) {
+          AuthLoginHandler.getLoginUser() == null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN && 
-          AuthHandler.getLoginUser() != null) {
+          AuthLoginHandler.getLoginUser() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
