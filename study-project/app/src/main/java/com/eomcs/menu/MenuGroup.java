@@ -60,9 +60,8 @@ public class MenuGroup extends Menu {
 
   // 배열에 들어 있는 Menu 객체를 찾아 제거한다.
   public Menu remove(Menu child) {
-    if (childs.remove(child)) {
+    if (childs.remove(child)) 
       return child;
-    }
     return null;
   }
 
@@ -123,10 +122,10 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
     for (Menu menu : childs) {
-      // 사용자가 해당 메뉴에 접근할 수 있는지 검사한다.
-      // 예) 메뉴의 접근 범위:   0100 = 관리자만 접근 가능
-      //     사용자의 접근 수준: 0110 = 관리자 및 일반 메뉴 접근 가능
-      if ((menu.accessScope & AuthLoginHandler.getUserAcessLevel()) > 0) {
+      // 사용자가 해당 메뉴에 접근 할 수 있는지 검사한다.
+      //    예) 메뉴의 접근 범위:   0100  = 관리자만 접근 가능   
+      //        사용자의 접근 수준: 0110  = 관리자 및 일반 메뉴 접근 가능
+      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
         menuList.add(menu);
       } 
     }

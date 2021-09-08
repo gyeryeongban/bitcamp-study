@@ -3,6 +3,10 @@ package com.eomcs.pms;
 import static com.eomcs.menu.Menu.ACCESS_ADMIN;
 import static com.eomcs.menu.Menu.ACCESS_GENERAL;
 import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -41,6 +45,7 @@ import com.eomcs.pms.handler.TaskListHandler;
 import com.eomcs.pms.handler.TaskUpdateHandler;
 import com.eomcs.util.Prompt;
 
+
 public class App {
   List<Board> boardList = new ArrayList<>();
   List<Member> memberList = new LinkedList<>();
@@ -59,18 +64,13 @@ public class App {
       this.menuId = menuId;
     }
 
-    public MenuItem(/*App outer,*/String title, int accessScope, String menuId) {
+    public MenuItem(String title, int accessScope, String menuId) {
       super(title, accessScope);
       this.menuId = menuId;
-      //this$0 = outer;
     }
 
     @Override
     public void execute() {
-      // inner 클래스는 바깥 클래스의 인스턴스를 내부 필드로 갖고 있기 때문에
-      // inner 클래스의 멤버를 마음대로 사용할 수 있다.
-
-      // 메뉴가 실행될 때 메뉴 아이디를 사용하여 Map에서 Command 객체를 찾아 실행한다.
       Command command = commandMap.get(menuId);
       command.execute();
     }
@@ -113,15 +113,110 @@ public class App {
   }
 
   void service() {
+    loadMembers();
+    loadBoards();
+    loadProjects();
+
     createMainMenu().execute();
     Prompt.close();
+
+    saveMembers();
+    saveBoards();
+    saveProjects();
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadBoards() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("board.data3"))) {
+
+      boardList.addAll((List<Board>) in.readObject());
+
+      System.out.println("게시글 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveBoards() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("board.data3"))) {
+
+      out.writeObject(boardList);
+
+      System.out.println("게시글 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadMembers() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("member.data3"))) {
+
+      memberList.addAll((List<Member>) in.readObject());
+
+      System.out.println("회원 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 회원 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveMembers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("member.data3"))) {
+
+      out.writeObject(memberList);
+
+      System.out.println("회원 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("회원 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadProjects() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("project.data3"))) {
+
+      projectList.addAll((List<Project>) in.readObject());
+
+      System.out.println("프로젝트 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 프로젝트 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveProjects() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("project.data3"))) {
+
+      out.writeObject(projectList);
+
+      System.out.println("프로젝트 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("프로젝트 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
   Menu createMainMenu() {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
+    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT , "/auth/login"));
     mainMenuGroup.add(new MenuItem("내정보", ACCESS_GENERAL, "/auth/userinfo"));
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL, "/auth/logout"));
 
@@ -177,7 +272,7 @@ public class App {
 
   private Menu createAdminMenu() {
     MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
-    adminMenu.add(new MenuItem("회원등록", "/member/add"));
+    adminMenu.add(new MenuItem("회원 등록", "/member/add"));
     adminMenu.add(new MenuItem("프로젝트 등록", "/project/add"));
     adminMenu.add(new MenuItem("작업 등록", "/task/add"));
     adminMenu.add(new MenuItem("게시글 등록", "/board/add"));

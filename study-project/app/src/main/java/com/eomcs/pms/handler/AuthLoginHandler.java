@@ -10,14 +10,13 @@ public class AuthLoginHandler implements Command {
   List<Member> memberList;
 
   static Member loginUser;
-  static int userAcessLevel = 0x01; // 처음에는 로그아웃 된 상태이다.
+  static int userAccessLevel = Menu.ACCESS_LOGOUT; // 기본은 로그아웃 된 상태이다.
 
   public static Member getLoginUser() {
     return loginUser;
   }
-
-  public static int getUserAcessLevel() {
-    return userAcessLevel;
+  public static int getUserAccessLevel() {
+    return userAccessLevel;
   }
 
   public AuthLoginHandler(List<Member> memberList) {
@@ -36,9 +35,9 @@ public class AuthLoginHandler implements Command {
       root.setName("관리자");
       root.setEmail("admin@test.com");
       loginUser = root;
-      userAcessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL;
+      userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL;
       return;
-    }
+    } 
 
     Member member = findByEmailPassword(email, password);
 
@@ -47,7 +46,7 @@ public class AuthLoginHandler implements Command {
     } else {
       System.out.printf("%s님 환영합니다!\n", member.getName());
       loginUser = member;
-      userAcessLevel = Menu.ACCESS_GENERAL;
+      userAccessLevel = Menu.ACCESS_GENERAL;
     }
   }
 
