@@ -90,9 +90,13 @@ public class App {
   public App() {
     commandMap.put("/board/add", new BoardAddHandler(boardList));
     commandMap.put("/board/list", new BoardListHandler(boardList));
-    commandMap.put("/board/detail", new BoardDetailHandler(boardList));
-    commandMap.put("/board/update", new BoardUpdateHandler(boardList));
-    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
+
+    BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList);
+    BoardDeleteHandler boardDeleteHandler = new BoardDeleteHandler(boardList);
+    //    commandMap.put("/board/update", boardUpdateHandler);
+    //    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
+    commandMap.put("/board/detail", 
+        new BoardDetailHandler(boardList, boardUpdateHandler, boardDeleteHandler));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
@@ -199,8 +203,8 @@ public class App {
     boardMenu.add(new MenuItem("등록", ACCESS_GENERAL, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    boardMenu.add(new MenuItem("변경", ACCESS_GENERAL, "/board/update"));
-    boardMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/board/delete"));
+    //    boardMenu.add(new MenuItem("변경", ACCESS_GENERAL, "/board/update"));
+    //    boardMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
     return boardMenu;
   }

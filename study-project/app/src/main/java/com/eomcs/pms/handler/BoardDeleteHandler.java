@@ -11,7 +11,7 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 

@@ -2,16 +2,25 @@ package com.eomcs.pms.handler;
 
 import java.util.List;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler extends AbstractBoardHandler {
 
-  public BoardDetailHandler(List<Board> boardList) {
+  BoardUpdateHandler boardUpdateHandler;
+  BoardDeleteHandler boardDeleteHandler;
+
+  public BoardDetailHandler(
+      List<Board> boardList, 
+      BoardUpdateHandler boardUpdateHandler,
+      BoardDeleteHandler boardDeleteHandler) {
     super(boardList);
+    this.boardUpdateHandler = boardUpdateHandler;
+    this.boardDeleteHandler = boardDeleteHandler;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -29,6 +38,30 @@ public class BoardDetailHandler extends AbstractBoardHandler {
 
     board.setViewCount(board.getViewCount() + 1);
     System.out.printf("조회수: %d\n", board.getViewCount());
+    System.out.println();
+
+    Member loginUser = AuthLoginHandler.getLoginUser(); 
+    if (loginUser == null || board.getWriter().getNo() != loginUser.getNo()) {
+      return;
+    }
+
+    while (true) {
+      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+      switch (input) {
+        case "U":
+        case "u":
+          boardUpdateHandler.execute(request);
+          return;
+        case "D":
+        case "d":
+          boardDeleteHandler.execute(request);
+          return;
+        case "0":
+          return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
+      }
+    }
   }
 }
 
