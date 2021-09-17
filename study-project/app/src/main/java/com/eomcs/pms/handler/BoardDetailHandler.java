@@ -7,20 +7,13 @@ import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler extends AbstractBoardHandler {
 
-  BoardUpdateHandler boardUpdateHandler;
-  BoardDeleteHandler boardDeleteHandler;
-
   public BoardDetailHandler(
-      List<Board> boardList, 
-      BoardUpdateHandler boardUpdateHandler,
-      BoardDeleteHandler boardDeleteHandler) {
+      List<Board> boardList) {
     super(boardList);
-    this.boardUpdateHandler = boardUpdateHandler;
-    this.boardDeleteHandler = boardDeleteHandler;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -45,16 +38,20 @@ public class BoardDetailHandler extends AbstractBoardHandler {
       return;
     }
 
+    // BoardUpdateHandler나 BoardDeleteHandler를 실행할 때 게시글 번호를 사용할 수 있도록
+    // CommandRequest에 보관한다.
+    request.setAttribute("no", no);
+
     while (true) {
       String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
       switch (input) {
         case "U":
         case "u":
-          boardUpdateHandler.execute(request);
+          request.getRequestDispatcher("/board/update").forward(request);
           return;
         case "D":
         case "d":
-          boardDeleteHandler.execute(request);
+          request.getRequestDispatcher("/board/delete").forward(request);
           return;
         case "0":
           return;

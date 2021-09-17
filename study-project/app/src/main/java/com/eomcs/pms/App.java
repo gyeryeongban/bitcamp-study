@@ -30,6 +30,7 @@ import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.Command;
+import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.MemberAddHandler;
 import com.eomcs.pms.handler.MemberDeleteHandler;
 import com.eomcs.pms.handler.MemberDetailHandler;
@@ -78,7 +79,11 @@ public class App {
     @Override
     public void execute() {
       Command command = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n, menuId");
+      }
     }
   }
 
@@ -88,15 +93,12 @@ public class App {
   }
 
   public App() {
+
     commandMap.put("/board/add", new BoardAddHandler(boardList));
     commandMap.put("/board/list", new BoardListHandler(boardList));
-
-    BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList);
-    BoardDeleteHandler boardDeleteHandler = new BoardDeleteHandler(boardList);
-    //    commandMap.put("/board/update", boardUpdateHandler);
-    //    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
-    commandMap.put("/board/detail", 
-        new BoardDetailHandler(boardList, boardUpdateHandler, boardDeleteHandler));
+    commandMap.put("/board/update", new BoardUpdateHandler(boardList));
+    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
+    commandMap.put("/board/detail", new BoardDetailHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
