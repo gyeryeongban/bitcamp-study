@@ -7,8 +7,7 @@ import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler extends AbstractBoardHandler {
 
-  public BoardDetailHandler(
-      List<Board> boardList) {
+  public BoardDetailHandler(List<Board> boardList) {
     super(boardList);
   }
 
@@ -34,11 +33,12 @@ public class BoardDetailHandler extends AbstractBoardHandler {
     System.out.println();
 
     Member loginUser = AuthLoginHandler.getLoginUser(); 
-    if (loginUser == null || board.getWriter().getNo() != loginUser.getNo()) {
+    if (loginUser == null || 
+        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
       return;
     }
 
-    // BoardUpdateHandler나 BoardDeleteHandler를 실행할 때 게시글 번호를 사용할 수 있도록
+    // BoardUpdateHandler나 BoardDeleteHandler를 실행할 때 게시글 번호를 사용할 수 있도록 
     // CommandRequest에 보관한다.
     request.setAttribute("no", no);
 

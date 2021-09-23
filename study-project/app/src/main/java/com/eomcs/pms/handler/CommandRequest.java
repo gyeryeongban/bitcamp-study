@@ -9,6 +9,7 @@ public class CommandRequest {
   Map<String,Object> paramMap = new HashMap<>();
 
   // 커맨드 맵을 받는다.
+  // - RequestDispatcher 를 생성할 때 사용한다.
   Map<String,Command> commandMap;
 
   public CommandRequest(Map<String,Command> commandMap) {
@@ -17,18 +18,24 @@ public class CommandRequest {
 
   public void setAttribute(String name, Object value) {
     paramMap.put(name, value);
-
   }
 
   public Object getAttribute(String name) {
     return paramMap.get(name);
   }
 
-  public RequestDispatcher getRequestDispatcher(String CommandId) {
-    Command command = commandMap.get(CommandId);
+  public RequestDispatcher getRequestDispatcher(String commandId) {
+    Command command = commandMap.get(commandId);
     if (command == null) {
       return null;
     }
     return new RequestDispatcher(command);
   }
 }
+
+
+
+
+
+
+

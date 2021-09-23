@@ -54,7 +54,7 @@ public class Project implements CsvValue {
 
     // => 작업들의 정보를 저장한다.
     for (Task t : this.getTasks()) {
-      strBuilder.append(String.format("%d,", t.getNo()));
+      strBuilder.append(String.format("%s,", t.toCsvString()));
     }
 
     return strBuilder.toString();
@@ -106,7 +106,7 @@ public class Project implements CsvValue {
       // => 파일에서 작업 데이터를 로딩한다.
       Task t = new Task();
       t.loadCsv(String.join(",", Arrays.copyOfRange(values, offset, offset + 6)));
-      //      t.loadCsv(String.format("%s,%s,%s,%s,%s,%s,",
+      //      t.loadCsv(String.format("%s,%s,%s,%s,%s,%s", 
       //          values[offset],
       //          values[offset + 1],
       //          values[offset + 2],
