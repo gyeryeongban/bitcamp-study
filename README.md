@@ -4456,6 +4456,65 @@ new 수퍼클래스명(파라미터,...) {}
 
 ## :pushpin: Day 53
 
+## 프로세스 간 pipe 연결
+
+> 실행 중인 프로그램
+
+- A -Data→ B
+  - 파이프를 연결하는 방법
+- $ A | B
+- ex) $ ipconfig | findstr "검색어" | nano
+
+## 바이트 스트림을 사용해 텍스트 출력하기
+
+- FileOutputStream -출력→ 파일
+- ByteArrayOutputStream -출력→ 배열
+- PipedOutputStream -출력→ 프로세스
+- "AB가각" -getBytes(문자 집합)→ UTF-8: 41 42 EA B0 80 EA B0 81
+  - MS949: 41 42 B0 A1 B0 A2
+  - UTF-16BE: 0041 0042 AC00 AC01
+  - UTF-15LE: 4100 4200 00AC 01AC
+- BE형 방식 = 큰 수부터 나옴 ex) UTF
+- LE형 방식 = 작은 수부터 나옴
+
+### `getBytes()`
+
+- file encoding에 따라 영향을 받기 때문에 추천하지 X
+- 파일 인코딩에 의존하지 말고 명확하게 언급할 것
+
+## 자바 I/O 스트림 클래스
+
+- "Data Processing Stream Classes"
+
+> Decorate: 다른 스트림에 연결해서 기능을 덧붙이는 역할
+
+### byte Stream
+
+- DataInputStream
+- DataOutputStream
+- ObjectInputStream
+- ObjectOutputStream
+- BufferedInputStream
+- BufferedOutputStream
+
+### Character Stream
+
+- BufferedReader
+- BufferedWriter
+- LineNumberReader
+- PrintWriter (Sink 스트림에도 포함)
+
+## 바이트 스트림 클래스로 텍스트 파일 읽기
+
+- 텍스트 파일
+- UTF-8 -읽기→ FileInputStram → 바이트 배열 (41 42 EA B0 80 EA B0 81)
+- new String(byte[], 문자집합) ⬇️ 변환할 때 file.encoding 환경 변수에 설정된 문자표에 따른다.
+- JVM 문자열 (UTF-16BE) char 타입 → 0041(A) 0042(B) AC00(가) AC01(각)
+
+> JVM은 문자를 다룰 때 UTF-16BE 문자표를 사용한다.
+
+- new String(byte[], 0, 8) -이클립스에서 실행하면 file.encoding의 값이 UTF-8로 설정된다 -> new String(byte[], 0, 8, "문자표") -바이트 배열에 들어있는 문자 코드가 어떤 문자들로 인코딩 되었는지 알려주면 제대로 변환될 것이다. -> 0041 0042 AC00 AC01
+
 ## :pushpin: Day 54
 
 ## :pushpin: Day 55
