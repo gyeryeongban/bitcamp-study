@@ -3554,7 +3554,7 @@ new 수퍼클래스명(파라미터,...) {}
 - 한글 - 명사구
 - 영어 - 동사구
   - 관사/전치사를 생략하는 경우가 존재
-- ex) 액터 → 시스템 (유스케이스)
+- ex) 액터 -> 시스템 (유스케이스)
 
 #### 유스케이스 예
 
@@ -4456,39 +4456,39 @@ new 수퍼클래스명(파라미터,...) {}
 
 ## :pushpin: Day 53
 
-## 프로세스 간 pipe 연결
+### 프로세스 간 pipe 연결
 
 > 실행 중인 프로그램
 
-- A -Data→ B
+- A -Data-> B
   - 파이프를 연결하는 방법
 - $ A | B
 - ex) $ ipconfig | findstr "검색어" | nano
 
-## 바이트 스트림을 사용해 텍스트 출력하기
+### 바이트 스트림을 사용해 텍스트 출력하기
 
-- FileOutputStream -출력→ 파일
-- ByteArrayOutputStream -출력→ 배열
-- PipedOutputStream -출력→ 프로세스
-- "AB가각" -getBytes(문자 집합)→ UTF-8: 41 42 EA B0 80 EA B0 81
+- FileOutputStream -출력-> 파일
+- ByteArrayOutputStream -출력-> 배열
+- PipedOutputStream -출력-> 프로세스
+- "AB가각" -getBytes(문자 집합)-> UTF-8: 41 42 EA B0 80 EA B0 81
   - MS949: 41 42 B0 A1 B0 A2
   - UTF-16BE: 0041 0042 AC00 AC01
   - UTF-15LE: 4100 4200 00AC 01AC
 - BE형 방식 = 큰 수부터 나옴 ex) UTF
 - LE형 방식 = 작은 수부터 나옴
 
-### `getBytes()`
+#### `getBytes()`
 
-- file encoding에 따라 영향을 받기 때문에 추천하지 X
+- file encoding에 따라 영향을 받기 때문에 추천 X
 - 파일 인코딩에 의존하지 말고 명확하게 언급할 것
 
-## 자바 I/O 스트림 클래스
+### 자바 I/O 스트림 클래스
 
 - "Data Processing Stream Classes"
 
 > Decorate: 다른 스트림에 연결해서 기능을 덧붙이는 역할
 
-### byte Stream
+#### byte Stream
 
 - DataInputStream
 - DataOutputStream
@@ -4497,38 +4497,759 @@ new 수퍼클래스명(파라미터,...) {}
 - BufferedInputStream
 - BufferedOutputStream
 
-### Character Stream
+#### Character Stream
 
 - BufferedReader
 - BufferedWriter
 - LineNumberReader
 - PrintWriter (Sink 스트림에도 포함)
 
-## 바이트 스트림 클래스로 텍스트 파일 읽기
+### 바이트 스트림 클래스로 텍스트 파일 읽기
 
 - 텍스트 파일
-- UTF-8 -읽기→ FileInputStram → 바이트 배열 (41 42 EA B0 80 EA B0 81)
-- new String(byte[], 문자집합) ⬇️ 변환할 때 file.encoding 환경 변수에 설정된 문자표에 따른다.
-- JVM 문자열 (UTF-16BE) char 타입 → 0041(A) 0042(B) AC00(가) AC01(각)
+- UTF-8 -읽기-> FileInputStram -> 바이트 배열 (41 42 EA B0 80 EA B0 81)
+- new String(byte[], 문자집합) ⬇️ 변환할 때 file.encoding 환경 변수에 설정된 문자표에 따름
+- JVM 문자열 (UTF-16BE) char 타입 -> 0041(A) 0042(B) AC00(가) AC01(각)
 
-> JVM은 문자를 다룰 때 UTF-16BE 문자표를 사용한다.
+> JVM은 문자를 다룰 때 UTF-16BE 문자표를 사용
 
-- new String(byte[], 0, 8) -이클립스에서 실행하면 file.encoding의 값이 UTF-8로 설정된다 -> new String(byte[], 0, 8, "문자표") -바이트 배열에 들어있는 문자 코드가 어떤 문자들로 인코딩 되었는지 알려주면 제대로 변환될 것이다. -> 0041 0042 AC00 AC01
+- new String(byte[], 0, 8) -이클립스에서 실행하면 file.encoding의 값이 UTF-8로 설정 -> new String(byte[], 0, 8, "문자표") -바이트 배열에 들어있는 문자 코드가 어떤 문자들로 인코딩 되었는지 알려주면 제대로 변환 -> 0041 0042 AC00 AC01
 
 ## :pushpin: Day 54
 
+### Decorator 패턴 - 기존 기능 확장
+
+> 추가 / 변경 / 삭제가 쉬움
+
+#### 문제점
+
+- 상속을 이용한 기능 확장은 유연성이 부족
+
+### FileOutputStream/FileInputStream
+
+- write(int) -> FileOutputStream -> 파일 -> FileInputStream
+- 끝 바이트만 출력
+- 리턴 값을 앞에서 부터 채우기 위해 비트 이동 연산자를 사용하여 바이트를 이동
+  - int 값은 4번에 걸쳐서 읽어서 비트 이동 연산자를 이용하여 하나의 int 값을 만들어야 함
+  - long 값은 4번에 걸쳐서 읽어서 비트 이동 연산자를 이용하여 하나의 long 값을 만들어야 함
+
+### 상속을 이용한 기존 기능 확장
+
+- FileOutputStream <- DataFileOutputStream (writeUTF(String), writeInt(int), writeLong(long))
+- 080557d2 <- DataFileOutputStream
+
 ## :pushpin: Day 55
+
+### list() -> File
+
+- 파일 생성
+- 파일 삭제
+- 파일 수정
+
+### <-read()- FileInputStream
+
+> 파일을 읽어들이는 것
+
+- ex) Binary File
+
+### <-write()- FileOutputStream
+
+> 파일을 쓰는 것
+
+- '가'
+  1. AC00 **BE**
+  2. 00AC **LE**
+- 기본 UTF 하면 BE형 방식
+
+### "AB가각" <- FileReader
+
+> 직접 바이트 배열로 변경하는 대신 해줌
+
+- ex) Text File
+
+### "AB가각" <- FileWriter
+
+> 직접 바이트로 변경하는 대신 해줌
+
+### Member
+
+- name: String
+- age: int
+- gender: boolean
+
+### FileOutputStream
+
+- write(int)
+- write(byte[])
+- write(byte[])
+
+### ⬆️ DataFileOutputStream
+
+> 데이터를 출력할 수 있도록 가공하는 일
 
 ## :pushpin: Day 56
 
+### java.io.Serializable과 serialVersionUID
+
+- 컴파일러가 클래스에 부여하는 버전, 개발자가 임의로 설정 가능
+- writeObject(객체 (인스턴스) <- Serializable 구현체만 출력 가능) -> ObjectOutputStream -> 인스턴스 (객체)의 각 필드의 값을 byte[]로 변환 + 클래스 정보 (클래스 버전 정보 ex) 3720) -출력-> -읽기-> ObjectInputStream -deserialize (역직렬화)-> readObject() -생성-> 객체 <- 파일에서 읽어들인 데이터의 클래스 버전과 현재 갖고있는 클래스의 버전이 동일해야 함
+  - ex) 3800
+
+### 메타 데이터 - HTML
+
+#### <h1> 자바 프로그래밍 </h1>
+
+- 콘텐트 (Content) = data
+- 콘텐트를 설명 = meta data = tag = markup (출판 용어) = element (기술 용어)
+- PC 컴퓨터 <-> 센서 장치
+- 이기종
+  - ex) Windows <-> Linux
+- Java App <-> C App
+  - 서로 다른 언어/운영체제인 경우 이기종이라 함
+  - .gif <- 표준 포맷으로 만든 바이너리 파일을 이기종 간 교환 가능
+- 객체 시리얼 데이터 <- 자바 시리얼 데이터는 표준 포맷이 아니기 때문에 이기종 언어간 호환 X <- 읽고 쓸 수 X
+- binary 형식으로 출력한 것은 해당 포맷을 알지 못하면 읽고 쓸 수 X => 그에 비해 텍스트 형식은 이기종 간에 읽고 쓸 수 O => 텍스트 형식으로 데이터를 주고 받는 경우가 많음
+
+#### 텍스트 형식
+
+- ex) XML, CSV, JSON 등
+
+### MIME 타입
+
+#### 형식
+
+- Multi-purpose
+- Internet
+- Mail
+- Extensions
+  - 인터넷 상에서 데이터를 보내고 받을 때 어떤 형식의 데이터인지 알려주는 이름
+  - 국제적으로 표준 포맷이 정의되어 있음
+
+#### 데이터
+
+- 처음에는 전자 우편을 주고 받을 때 데이터 포맷을 알려줄 목적으로 사용 -> 지금은 웹 상에서 데이터를 주고 받을 때에도 사용
+
+#### 타입/서브타입
+
+##### Example
+
+- test/html
+- test/css
+- test/javascript
+- test/csv
+- application/pdf
+- application/zip
+- application/msword
+
 ## :pushpin: Day 57
+
+### CSV 문자열을 만드는 일
+
+1. 기존 방식
+
+- Board -가져와서-> App -가공-> CSV 문자열
+  - no
+  - title
+  - content
+
+2. 개선
+
+- Board <-1. CSV 문자열을 요구 `toCsvString()`- App
+- -생성-> CSV 문자열
+- CSV 문자열을 만드는 책임이 App 클래스에서 데이터를 갖고 있는 Board 클래스로 이동 <- Information Expert
+
+### Project 객체를 CSV 형식으로 출력하기
+
+- 번호, 제목, 내용, 시작일, 종료일, 관리자 번호, 관리자명, 멤버 목록, 작업 목록
+- 저장
+  - CSV 형식의 한계
+  - 즉, 데이터가 다른 데이터를 포함하는 경우 CSV 형식으로 표현하기 어려움
+  - =해결=> 계층 구조로 된 데이터를 잘 표현할 수 있는 포맷
+    - => XML, JSON
 
 ## :pushpin: Day 58
 
+### CsvValue 인터페이스
+
+- List <-3. 저장- loadObjects() {} ↩️ 2. 객체 생성한 후 csv 문자열의 값으로 초기화 <-1. 읽기- csv 파일
+- List <-1. 꺼내서- saveObjects() {} ↪️ 2. 객체에서 csv 문자열을 얻어서 (도메인 객체.toCsvString() 호출) -3. 저장-> csv 파일
+
+#### <<interface>> CsvValue
+
+- toCsvString()
+- loadCsv()
+
+- 객체를 CSV 형식의 데이터로 읽고 쓰는데 사용할 규칙을 정의
+- -> loadObjects() | saveObjects() 메서드를 이 규칙에 따라 객체를 다룸
+- 규칙을 정의하는 개발자와 그 규칙을 사용하는 개발자 간의 합을 맞추기 위해 규칙을 정함
+
+### 메타 데이터 - JSON
+
+- 데이터를 설명하는 데이터 콘텐트로 설명 = meta data = markup
+- Serialization: JSON으로 만듦
+- Deserialization: JSON을 원래 문자열로 되돌림
+
+### Collection
+
+#### <<interface>> Interable
+
+- iterator() <- 목록에서 데이터 꺼내는 기능
+- forEach() <- 목록에서 데이터 꺼내는 기능
+
+#### ⬆️ <<interface>> Collection
+
+- add() <- 목록에 데이터를 추가/삭제하는 기능, 검사하는 기능
+- remove() <- 목록에 데이터를 추가/삭제하는 기능, 검사하는 기능
+- size() <- 목록에 데이터를 추가/삭제하는 기능, 검사하는 기능
+- isEmpty() <- 목록에 데이터를 추가/삭제하는 기능, 검사하는 기능
+- contains() <- 목록에 데이터를 추가/삭제하는 기능, 검사하는 기능
+
+#### ⬆️ <<interface>> List
+
+- get() <- 목록의 데이터를 인덱스로 다루는 기능
+- set() <- 목록의 데이터를 인덱스로 다루는 기능
+- indexOf() <- 목록의 데이터를 인덱스로 다루는 기능
+
+#### ⬆️ <<concrete>> ArrayList
+
+- 데이터 조회
+- 데이터 추가/삭제/검사
+- 인덱스
+
+### 객체 -> JSON 문자열 : 객체의 필드 값을 json 형식의 문자열로 만들기
+
+1. 객체 준비
+2. JSON 처리 객체 준비
+3. 객체의 값을 JSON 문자열로 얻기
+
+#### JSON 객체 형식 - { 객체 정보 }
+
+```
+{ "프로퍼티명" : 값, "프로퍼티명": 값, ...}
+```
+
+##### 값:
+
+- 문자열 => "값"
+- 숫자   => 값
+- 논리   => true, false
+- 프로퍼티명은 반드시 문자열로 표현해야 한다.
+
+### 객체 -> JSON 문자열 : 배열 다루기
+
+#### JSON 배열 형식 - [{ 객체 정보 },{ 객체 정보}, ...]
+
+```
+[
+{"프로퍼티명"*:*값,"프로퍼티명"*:*값, ...},
+{"프로퍼티명"*:*값,"프로퍼티명"*:*값, ...},
+{"프로퍼티명"*:*값,"프로퍼티명"*:*값, ...},
+...
+]
+```
+
+### 객체 -> JSON 문자열 : 컬렉션 다루기
+
+#### JSON 컬렉션 형식 - [{ 객체 정보 },{ 객체 정보}, ...]
+
+- 배열을 출력한 것과 동일
+- JSON은 배열과 컬렉션을 구분하지 X
+
+```
+[
+{"프로퍼티명"*:*값,"프로퍼티명"*:*값, ...},
+{"프로퍼티명"*:*값,"프로퍼티명"*:*값, ...},
+{"프로퍼티명"*:*값,"프로퍼티명"*:*값, ...},
+...
+]
+```
+
+### JSON 문자열 -> 객체 : 컬렉션 다루기
+
+1. TypeToken 클래스의 서브 클래스를 생성
+
+- 수퍼 클래스를 지정할 때 제네릭의 타입을 설정
+- TypeToken 클래스에는 Type 인터페이스의 구현체를 만드는 메서드가 있기 때문에 이 클래스의 서브 클래스를 만드는 것
+- 타입 파라미터에 컬렉션 타입을 전달하는 목적 이외에는 다른 이유가 X
+  - 서브 클래스에 뭔가를 추가할 필요가 X
+
+2. TypeToken 객체 준비
+3. TypeToken 객체를 통해 Type 구현체를 얻음
+4. Type 객체에 저장된 정보를 바탕으로 JSON 문자열로부터 컬렉션 객체를 생성
+
+### 객체 -> JSON 문자열 : 다른 객체를 포함하는 경우
+
+#### 다른 객체를 포함했을 때 JSON 형식
+
+```
+{
+프로퍼티명 *:* 값,
+프로퍼티명 *:* {프로퍼티명*:*값,프로퍼티명*:*값,...},
+...
+}
+```
+
+### 객체 -> JSON 문자열 : 다른 객체를 목록으로 포함하는 경우
+
+#### 다른 객체를 목록으로 포함했을 때 JSON 형식
+
+```
+{
+프로퍼티명 *:* 값,
+프로퍼티명 *:* {프로퍼티명*:*값,프로퍼티명*:*값,...},
+프로퍼티명 *:* [{...},{...},{...},...],
+...
+}
+```
+
 ## :pushpin: Day 59
+
+### Command 규칙 변경
+
+#### <<interface>> Command
+
+- execute() -> excute(파라미터) <- CommandRequest <- Command 객체를 실행할 때 이 객체에 필요한 값을 담아 전달
+
+### 17-a. 다른 핸들러를 실행할 때 값 넘기기
+
+- 게시글 상세보기 -> App -execute()-> BoardDetailHandler -변경(U) execute()-> BoardUpdateHandler
+- 게시글 상세보기 -> App -execute()-> BoardDetailHandler -삭제(D) execute()-> BoardDeleteHandler
+
+### 17-b. 다른 핸들러를 실행할 값 넘기기
+
+- App -execute()->
+
+### 17-c. 커맨드 객체 간의 종속성 없애기
+
+- 게시글 상세보기 -> App -execute()-> BoardDetailHandler
+- -변경(u)-> RequestDispatcher -execute()-> BoardUpdateHandler
+- RequestDispatcher -execute()-> BoardDeleteHandler
+
+1. 객체 간의 관계를 빠르게 파악하기
+
+#### CommandRequest
+
+> 핸들러에게 값을 전달하는 일 / 핸들러끼리 값을 주고 받는 일
+
+#### RequestDispatcher
+
+> 커맨드의 요청을 받아 대신 실행 / 커맨드리퀘스트를 만드는 일
+
+- 커맨드(핸들러) 객체 간의 종속성이 제거
+- BoardDetailHandler
+- BoardUpdateHandler
+- BoardDeleteHandler
 
 ## :pushpin: Day 60
 
+### 17-b. 다른 핸들러를 실행할 때 값 넘기기
+
+#### <<commad>> A -execute()-> <<commad>> B
+
+- 다양한 값을 전달할 수 있도록 특별한 파라미터 '바구니'를 새로 정의
+
+#### commandRequest
+
+- 파라미터 타입을 정의
+- command 객체를 실행할 때 이 객체에 필요한 값을 담아 전달
+- 서블릿 = command
+
+### 17-c. 커맨드 객체 간의 종속성 없애기
+
+- 의존한다 = 이 클래스 없이 컴파일 불가한 상태
+- 엮여있다 -> 커플링
+
+#### 웹 프로그래밍: 서블릿
+
+> 하나의 서블릿에서 다른 서블릿을 사용할 때 execute()를 사용하지 않고 RequestDispatcher를 사용해 처리
+
+- 구조는 더 복잡하지만 command를 직접 리턴하는 방법 보다는 RequestDispatcher를 사용하는게 향후 유지 보수에 더 나음
+
+### 18-a. Observer 디자인 패턴: 옵저버 패턴이 필요한 이유
+
+#### `new Date(System.currentTimeMillis())`
+
+- 1970년 0시 0분 0초 부터 카운트
+
+### 18-b. 'Observer' 패턴으로 구조 변경
+
+- 실행 -> App -호출-> service() (리스너 실행)
+
+### Observer 패턴
+
+- 관찰자 | 감시자 = listener
+- 보호 관찰자 <-특정 상태에 대해 전화로 보고-|-상태를 감시-> 가석방 죄수 (보호 관찰자의 전화번호) => Observer = Listener <-2. 보고 (메서드 호출)- 1. 상태 변경 객체 (Observer 객체 주소)
+
+### Observer 디자인 패턴의 클래스 다이어그램
+
+- Observer (m1(), m2()) <-m1(), m2()- Subject (add Listener(Observer), removeLisner(Observer), listeners: List)
+
+1. 특정 상태에 놓이면
+2. 규칙에 따라 호출
+
+- 객체가 특정 상태일 때 기능을 추가/삭제 하기가 쉬움
+
+### 18-b. Observer 패턴 적용
+
+- App -call-> <<interface>> ApplicationContentListener (App 시작할 때 -> contextInitialzed(), App 종료할 때 -> contextDestroyed())
+
+#### App <- Subject = Publisher (= 발행자)
+
+- ex) 가석방 죄수
+- addApplicationContextListener()
+- removeApplicationContextListener()
+
+#### ApplicationContentListener <- Observer = Subscriber (= 수신자)
+
+- ex) 보호 관찰자
+
+#### Observer 목표
+
+- 기능을 언제든 추가하거나 뺄 수 있음
+- 객체가 특정 상태에 놓일 때 기능을 추가하고 싶을 때 쉽게 가능하도록 하는 디자인 패턴
+
+### 18-b. 환영 메세지 출력을 옵저버로 처리
+
+#### App
+
+```
+service() {
+환영 메세지 출력
+종료 메세지 출력
+}
+```
+
+##### <<ApplicationContextListener>> AppInitListener
+
+- contextInitialized() {}
+- contextDestroyed() {}
+
+### 18-c. 파일 로딩 및 저장 기능을 옵저버로 처리
+
+- App =옵저버로 분리=> <<ApplicationContextListener>> AppInitListener
+
+### 옵저버 적용
+
+#### App -옵저버로 분리->
+
+##### AppInitListener
+
+- 환영 메세지
+- 종료 메세지
+
+##### FileListener
+
+- 파일 로딩
+- 파일 저장
+
+### Subject(Publisher)와 Observer(Subscriber = Lister) 간의 값 공유하기
+
+- <<subject>> App -1. call | contextInitialized(), contextDestroyed()-> <<Observer>> FileListener 2. 작업
+- Map <-작업 결과 보관 | 조회- <<Observer>> FileListener - - -> <<Observer>> ApplicationContextLister
+- 데이터를 저장하고 꺼내기 위해 List 객체 사용
+
+### 19. 파일을 공유하기
+
+1. 현재 애플리케이션 구조의 문제점 (Application Architecture)
+
+#### PC
+
+- 사용자 -실행 (입력/출력)-> App <-로딩-|-저장-> 파일
+- 사용자 -실행-> App <-로딩-|-저장-> 파일
+- 프로그램끼리 데이터 공유 불가
+  - ex) 인사팀 파일 <-> HR <-사원 등록- 직원
+- 데이터 공유 X -> 업무 수행 불가
+- 직원이 수행한 작업 결과가 각 직원의 PC에 저장 -> 직원 간 작업 결과의 공유가 어려움
+
+### 해결책
+
+1. 컴퓨터 공유
+2. 파일을 주고 받기 -> 매우 번거로움 / 동시 작업 불가
+
+### 19. 데이터를 공유하는 고전적인 방법 - 파일 서버 또는 네트워크 드라이브로 파일 공유
+
+- 직원 -사용-> <<PC>> HR <-읽고/쓰기-> <<PC>> 파일 (파일이 들어있는 디렉토리를 공유)
+- 네트워크 드라이브로 다른 PC의 디렉토리에 접근
+
+#### 특징
+
+- 같은 파일을 접근하기 때문에 프로그램 간에 파일을 주고 받을 필요가 X
+- 여러 App에서 파일을 동시에 접근할 때 다른 프로그램이 데이터를 저장하는 동안 또 다른 프로그램이 파일에 데이터를 저장한다면 다른 프로그램이 작업한 데이터를 덮어쓸 수 있음
+
+### 19. 여러 App에서 같은 파일을 읽고 쓸 때 문제점 해결
+
+- 직원 -사용-> <<PC>> HR -> <<PC>> -데이터 읽고 쓰기 요청-> 파일 관리 App (중간에서 데이터를 덮어쓰지 않도록 파일에 데이터를 읽고 쓰는 것을 관리) <-읽고 쓰기-> 파일
+
+### 프로그램 간의 데이터 교류 => 네트워킹 기술 필요
+
+- App <-응답- 네트워킹 -요청-> 파일 관리 App <-> 파일
+- 요청을 받아서 처리해 주는 역할 => "Server"
+- 서버에 작업을 요청하는 역할 => "Client"
+  - ex) 서버: 카톡 서버
+  - 클라이언트: 메신저 <-> 카톡 서버
+  - 게임 API <-> 게임 서버 (wow 서버)
+  - 메일 App <-> 메일 서버
+  - 일정 서버 <-> 파일
+  - 캘린더 App <-> 파일 관리 App
+  - 웹 브라우저 <-> Web 서버
+
+### 파일의 데이터를 전문적으로 관리 -> DBMS
+
+- 사용자 -> App <-통신 = JDBC API- DBMS <-I/O-> 파일
+- 파일에서 데이터를 저장, 로딩
+- 파일에서 데이터를 찾기
+- 사용자에 따라 접근을 제어
+  - ex) Oracle, MS-SQL, DB2, MYSQL, MariaDB, PostareSQL, Tibero, Cubrid, App
+
 ## :pushpin: Day 61
 
+### 19 단계의 목표 -> 다인용 Application으로 전환
+
+#### Enterprise Application Architecture
+
+- ~~구조~~ -> Architecture
+
+#### App. Architecture 변경
+
+- 1인용 App -> 19. 다인용 App
+- 동시 사용 => 같은 기능을 여러 명이 동시에 작업할 수 있는 App
+
+#### 공동 이용
+
+- 다인용 -> 사용자 -ID/PWD-> App <-> 파일
+- 공동 이용 -> ID/PWD로 사용자 구분
+
+#### 목표
+
+- 개인별 이용 -> 동시 사용 = 데이터 공유
+- 사용자 -> App <-> 파일
+- 동시에 같은 업무를 수행할 수 있는 Application 만들기 -> "기업용 App" => Enterprise App
+- 기업용 App -> 동시 작업 -> 데이터 공유 => 무결성 제약 조건 통제 (integrity)
+- (Enterprise) =제어=> 트랜잭션 기술 (transaction)
+- 동시 작업을 제어하는 방법이 필요
+
+### 19 단계
+
+- PMS -> Client PMS <-입력/결과 출력 => UI 제공-> 사용자 -> Server PMS <-I/O-> 파일
+- Client PMS <-결과 응답-데이터 요청-> Server PMS
+- 여러 Client가 Server와 데이터 공유를 하도록 하기 위함
+
 ## :pushpin: Day 62
+
+### 19-b. 데이터 주고 받기
+
+- ClientApp <-응답-요청-> ServerApp
+- 데이터 송수신
+
+### 네트워킹
+
+- 컴퓨터 Lan Card
+
+#### Internet
+
+##### WAN
+
+**Wide Area Network**
+
+- 회사 -Gateway-> Local Area Network
+- Network Internet C; 릭 = 로컬 네트워크를 연결하는 카드
+- Gateway: 입구와 입구를 열 때
+
+### 네트워킹 - 두 대의 컴퓨터에서 통신
+
+- ClientApp <-> ServerApp
+- 컴퓨터 <-> 컴퓨터
+
+### 네트워킹 - 한 대의 컴퓨터에서 통신
+
+- ClientApp ServerApp
+- 컴퓨터 NIC
+- 통신사 - Gateway - HUB - HUB - 컴퓨터
+- 프로그램과 프로그램 사이에 데이터를 직접 주고 받는 방법은 X (두 대의 컴퓨터나 한 대의 컴퓨터나 마찬가지)
+
+### Socket 클래스
+
+- ClientApp -X-> ServerApp
+- ⬇️ Socket-> NFC -Socket-> ⬆️
+- NIC을 통해 Application 끼리 데이터를 주고 받게 도와주는 역할
+
+### Socket과 ServerSocket
+
+- ClientApp -X-> ServerApp
+- ⬇️ Socket-> NFC -ServerSocket-> -Socket-> ⬆️
+- 요청하는 쪽 요청받는 쪽
+
+#### Best Practies; BP
+
+- Practies (실천) = 경험
+  - ex) Design Pattens -> Refactory (정리 최선의 방법) -> Qusle Sort (정렬 최선의 방법)
+- ip Adress: 어느 컴퓨터의 어느 프로그램 주소
+- 몇번 포트 프로그램인지 알기 위해 포트 번호가 필요
+
+### 포트 번호
+
+- ClientApp -2700-> ServerApp 1
+- ClientApp -3200-> ServerApp 2
+- ClientApp -4300-> ServerApp 3
+  - 포트 번호 (Port): 통신할 대상을 구분하는 번호
+- Client 측, Server 측 모두 Port 번호가 필요
+
+### ServerSocket/Socket과 포트 번호
+
+- 모든 소켓은 포트 번호가 존재
+- ClientApp -> Socket 24777 -> ServerApp <- Socket 37411 (내선 번호) <- ServerSocket 3477 (대표 번호)
+
+### 다중 Client와 포트 번호
+
+- ServerSocket 7222 (고정) Application에서 부여
+- C1 - Socket 32000 (임의) -> Server 41171 -> S
+- C2 - Socket 37180 (임의) -> Server 51130 -> S
+- C3 - Socket 36220 (임의) -> Server 52300 -> S
+- OS가 임의 값 부여
+- 데이터를 주고 받기 위해 소켓이 필요하고 소켓과 소켓을 구분하기 위한 포트 번호가 필요
+
+- ServerSocket 7222 (고정) Application에서 부여
+- 탭 1 -링크 클릭-> 요청 -> Socket 32000 (임의) -> Server 41171 -> 웹 서버
+- 탭 2 -링크 클릭-> 요청 -> Socket 37180 (임의) -> Server 51130 -> 웹 서버
+- 탭 3 -링크 클릭-> 요청 -> Socket 36220 (임의) -> Server 52300 -> 웹 서버
+- OS가 임의 값 부여
+- 웹 브라우저는 훨씬 더 많은 소켓을 사용하며 소켓이 지정되어야 포트 번호가 부여
+  - ex) 개인 간의 연락을 위해 서로의 연락처가 필요한 것처럼 고유의 포트 번호가 존재
+
+#### Server
+
+- HTTP: 80
+- ServerSocket은 데이터를 받는 쪽에만 존재
+
+#### 접속 후 데이터 송수신
+
+- Socket <-> Socket
+- ⬆️ OutputStream ⬇️ InputStream
+- ⬆️ Data (출력) ⬇️ Data (읽기)
+
+#### 접속 후 데이터 송수신 + 데코레이터
+
+- 기존 클래스 손 대지 않고 기능 추가
+- Socket <-> Socket
+- ⬆️ OutputStream ⬇️ InputStream
+- ⬆️ <<Decorator>> PrintWriter ⬆️ BufferedReader
+- ⬆️ Data (println() / printf() / print())
+- 네트워킹 프로그램은 연결만 되면 종료, 그 후 부터는 입출력 프로그램
+
+#### 네트워킹 입출력
+
+```
+/* 메세지를 보내기 위해 반드시 호출할 것
+ * 상대편에게 확실히 데이터를 보내고 싶다면 반드시 명시할 것 */
+out.flush();
+```
+
+- print()를 해준다고 서버에 데이터가 보내지지 X
+- 파일 입출력과 개념이 다름 -> 헷갈리지 말 것
+
+### 19-c. 프롬프트 적용
+
+- ClientApp -접속-> ServerApp
+
+1. 접속
+2. 프롬프트로 입력 받기
+3. 보내기
+4. 보낸 데이터 그대로 리턴
+5. "quit"
+6. "goodbye"
+7. 접속 종료
+
+- 클라이언트가 한 줄의 문자열을 보낼 때까지 리턴하지 X
+
+#### readLine() VS println()
+
+```
+/* 소켓에서 한 줄의 문자열을 보낼 때까지 기다림
+ * 서버에서 한 줄의 문자열을 보낼 때까지 기다림 */
+readLine();
+```
+
+- 데이터를 보내든 말든 기다리지 않고 출력하는 println()과 달리 readLine()은 서버에서 한 줄의 문자열을 보낼 때까지 기다림
+- pms: 데이터 저장 관리
+
+### 19-d. Client와 Server 간 통신 규칙 정의
+
+- protocol 예) FTP, HTTP, Telnet, SMTP, POP3, IMAP 등
+- ClientApp -접속-> ServerApp
+
+1. 접속
+2. 요청
+   1. 명령 한 줄
+   2. JSON 데이터 한 줄
+3. 응답
+   1. 처리 결과 한 줄
+   2. JSON 데이터 한 줄
+
+### 19-d. Board 객체 저장 및 조회
+
+#### ClientApp
+
+- Board -new Gson().toJson() | serialize (직렬화)-> {-} JSON -> Socket -> Socket -> JSON 문자열 -new Gson().toJson() | deserialize (역직렬화)-> Board
+
+#### :pushpin: Day 63
+
+### 19-e. PMS를 Client/Server로 분리
+
+- Client App <-UI 처리- PMS -데이터 저장 관리-> Server App
+- domain 객체
+- handler 객체
+
+### 19-e. 통신 기능
+
+> 사용자에게 json으로 바꾸는거 신경 쓰지 않도록 전체 다 캡슐화
+
+#### 캡슐화 ex)
+
+- 핸드폰 내부적으로 어떻게 돌아가는 지 모름
+
+#### Board -request (명령 | 객체)-> RequestAgent -> RequestProcessor
+
+- 프로토콜에 따라 서버에 요청하는 기능을 캡슐화 -> 복잡한 코드를 클래스에 감추는 것 -> 만약 통신 프로토콜이 바뀌더라도 RequestAgent만 변경해도 됨 -> 최소 변경
+
+#### `in.readLine();`
+
+- 무조건 빈 문자열이라도 읽음
+
+### 19-e. 통신 기능 캡슐화
+
+#### RequestProcessor -execute(Request(요청 정보) | Response(응답 처리))-> BoardTable
+
+- 클라이언트 요청을 받아 처리
+- 웹은 int 형식이 아닌 문자 형식으로 값을 저장
+
+#### `startsWith()`
+
+- 파라미터 안에 있는 문자처럼 이렇게 시작한다면
+
+#### `response`
+
+- 결과 상태, 결과 값을 저장
+
+#### `readLine()`
+
+- 요청하거나 응답할 때 두 줄의 문자열을 보내는게 규칙
+
+#### `out.flush()`
+
+- 쏜다
+
+### 19-f. 파일 및 데이터 처리 기능을 서버 프로젝트로 이전
+
+#### ~~PMS~~
+
+##### Client
+
+- UI 제공
+- 업무 수행
+
+##### Server
+
+- 데이터 저장
+- 데이터 관리
+
+- 기존 구조 (Standalone App) -**변경 <= migration (마이그레이션)**-> 새 구조
