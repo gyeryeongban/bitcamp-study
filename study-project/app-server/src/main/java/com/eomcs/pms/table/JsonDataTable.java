@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,12 +16,12 @@ import com.google.gson.Gson;
 // 역할
 // - 데이터를 처리하는 클래스가 공통으로 가져야할 필드나 메서드를 정의한다.
 // 
-public abstract class DataTable<T> {
+public abstract class JsonDataTable<T> {
 
   protected List<T> list = new ArrayList<>();
   private String filename;
 
-  public DataTable(String filename) {
+  public JsonDataTable(String filename) {
     this.filename = filename;
     loadObjects();
   }
@@ -40,7 +42,8 @@ public abstract class DataTable<T> {
         strBuilder.append(str);
       }
 
-      //Type type = TypeToken.getParameterized(Collection.class, domainType).getType(); 
+      Field field = getClass().getField("list");
+      Type type = TypeToken.getParameterized(Collection.class, domainType).getType(); 
       Collection<T> collection = new Gson().fromJson(strBuilder.toString(), list.getClass());
       list.addAll(collection);
 
