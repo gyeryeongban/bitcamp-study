@@ -29,7 +29,6 @@ public class RequestProcessor implements AutoCloseable {
     this.socket = socket;
     out = new PrintWriter(socket.getOutputStream());
     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    this.dataProcessorMap = dataProcessorMap;
 
     // 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("board.", new BoardTable());

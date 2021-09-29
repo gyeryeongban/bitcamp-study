@@ -5,8 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,8 +40,7 @@ public abstract class JsonDataTable<T> {
         strBuilder.append(str);
       }
 
-      Field field = getClass().getField("list");
-      Type type = TypeToken.getParameterized(Collection.class, domainType).getType(); 
+      //Type type = TypeToken.getParameterized(Collection.class, domainType).getType(); 
       Collection<T> collection = new Gson().fromJson(strBuilder.toString(), list.getClass());
       list.addAll(collection);
 
