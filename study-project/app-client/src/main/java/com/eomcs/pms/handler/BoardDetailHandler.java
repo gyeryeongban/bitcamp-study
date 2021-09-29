@@ -24,16 +24,11 @@ public class BoardDetailHandler implements Command {
     requestAgent.request("board.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
     Board board = requestAgent.getObject(Board.class);
-
-    if (board == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
 
     System.out.printf("제목: %s\n", board.getTitle());
     System.out.printf("내용: %s\n", board.getContent());
@@ -44,14 +39,12 @@ public class BoardDetailHandler implements Command {
     System.out.printf("조회수: %d\n", board.getViewCount());
     System.out.println();
 
-    Board loginUser = AuthLoginHandler.getLoginUser(); 
-    if (loginUser == null || 
-        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
-      return;
-    }
+    //    Member loginUser = AuthLoginHandler.getLoginUser(); 
+    //    if (loginUser == null || 
+    //        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
+    //      return;
+    //    }
 
-    // BoardUpdateHandler나 BoardDeleteHandler를 실행할 때 게시글 번호를 사용할 수 있도록 
-    // CommandRequest에 보관한다.
     request.setAttribute("no", no);
 
     while (true) {

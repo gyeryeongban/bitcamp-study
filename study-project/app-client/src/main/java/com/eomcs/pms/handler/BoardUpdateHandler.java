@@ -24,21 +24,16 @@ public class BoardUpdateHandler implements Command {
     requestAgent.request("board.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
     Board board = requestAgent.getObject(Board.class);
 
-    if (board == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
-
-    if (board.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
-      System.out.println("변경 권한이 없습니다.");
-      return;
-    }
+    //    if (board.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
+    //      System.out.println("변경 권한이 없습니다.");
+    //      return;
+    //    }
 
     String title = Prompt.inputString(String.format("제목(%s)? ", board.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s)? ", board.getContent()));
