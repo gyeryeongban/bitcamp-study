@@ -27,6 +27,8 @@ public class BoardDeleteHandler implements Command {
       return;
     }
 
+    //    Board board = requestAgent.getObject(Board.class);
+
     if (board.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
