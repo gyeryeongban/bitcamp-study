@@ -5191,7 +5191,7 @@ readLine();
 
 - Board -new Gson().toJson() | serialize (직렬화)-> {-} JSON -> Socket -> Socket -> JSON 문자열 -new Gson().toJson() | deserialize (역직렬화)-> Board
 
-#### :pushpin: Day 63
+## :pushpin: Day 63
 
 ### 19-e. PMS를 Client/Server로 분리
 
@@ -5253,3 +5253,127 @@ readLine();
 - 데이터 관리
 
 - 기존 구조 (Standalone App) -**변경 <= migration (마이그레이션)**-> 새 구조
+
+## :pushpin: Day 64
+
+### 19-f. C/S 연동 구조
+
+#### Client
+
+##### RequestAgent <-응답-요청->
+
+- BoardAddHandler
+- BoardListHandler
+
+- UI 제공
+- 업무 로직 수행
+
+#### Server
+
+##### RequestProcessor
+
+- BoardTable <-> 파일
+- MemberTable <-> 파일
+
+- 데이터 관리
+- 데이터를 파일에 보관/로딩
+
+### <<abstract>> DataTable
+
+- 일반화
+
+##### BoardTable
+
+- file name: String
+- loadObject()
+- saveObject()
+
+##### MemberTable
+
+- file name: String
+- loadObject()
+- saveObject()
+
+##### 추상 클래스
+
+> 추상 클래스와 인터페이스는 문법의 목적이 다름
+
+- 꼭 물려주고 싶은 메서드가 있다면 사용
+  - 일하세요 -요청-> 관리자 -일해-> 쌀밥 먹는 자 <- 사람 -> 고기
+  - 누굴 상속 받냐에 상관없이 작업자 규칙에 따라 만든다
+    - 일하세요 -요청-> 관리자 -일해-> 작업자 <- 사람
+
+#### `getCLass()`
+
+- 현재 클래스의 정보를 가져옴
+
+#### `getField()`
+
+- 현재 클래스에 있는 필드 중에서 파라미터로 받은 이름을 가진 필드 정보를 가져옴
+
+#### `getType()`
+
+- 일반 클래스
+
+#### `getGenericType()`
+
+- 제네릭 적용된 클래스
+
+## :pushpin: Day 65
+
+#### AbstractTaskHandler =>
+
+- printTasks()
+- getStatusLabel()
+- promptStatus()
+- promptStatue(-)
+
+#### ⬆️ TaskHandlerHelper
+
+- printTasks()
+- getStatusLabel()
+- promptStatus()
+- promptStatue(-)
+
+#### ⬆️ TaskAddHandler | TaskDetailHandler
+
+### 19-g. 다중 클라이언트 접속 처리
+
+1. stateful
+
+- **고객** ←1. 연결, 2. 문의, 3. 답변-> **상담사**
+
+2. stateless
+
+- **고객** ←1. 연결, 2. 인증 요청, 3. 답변, 4. 끊기-> **코로나 인증 전화**, **114 전화 안내**
+- 클라이언트가 연결을 끊기 전까지 계속 연결
+
+1. 소수의 클라이언트 요청 처리
+2. 서버는 클라이언트 정보를 유지
+3. 메모리 많이 사용
+
+- -> 응답 후 즉시 연결을 끊는다
+
+1. 다수의 클라이언트 요청 처리
+2. 서버는 클라이언트 정보를 유지하지 않는다
+3. 메모리 적게 사용
+
+- 메일 전송 ->
+- ← 게임
+- 검색 ->
+- ← 채팅
+
+### 클라이언트 VS 서버
+
+- 클라이언트는 요청하는 입장
+- 서버는 요청을 받아 작업을 요청하는 입장
+
+### 네트워킹
+
+- Connection-Oriented = TCP
+  - 연결 후 데이터 송/수신 ex) 전화
+  - 데이터 송/수신에 대한 신뢰 보장
+    - Stateful 연결 -> 요청 <-> 응답 -> 끊기
+    - Stateless 연결 -> 요청 -> 응답 -> 끊기
+- Connectionless = UDP
+  - 연결 없이 데이터 송/수신 ex) 편지, 택배, 라디오
