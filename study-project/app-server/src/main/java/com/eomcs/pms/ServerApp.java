@@ -29,7 +29,6 @@ public class ServerApp {
     dataProcessorMap.put("board.", new BoardTable());
     dataProcessorMap.put("member.", new MemberTable());
     dataProcessorMap.put("project.", new ProjectTable());
-    dataProcessorMap.put("task.", new ProjectTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
     requestProcessor.service();

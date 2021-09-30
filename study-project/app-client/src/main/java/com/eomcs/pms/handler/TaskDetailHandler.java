@@ -1,53 +1,39 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
 import com.eomcs.pms.domain.Member;
+import com.eomcs.pms.domain.Project;
 import com.eomcs.pms.domain.Task;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class TaskDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  ProjectPrompt projectPrompt;
 
-  public TaskDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public TaskDetailHandler(ProjectPrompt projectPrompt) {
+    this.projectPrompt = projectPrompt;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[작업 상세보기]");
-    int no = Prompt.inputInt("번호? ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
-
-    requestAgent.request("task.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 작업이 없습니다.");
+    Project project = projectPrompt.promptProject();
+    if (project == null) {
+      System.out.println("작업 조회를 취소합니다.");
       return;
     }
 
-    Task task = requestAgent.getObject(Task.class);
+    TaskHandlerHelper.printTasks(project);
 
-    //    Project project = projectPrompt.promptProject();
-    //    if (project == null) {
-    //      System.out.println("작업 조회를 취소합니다.");
-    //      return;
-    //    }
-    //
-    //    printTasks(project);
-    //
-    //    System.out.println("-------------------------------------");
-    //
-    //    int taskNo = Prompt.inputInt("작업 번호? ");
-    //
-    //    Task task = task.findTaskByNo(taskNo);
-    //    if (task == null) {
-    //      System.out.println("해당 번호의 작업이 없습니다.");
-    //      return;
-    //    }
+    System.out.println("-------------------------------------");
+
+    int taskNo = Prompt.inputInt("작업 번호? ");
+
+    Task task = project.findTaskByNo(taskNo);
+    if (task == null) {
+      System.out.println("해당 번호의 작업이 없습니다.");
+      return;
+    }
 
     System.out.printf("내용: %s\n", task.getContent());
     System.out.printf("마감일: %s\n", task.getDeadline());
@@ -60,7 +46,7 @@ public class TaskDetailHandler implements Command {
       return;
     }
 
-    request.setAttribute("project", task);
+    request.setAttribute("project", project);
     request.setAttribute("task", task);
 
     while (true) {
