@@ -17,9 +17,6 @@ import com.google.gson.Gson;
 // 
 public class RequestProcessor extends Thread {
   Socket socket;
-  PrintWriter out;
-  BufferedReader in; 
-
   Map<String,DataProcessor> dataProcessorMap;
 
   public RequestProcessor(Socket socket, Map<String,DataProcessor> dataProcessorMap) throws Exception {
@@ -30,56 +27,53 @@ public class RequestProcessor extends Thread {
   @Override
   public void run() {
     try (Socket socket = this.socket;
-        Printersocket.getOutputStream());
-        Buffered in =  new BufferedReader(in)) {
+        PrintWriter out = new PrintWriter(socket.getOutputStream());
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
 
-          Set<String> dataProcessorNames = dataProcessorMap.keySet();
+      Set<String> dataProcessorNames = dataProcessorMap.keySet();
 
-          String command = in.readLine();
-          Request request = new Request(command, in.readLine());
-          Response response = new Response();
+      String command = in.readLine();
+      Request request = new Request(command, in.readLine());
+      Response response = new Response();
 
-          if (command.equalsIgnoreCase("quit")) {
-            response.setStatus(Response.SUCCESS);
-            response.setValue("goodbye");
-            sendResult(response, out);
-            return;
-          } 
+      if (command.equalsIgnoreCase("quit")) {
+        response.setStatus(Response.SUCCESS);
+        response.setValue("goodbye");
+        sendResult(response, out);
+        return;
+      } 
 
-          DataProcessor dataProcessor = null;
-          for (String dataProcessorName : dataProcessorNames) {
-            if (command.startsWith(dataProcessorName)) {
-              dataProcessor = dataProcessorMap.get(dataProcessorName);
-              break;
-            }
-          }
-
-          if (dataProcessor != null) { // 명령어에 해당하는 데이터 처리 담당자가 있으면
-            dataProcessor.execute(request, response);
-
-          } else {
-            response.setStatus(Response.FAIL);
-            response.setValue("해당 명령어를 처리할 수 없습니다.");
-          }
-
-          sendResult(response, out); // 클라이언트에게 실행 결과를 보낸다.
-
-          saveData();
-
-          System.out.println("클라이언트 접속 종료!");
-
-
-        } catch (Exception e) {
-          System.out.println("클라이언트 요청 처리 중 오류 발생!");
+      DataProcessor dataProcessor = null;
+      for (String dataProcessorName : dataProcessorNames) {
+        if (command.startsWith(dataProcessorName)) {
+          dataProcessor = dataProcessorMap.get(dataProcessorName);
+          break;
         }
+      }
+
+      if (dataProcessor != null) { // 명령어에 해당하는 데이터 처리 담당자가 있으면
+        dataProcessor.execute(request, response);
+
+      } else {
+        response.setStatus(Response.FAIL);
+        response.setValue("해당 명령어를 처리할 수 없습니다.");
+      }
+
+      sendResult(response, out); // 클라이언트에게 실행 결과를 보낸다.
+
+      saveData();
+
+      System.out.println("클라이언트 접속 종료!");
+
+    } catch (Exception e) {
+      System.out.println("클라이언트 요청 처리 중 오류 발생!");
+    }
   }
 
   private void saveData() throws Exception {
-    // => 데이터를 파일에 저장한다.
     Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
     for (DataProcessor dataProcessor : dataProcessors) {
-      if (DataProcessor JsonDataTable) {
-        // 만약 데이터 처리 담당자가 JsonDataTable 의 자손이라면,
+      if (dataProcessor instanceof JsonDataTable) {
         ((JsonDataTable<?>)dataProcessor).save();
       }
     }
