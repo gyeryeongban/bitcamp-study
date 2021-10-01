@@ -122,10 +122,7 @@ public class ClientApp {
   }
 
   // MenuGroup에서 사용할 필터를 정의한다.
-  // MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
-
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
-
 
 
   Menu createMainMenu() {
