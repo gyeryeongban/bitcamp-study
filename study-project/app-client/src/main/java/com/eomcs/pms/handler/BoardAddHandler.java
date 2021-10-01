@@ -26,15 +26,13 @@ public class BoardAddHandler implements Command {
     board.setWriter(AuthLoginHandler.getLoginUser());
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    //boardList.add(board);
     requestAgent.request("board.insert", board);
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("게시글 저장 성공!");
-    } else {
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("게시글 저장 실패!");
+      return;
     }
 
+    System.out.println("게시글을 저장했습니다.");
   }
 }
 

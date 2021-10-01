@@ -1,25 +1,29 @@
 package com.eomcs.pms.handler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.eomcs.pms.domain.Member;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class MemberPrompt {
 
-  List<Member> memberList;
+  RequestAgent requestAgent;
 
-  public MemberPrompt(List<Member> memberList) {
-    this.memberList = memberList;
+  public MemberPrompt(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
-  protected Member findByName(String name) {
-    for (Member member : memberList) {
-      if (member.getName().equalsIgnoreCase(name)) {
-        return member;
-      }
+  protected Member findByName(String name) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("name", name);
+
+    requestAgent.request("member.selectOneByName", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
     }
-    return null;
+    return requestAgent.getObject(Member.class);
   }
 
   protected static Member findByName(String name, List<Member> memberList) {
@@ -31,7 +35,7 @@ public class MemberPrompt {
     return null;
   }
 
-  public Member promptMember(String label) {
+  public Member promptMember(String label) throws Exception {
     while (true) {
       String memberName = Prompt.inputString(label);
       if (memberName.length() == 0) {
@@ -63,7 +67,7 @@ public class MemberPrompt {
     }
   }
 
-  public List<Member> promptMembers(String label) {
+  public List<Member> promptMembers(String label) throws Exception {
     ArrayList<Member> members = new ArrayList<>();
 
     while (true) {
