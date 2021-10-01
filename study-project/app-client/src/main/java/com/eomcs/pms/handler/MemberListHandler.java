@@ -16,7 +16,7 @@ public class MemberListHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[회원 목록]");
 
-    requestAgent.request("member.SelectList", null);
+    requestAgent.request("member.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("목록 조회 실패!");

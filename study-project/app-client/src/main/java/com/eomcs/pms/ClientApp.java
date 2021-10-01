@@ -18,6 +18,8 @@ import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.MemberAddHandler;
+import com.eomcs.pms.handler.MemberDeleteHandler;
+import com.eomcs.pms.handler.MemberDetailHandler;
 import com.eomcs.pms.handler.MemberListHandler;
 import com.eomcs.pms.listener.AppInitListener;
 import com.eomcs.request.RequestAgent;
@@ -90,9 +92,9 @@ public class ClientApp {
     // Command 객체 준비
     commandMap.put("/member/add", new MemberAddHandler(requestAgent));
     commandMap.put("/member/list", new MemberListHandler(requestAgent));
-    //    commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
+    commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
     //    commandMap.put("/member/update", new MemberUpdateHandler(requestAgent));
-    //    commandMap.put("/member/delete", new MemberDeleteHandler(requestAgent));
+    commandMap.put("/member/delete", new MemberDeleteHandler(requestAgent));
 
     commandMap.put("/board/add", new BoardAddHandler(requestAgent));
     commandMap.put("/board/list", new BoardListHandler(requestAgent));
@@ -156,7 +158,7 @@ public class ClientApp {
   private Menu createMemberMenu() {
     MenuGroup memberMenu = new MenuGroup("회원");
     memberMenu.setMenuFilter(menuFilter);
-    memberMenu.add(new MenuItem("등록", ACCESS_GENERAL, "/member/add"));
+    memberMenu.add(new MenuItem("등록", "/member/add"));
     memberMenu.add(new MenuItem("목록", "/member/list"));
     memberMenu.add(new MenuItem("상세보기", "/member/detail"));
     return memberMenu;
