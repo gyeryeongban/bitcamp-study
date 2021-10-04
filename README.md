@@ -5341,11 +5341,11 @@ readLine();
 
 1. stateful
 
-- **고객** ←1. 연결, 2. 문의, 3. 답변-> **상담사**
+- **고객** <-1. 연결, 2. 문의, 3. 답변-> **상담사**
 
 2. stateless
 
-- **고객** ←1. 연결, 2. 인증 요청, 3. 답변, 4. 끊기-> **코로나 인증 전화**, **114 전화 안내**
+- **고객** <-1. 연결, 2. 인증 요청, 3. 답변, 4. 끊기-> **코로나 인증 전화**, **114 전화 안내**
 - 클라이언트가 연결을 끊기 전까지 계속 연결
 
 1. 소수의 클라이언트 요청 처리
@@ -5359,9 +5359,9 @@ readLine();
 3. 메모리 적게 사용
 
 - 메일 전송 ->
-- ← 게임
+- <- 게임
 - 검색 ->
-- ← 채팅
+- <- 채팅
 
 ### 클라이언트 VS 서버
 
@@ -5377,3 +5377,73 @@ readLine();
     - Stateless 연결 -> 요청 -> 응답 -> 끊기
 - Connectionless = UDP
   - 연결 없이 데이터 송/수신 ex) 편지, 택배, 라디오
+
+## :pushpin: Day 66
+
+### 19-i. 멀티 스레드
+
+> 멀티 = 다중 / 스레드 = thread(실) - 실행 흐름 ex) 상담사
+
+1. **기존 방식**
+
+- Client (고객 1~3) -1. 연결-2. 요청- - -> <- - - 응답 ~~-~~ 5. 연결 끊기- Server (상담사) 3. 요청처리
+  - 시간이 오래 걸리면 -> 다음 클라이언트의 대기 시간이 길어짐
+
+1. **개선**
+
+- 고객 1 <-> 상담사
+- 고객 2 -> 상담사
+- 고객 3 - 상담사
+
+> 상담사 수만큼 고객의 요청을 동시에 처리 가능
+
+### JVM과 Thread
+
+- 실행 -> JVM "main" 실행 흐름 main() 호출 ——클라이언트 접속——> 종료
+  - 새 실행 흐름 생성 -> 시작
+  - run() 호출 —————> 종료
+  - run() 호출 ——↕️ 서로 간섭 X——> 종료
+  - run() 호출 —————> 종료
+
+### 스레드 정의하기
+
+> "main 실행 흐름"과 별개로 독립적으로 실행할 코드를 정의하기
+
+```
+class MyThead extends Thread {
+	@Override
+	public void run() {
+		// 독립적으로 실행할 코드
+	}
+ }
+```
+
+### PMS의 멀티 스레드
+
+- 실행 -> JVM "main" 실행 흐름 main() 호출 -클라이언트 접속-> 종료
+- **JVM** main -호출-> main() -Client 접속—요청 처리-
+
+### 18 vs 19 애플리케이션 아키텍처
+
+1. **18** App <-> 파일
+
+- List <-> 메모리
+  - BoardAddHandler
+  - BoardListHandler
+  - BoardDetailHandler
+
+2. **19** Client <-> SeverApp <-> 파일
+
+- RequestAgent <-> 서버
+  - BoardAddHandler
+  - BoardListHandler
+  - BoardDetailHandler
+
+> BoardListHandler 대신 RequestAgent으로 다 뜯어 고침
+
+3. **21** DBMS 도입
+
+- Statement <-> DBMS 서버
+  - BoardAddHandler
+  - BoardListHandler
+  - BoardDetailHandler
