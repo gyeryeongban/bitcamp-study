@@ -5509,3 +5509,125 @@ new Gson()
 Gson gson = new Gson();
 gson.xxx(); <- 부가 기능 설정
 ```
+
+### 애플리케이션 아키텍처의 변경 내역
+
+- App -데이터 저장→ 배열
+- App -데이터 저장→ Collection
+- App -데이터 저장→ Collection ←보관/로딩→ 파일
+- ClientApp ←처리 결과 응답-통신-데이터 처리 요청→ ServerApp -데이터 저장→ Collection ←보관/로딩→ 파일
+
+#### DBMS
+
+- ClientApp ←처리 결과 응답-통신-데이터 처리 요청→ DBMS (개발자는 데이터 보관과 조회에 신경 쓸 필요 X)
+
+### DBMS 개요
+
+- Database Mansgement System
+- 데이터 보관과 조회를 서비스하는 프로그램
+
+#### Database
+
+- 실시간 접근 가능: 데이터 처리 요청에 즉시 응답
+- 동시 공유: 여러 사용자가 공유
+- 데이터의 독립성: 애플리케이션에 비종속
+- 일관성: 데이터 처리 작업이 끝난 후 데이터의 값은 유효한 상태를 유지 (→ ex) 특정 회원 데이터 삭제 → 삭제한 회원의 글도 삭제)해야 함
+- 무결성: 유효하지 않은 데이터의 등록과 변경, 삭제를 제한 (→ ex) 게시글 작성자를 삭제 불가)
+- 보안성: **사용자 인증** ((authentication) ID/PWD 일치 → 유효한 사용자)**과 권한 검사** ((authentication) 기능의 이용 권한 검사 → 동적 허용? 변경 허용?)
+
+#### DBMS
+
+- 데이터베이스를 조작하는 S/W
+- ex)
+  - Oracle
+  - MySQL
+  - DB2
+  - MS-SQL
+  - Altibase
+  - Tibero
+  - Cubrid 등
+
+### SQL
+
+- App -데이터 처리 요청 (요청 명령을 작성하는 문법 → Structured Query Language) → DBMS
+
+#### DDL (Data Definition Language)
+
+> 데이터 구조 정의 문법
+
+#### DQL (Data Query Language)
+
+> 데이터 조회 요청 문법
+
+#### DML (Data Management Language)
+
+> 데이터 등록/변경/삭제 문법
+
+- DML = DQL + DML
+  - DQL과 DML을 합쳐서 DML이라 칭함
+
+### SQL
+
+- App -표준 SQL 문법 (DBMS에 공통으로 사용할 수 있는 문법)→ DBMS
+- App + 오라클 전용 문법 → Oracle
+- App + MySQL 전용 문법 → MySQL
+- App + MS-SQL 전용 문법 → MS-SQL
+
+### DBMS와 SQL
+
+- **Oracle** 유료
+- Sun - **MySQL** 무료/유료
+- FaceBook, Google, Apple, Twiter→ **MariaDB** 무료
+- MySQL과 MariaDB의 포트 번호가 같아서 동시에 실행 X
+  - 포트 번호 변경 후에는 가능
+
+### DBMS와 SQL
+
+- ServerApp | PMS Server ←요청-HTTP-응답→ ClientApp | PMS Client
+- Web Server ←요청-HTTP-응답→ Web Browser = HTTP Client
+
+---
+
+- MariaDB (mysqld.exe) ←요청-MariaDB protocol-응답→ MariaDB Client (mysql.exe) ←SQL 입력-결과 출력→ 사용자
+  - ex) ServerApp ↔ ClientApp ← Prompt
+
+### SQL 테스트 준비
+
+1. 사용자 추가
+
+> create user 'study'@'localhost' identified by '1111'
+
+- ex) [localhost](http://localhost)에서 study 아이디로 접속하는 경우에 허락하겠다는 의미
+
+> create user 'study'@'%' identified by '1111'
+
+2. 데이터를 저장할 데이터베이스 생성
+
+- create database studydb character set utf8 collate utf8_general_ci;
+
+3. 데이터베이스를 사용할 사용자의 권한을 지정
+
+> grant all on studydb.\* to 'study'@'localhost';
+
+### DDL (Data Definition Langage)
+
+1. 테이블 생성
+
+```
+crate table test01 (
+name varchar(50) not null,
+kor int not null,
+eng int not null,
+math int not null,
+sum int not null,
+aver float not null);
+```
+
+- 엑셀과 비교
+  - sheet = table
+  - \*.xsl 파일 = database
+
+### 테이블과 row, column
+
+- column = attribute = filend
+- row = record = tuple
