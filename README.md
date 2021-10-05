@@ -5507,5 +5507,5 @@ new Gson()
 
 ```
 Gson gson = new Gson();
-gson.xxx(); ← 부가 기능 설정
+gson.xxx(); <- 부가 기능 설정
 ```
