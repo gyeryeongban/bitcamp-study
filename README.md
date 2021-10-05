@@ -5447,3 +5447,65 @@ class MyThead extends Thread {
   - BoardAddHandler
   - BoardListHandler
   - BoardDetailHandler
+
+## :pushpin: Day 67
+
+### 애플리케이션 아키텍처 변화
+
+#### Board
+
+- no
+- title
+- content
+- registeredDate
+- viewCount
+- like
+
+#### Member
+
+- no
+- name
+- email
+- password
+- photo
+- tel
+- registeredDate
+
+#### Project
+
+- no
+- title
+- writer
+- startDate
+- endDate
+
+#### Task
+
+- tasks
+
+#### Manager
+
+- position
+- fas
+
+#### Teacher
+
+- major
+- hourPay
+
+### Builder 디자인 패턴
+
+1. 단순 객체 생성
+
+```
+new Gson()
+```
+
+2. 복잡한 기능을 갖는 객체 생성 -캡슐화; 복잡한 코드를 클래스에 넣어서 감춤 ex) requestAgent->
+
+#### GsonBuilder
+
+```
+Gson gson = new Gson();
+gson.xxx(); ← 부가 기능 설정
+```
