@@ -5634,4 +5634,129 @@ aver float not null);
 
 ## :pushpin: Day 68
 
+### DBMS 개요
+
+- ←결과 출력-명령어 (SQL 언어로 명령어 작성)→ DBMS Clinet (MariaDB Client App) ←요청 처리 결과-DBMS 통신 규칙-데이터 작업의 요청→ DBMS (MariaDB) -Data I/O→ 파일
+
+- 데이터를 파일에 저장
+- 파일에 저장된 데이터를 조회/변경/삭제
+- 데이터베이스의 기능을 제공
+
+### SQL
+
+1. DDL → 데이터를 저장하고 다룰 DB 객체를 정의
+
+- Table, View, Reocedure, Function
+
+2. DQL → DB 객체의 데이터를 다룸 ⬆️
+
+- DML → DB 객체의 데이터를 다룬다 ⬆️
+
+### 테이블
+
+```
+create table 테이블명 (컬럼, ...) <- 테이블 정의
+drop table 테이블명 <- 테이블 삭제
+alter table 테이블명 변경사항 <- 테이블 변경
+describle 테이블명 <- 테이블 정보 조회
+= desc
+```
+
+### insert
+
+```
+insert into test1(no, name) values(1, 'aaa')
+```
+
+- test1 = 테이블명
+- (no, name) = 컬럼명 ← 컬럼을 나열한 순서와 일치해야 한다.
+- (1, 'aaa') = 컬럼에 들어갈 값
+- 컬럼의 순서와 일치
+
+### select
+
+```
+select no, name from test1
+```
+
+- no, name = 컬럼명
+
+```
+create table test1(
+  no int not null,
+  name varchar(20) default 'noname', <- 0 ~ 20자
+  age int default 20
+);
+```
+
+### key, comdidate key, primary key/alternate key
+
+- condidate key = 최소 키
+- primary key/alternate key = artificial key
+
+#### key ← 데이터를 구분할 때 사용할 컬럼들\*
+
+- [이메일] ← Candidate Key (최소 키)
+  - 나중에 바꿀 때를 대비
+  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키'가 된다. → "Alternate Key"
+- [아이디] ← Candidate Key (최소 키)
+  - DB 관리자가 주 키로 결정한 Key = "Primary Key"
+- [주민번호] ← Candidate Key (최소 키)
+  - 개인 정보 때문에 잘 적지 않음
+  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키'가 된다. → "Alternate Key"
+- [이름, 전화번호] ← Candidate Key (최소 키)
+  - 하나로 구분해도 되기 때문에 굳이 두 개의 값으로 구분할 필요 X
+  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키'가 된다. → "Alternate Key"
+- ~~[아이디, 전화번호]~~
+- ~~[이메일, 주민번호]~~
+- ~~[이메일, 이름]~~
+- ~~[주민번호, 이름]~~
+- ~~[이름, 우편번호]~~
+- ~~[이름, 아이디, 전화번호]~~
+
+# Artificial Key
+
+게시글: 제목, 내용, 작성일, 작성자, 조회수, 좋아요수 |게시글 번호|
+
+## Primary Key?
+
+- 마땅히 사용할 Key가 없을 경우
+- → 임의의 컬럼을 만들어 PK로 지정한다. = Artificial Key (인공 키)
+  - ex) 일련 번호
+- PK는 기본으로 not null이다.
+
+# Alternate key
+
+## constraint; 제약
+
+- 유니크 라는 의미의 UK
+- 유니크 컬럼은 not null이라고 설정하지 않는 이상 null 값을 허용한다.
+- 처음부터 중복되어선 안되는 값은 유니크 컬럼으로 설정한다.
+
+# View
+
+- 셀렉트 문을 가상으로 테이블로 사용한다.
+
+어떤 테이블의 정보가 들어가 있는지는 테이블 마다 다르다.
+
+# Commit
+
+1. autocommit = true
+
+   -1. insert→ MariaDB Client -2. 요청 전달→ MariaDB -3. insert→ Test1
+
+   ←결과 출력- MariaDB Client ←4. 입력 결과- MariaDB → Test1
+
+2. autocommit = false
+
+   -1. insert→ MariaDB Client -2. 요청 전달→ MariaDB → Test1
+
+   -4. commit/rollback→ -3. 실행 명령 저장→ insert (임시 DB)
+
+   -5. commit/rollback 요청→ MariaDB -6. 임시 작업을 취소→
+
+A 회사 ← 결제, 메일, 게시판 G/W
+
+트랜잭션 = commit/rollback
+
 ## :pushpin: Day 69
