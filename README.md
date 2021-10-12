@@ -5760,3 +5760,5 @@ A 회사 ← 결제, 메일, 게시판 G/W
 트랜잭션 = commit/rollback
 
 ## :pushpin: Day 69
+
+## :pushpin: Day 70
