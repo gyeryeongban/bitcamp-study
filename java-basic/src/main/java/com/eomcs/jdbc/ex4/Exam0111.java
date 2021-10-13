@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Exam0411x {
+public class Exam0111 {
 
   public static void main(String[] args) throws Exception {
     String title = null;

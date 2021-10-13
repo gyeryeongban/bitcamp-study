@@ -1,5 +1,5 @@
 // 트랜잭션 다루기 - commit & rollback
-package com.eomcs.jdbc.ex3;
+package com.eomcs.jdbc.ex4;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Exam0520 {
+public class Exam0220 {
 
   public static void main(String[] args) {
     String title = null;
@@ -45,7 +45,7 @@ public class Exam0520 {
         PreparedStatement fileStmt = con.prepareStatement(
             "insert into x_board_file(file_path,board_id) values(?,?)")) {
 
-      // 여러 개의 데이터 변경 작업을 한 단위로 수행해야 한다면,
+      // 여러 개의 데이터 변경 작업을 한 단위로 묶어 수행해야 한다면,
       // commit 할 때까지 실제 테이블에 적용하지 않도록
       // auto commit을 취소하고 수동 커밋 상태로 만든다.
       //
@@ -61,7 +61,7 @@ public class Exam0520 {
       //
       // 1) 트랜잭션 시작 - 커넥션 객체의 오토커밋을 false로 지정한다.
       // 이후부터 이 커넥션으로 실행하는 모든 SQL은
-      // commit을 요청하기 전에는 테이블에 그 결과를 적용하지 않고
+      // commit을 요청하기 전에는 테이블에 그 결과를 적용하지 않고 
       // 임시 데이터베이스에 따로 보관한다.
       con.setAutoCommit(false);
 
