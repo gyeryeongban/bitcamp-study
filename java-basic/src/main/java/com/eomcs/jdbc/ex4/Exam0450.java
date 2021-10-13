@@ -3,7 +3,7 @@ package com.eomcs.jdbc.ex4;
 
 import java.util.Scanner;
 
-public class Exam0150 {
+public class Exam0450 {
 
   public static void main(String[] args) throws Exception {
     int no = 0;

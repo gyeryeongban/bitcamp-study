@@ -3,7 +3,7 @@ package com.eomcs.jdbc.ex4;
 
 import java.util.List;
 
-public class Exam0120 {
+public class Exam0420 {
 
   public static void main(String[] args) throws Exception {
     try {

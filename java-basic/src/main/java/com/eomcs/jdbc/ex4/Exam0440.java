@@ -3,7 +3,7 @@ package com.eomcs.jdbc.ex4;
 
 import java.util.Scanner;
 
-public class Exam0140 {
+public class Exam0440 {
 
   public static void main(String[] args) throws Exception {
     Board board = new Board();
