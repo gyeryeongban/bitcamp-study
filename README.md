@@ -5758,7 +5758,7 @@ create table test1(
 
 ### select
 
-- 사용자 ←출력-(SQL → 명령어 → )입력→ MariaDB Client (mysql.exe) ←처리 결과-데이터 처리 요청→ MariaDB Server ←I/O→ 파일
+- 사용자 <-출력-(SQL -> 명령어 -> )입력-> MariaDB Client (mysql.exe) <-처리 결과-데이터 처리 요청-> MariaDB Server <-I/O-> 파일
 
 #### DDL
 
@@ -5776,12 +5776,12 @@ create table test1(
 
 ### selection / projection
 
-- **no, name** ← 특정 컬럼 값만 선택하는 것 = projection
-- **working = 'Y'** ← 특정 조건에 해당하는 레코드(row)만 선택하는 것
+- **no, name** <- 특정 컬럼 값만 선택하는 것 = projection
+- **working = 'Y'** <- 특정 조건에 해당하는 레코드(row)만 선택하는 것
 
 #### 순서
 
-- from → where → select
+- from -> where -> select
 
 ```
 select *
@@ -5823,32 +5823,315 @@ where name like 's0_';
 
 > Entity | Relation
 
-- 객체 간의 관계 → 프로그래밍 하기 쉬운 쪽으로 객체 간의 관계를 설정
-- 테이블 간의 관계 → 데이터 중복을 최소화시키는 쪽으로 관계를 설정
+- 객체 간의 관계 -> 프로그래밍 하기 쉬운 쪽으로 객체 간의 관계를 설정
+- 테이블 간의 관계 -> 데이터 중복을 최소화시키는 쪽으로 관계를 설정
 
 - ERD 표기법
 
 1.  Information Engineering Notation
 
-- 공학 → 경험으로 얻은 사실을 학문으로 체계화 시켜서 연구하는 것
-  - ⇒ 해당 분야에 종사하는 사람들이 시행착오를 줄이게 도와줌
+- 공학 -> 경험으로 얻은 사실을 학문으로 체계화 시켜서 연구하는 것
+  - => 해당 분야에 종사하는 사람들이 시행착오를 줄이게 도와줌
 
 ### Foreign Key (외부 키) - 다른 테이블의 PK 값
 
-- 게시글 (FK) -PK를 가리킴 (참조)→ (PK) 번호
-- 작성자 (FK) -PK를 가리킴 (참조)→ (PK) 번호
+- 게시글 (FK) -PK를 가리킴 (참조)-> (PK) 번호
+- 작성자 (FK) -PK를 가리킴 (참조)-> (PK) 번호
 
-- 자식 테이블 -참조→ 부모 테이블
-- 자식 테이블 → 부모 테이블
+- 자식 테이블 -참조-> 부모 테이블
+- 자식 테이블 -> 부모 테이블
 
-- 데이터를 하나 삭제해도 그 데이터와 연결된 모든 데이터를 삭제 ⇒ 무결성
+- 데이터를 하나 삭제해도 그 데이터와 연결된 모든 데이터를 삭제 => 무결성
 - 일치성과 무결성을 기본으로 제공
 - 하나의 데이터가 다른 데이터를 종속
 
 ## :pushpin: Day 70
 
+### 조인
+
+> 합친다, 연결한다
+
+1. cross 조인 (카디션 곱)
+
+> 무조건 1:1 결합
+
+2. natural 조인
+
+> 같은 이름의 컬럼 값을 기준으로 결합
+
+- 문제점
+
+  - 조인의 기준이 될 컬럼이 일치하지 않는 경우
+  - 서로 상관없는 컬럼의 이름이 같을 경우
+
+- FK 컬럼 이름 ≠ FK가 가리키는 PK 컬럼 이름
+  - -> 올바른 조인이 수행되지 X
+
+### Natural 조인을 수행할 기준 컬럼의 이름이 일치하지 않거나 엉뚱한 컬럼과 일치할 경우
+
+1. join on ~ 문법 사용
+
+- Board join AttachedFile
+- on Board.no = AttachedFile.bno
+- 조인 조건
+  - Board, AttachedFile -> 테이블
+
+### Natural 조인을 수행할 때 기준 컬럼 외에 이름이 같은 컬럼이 여러 개 있을 경우
+
+```
+Board join AttachedFile
+using (bno)
+```
+
+- 조인할 때 사용할 기준 컬럼을 명시적으로 지정
+
+### 왜 데이터를 가져올 때 여러 테이블의 데이터를 결합해서 꺼내는 가?
+
+> 데이터 중복을 피하기 위해 데이터가 여러 테이블에 분산 -> 데이터 일관성에 문제
+
+- 데이터가 중복
+
+  - 변경이 번거로움
+  - 변경 항목을 누락할 수 있음
+    - 결합 발생 = 데이터 일관성이 깨짐 -> 같은 팀장인데 전화번호가 다른 경우
+
+- =데이터 중복 문제(데이터를 분산) 해결=>
+
+### 조인을 수행할 때 데이터가 누락되는 상황
+
+1. Natural Join
+
+- -> 조인할 상대 테이블의 데이터가 없으면 결과에서 누락되는 문제가 발생
+
+2. Outer Join
+
+#### Cross Join
+
+- 아무 의미없는 Join
+
+#### Inner Join
+
+- 일치하는 경우에만
+- inner는 생략 가능
+- 좁히는 것
+
+### Application과 DBMS
+
+- 사용자 <-결과 출력-SQL-> DBMS Client (mysql.exe) <-실행 결과 응답-(DBMS 통신규칙)-데이터 처리 요청-> DBMS (MariaDB) <-데이터 I/O-> 파일
+- 사용자 <-결과 출력-입력-> App <-return-call-> DBMS API <-응답 수신-(DBMS 통신규칙)-요청 전달-> DBMS
+- DBMS API <- DBMS 제조사 (Vendor)에서 API 제공
+
+### Java와 DBMS API
+
+- DBMS <-Data I/O-> 파일
+- actor <-> Java App <-return-**SQL->call**-> DBMS Java API <-응답-(DBMS 통신 프로토콜)-요청-> DBMS <-Data I/O-> 파일
+
+- DBMS Java API
+- DBMS와 통신하기 위한 프로토콜은 DBMS 제조사만 앎
+  - DBMS와 통신하는 API는 DBMS 제조사에서 제공
+
+### DBMS API와 JDBC API
+
+- actor <-> Java App <-return-**SQL->call**-> Oracle Java API <-응답-(Oracle 통신 프로토콜)-요청-> Oracle <-Data I/O-> 파일
+- actor <-> Java App <-return-**SQL->call**-> MySQL Java API <-응답-(MySQL 통신 프로토콜)-요청-> MySQL <-Data I/O-> 파일
+- actor <-> Java App <-return-**SQL->call**-> Tibero Java API <-응답-(Tibero 통신 프로토콜)-요청-> Tibero <-Data I/O-> 파일
+- DBMS에 상관없이 API 사용법이 같도록 인터페이스로 호출 규칙을 정의 -> JDBC API - java.sql._ / javax.sql._
+
+### JDBC API와 JDBC Driver의 관계
+
+- JDBC API
+
+  - Java DataBase Connectivity
+  - Application Programming Interfau
+
+- <- - DBMS Java API <-응답-요청-> DBMS <-Data I/O-> 파일
+- -> DBMS 제조사는 자바 애플리케이션에서 DBMS에 접속할 수 있도록 API를 제공 -> 자바에서 규정한 JDBC API에 맞춰서 만듦
+
+- DBMS에 상관없이 사용법이 동일
+- JDBC API 규칙에 따라 만든 자바 클래스들을 "JDBC Driver"라 부름
+
+### JDBC 프로그래밍
+
+- JDBC API 규격에 맞춰 JDBC Driver에 들어있는 클래스를 이용하여 DBMS 서버로 데이터를 처리하는 것
+
+#### JDBC API
+
+- API 규칙에 따라 클래스를 정의
+
+#### JDBC Driver
+
+- 그 클래스를 사용하여 DBMS에 접속
+
+### JDBC 프로그래밍 준비
+
+1. MariaDB JDBC 드라이버 준비
+2. JDBC API 규칙에 따라 메서드 호출
+
+### JDBC Programming
+
+1. java.sql.Driver 구현체를 java.sql.DriverManager에 등록
+
 ## :pushpin: Day 71
+
+### DBMS 개요
+
+> DBMS: DB를 보관/조회하는 소프트웨어
+
+- Database = 데이터를 보관한 것
+- 데이터를 보관한 파일 +
+  - 실시간 접근 가능
+  - 동시 공유: 여러 사용자가 공유
+  - 데이터의 독립성
+  - 일관성
+  - 무결성
+  - 보안성
+
+### DBMS API - JDBC API 규격
+
+> Java Database Connectivity API 규격
+
+- JDBC API 규격에 따라 구현한 클래스 라이브러리
+- 요청/응답 = 통신 한다는 뜻
+- Java App -call-> JDBC Driver -call-> Oracle ODBC Driver -call-> Oracle Native API <-요청/응답-> Oracle DBMS
+
+#### Type 1 드라이버
+
+- ODBC-JDBC Bridge
+- JRE에 기본 포함 -> 별도 다운로드 불필요
+- ODBC를 경유
+  - 실행 속도 느림
+- 따로 JDBC 전용 드라이버가 없이 ODBC 드라이버만 있는 경우 유용
+  - ex) 엑셀, CSV 등
+
+#### Type 2 드라이버
+
+- Native API 드라이버
+- JRE에 포함 안 됨
+  - DBMS Vendor에서 별도로 다운로드 해야 함
+- 로컬에 Native API 설치해야 함
+
+#### Type 4 드라이버
+
+- Network protocal 드라이버
+- DBMS Vendor에서 별도 다운로드 해야 함
+- C/C++ 호출 X -> pure Java 드라이버
+- 로컬에 C/C++ 라이브러리 설치 불필요
+- 실무에서 가장 많이 사용
+
+##### 문제점
+
+- Type 2, Type 4는 DBMS에 따라 교체해야 함
+- middleware = middle + software
+
+#### Type 3 드라이버
+
+- 중계서버 Vendor에서 다운로드
+- DBMS가 바뀌더라도 로컬은 영향을 받지 X
+- 속도가 느림
+
+- 개발자 입장에서는 Type 1, 2, 3, 4 중에 어떤 것을 사용하는지 상관 X
+  - 왜? API가 동일 = 같은 규격
+  - 동작 방법에 따라 드라이버 종류가 4가지
+
+### JDBC API 주요 객체
+
+- <<concrete>> java.lang.DriverManager
+
+  - java.sql.Driver 구현체 관리
+  - Driver 실행은 중계
+
+- ⬇️ 리턴 <<interface>> java.sql.Driver
+
+  - JDBC 드라이버 정보 제공
+  - DBMS 연결 객체 생성
+
+- ⬇️ 리턴 <<interface>> java.lang.Connection
+
+  - DBMS에 연결
+  - SQL 질의 수행 객체 생성
+
+- ⬇️ 리턴 <<interface>> java.sql.Statement
+
+  - java.sql.PreparedStatement
+  - SQL 질의 수행
+  - 결과 조회 객체 생성
+
+- <<interface>> java.sql.ResultSet
+  - select 결과를 가져오는 역할
 
 ## :pushpin: Day 72
 
+### Statement vs PreparedStatement
+
+#### Statement
+
+- **간결함** X
+- **SQL 삽입공격** O
+- **바이너리 데이터** X
+- **반복 실행속도** 느리다
+
+#### PreparedStatement
+
+- **간결함** O
+- **SQL 삽입공격** X
+- **바이너리 데이터** O
+- **반복 실행속도** 빠르다
+
+### Transaction
+
+> 여러 개의 데이터 변경 작업을 한 단위로 묶은 것
+> (insert, update, delete)
+
+#### Example
+
+1. 회원 정보 입력
+2. 물품 구매하기
+3. 멤버 탈퇴
+
 ## :pushpin: Day 73
+
+### DB 모델링 절차
+
+1. 논리 모델 정의
+
+   - 일상적인 개념으로 표현
+
+   1. 엔티티 식별 및 컬럼 식별
+   2. PK 선정 또는 인공 키 도입
+   3. 제1정규화 -> 데이터 중복 및 컬럼 중복 제거
+   4. 제2정규화 -> 여러 PK에 종속되지 않은 데이터 식별
+   5. 제3정규화 -> 일반 컬럼에 종속된 데이터 식별
+
+   - 중복 데이터 제거하는 방법
+
+   6. 다대다 관계 해소 / 포함 관계, 배타적 관계 식별
+   7. 관계 차수 지정
+   8. 대안 키 -> 유니크로 지정
+   9. 컬럼의 옵션을 설정
+
+2. 물리 모델 정의
+
+   - DBMS에 맞춰서 표현
+
+   1. DBMS 관계에 따라 테이블 및 컬럼명 설정
+   2. 도메인 정의 및 적용
+   3. 자동 증가 컬럼 지정
+   4. 기본 값 및 제약 조건
+
+3. SQL 생성
+
+### 정규화
+
+> 중복 데이터 제거 규칙
+
+### 포함 관계와 배타적 관계
+
+1. 포함 관계 (include)
+
+- 여러 개를 겹칠 수 있음
+- 회원 정보가 여러 테이블에 포함될 수 있음
+
+2. 배타적 관계 (exclude)
+
+- ex) 선풍기 단계, 라디오 채널, 콘텍 렌즈와 안경
+- 회원 정보가 3개의 테이블 중 오직 한 개의 테이블만 관계를 맺을 수 있음
