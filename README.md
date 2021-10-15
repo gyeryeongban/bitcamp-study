@@ -5636,7 +5636,7 @@ aver float not null);
 
 ### DBMS 개요
 
-- ←결과 출력-명령어 (SQL 언어로 명령어 작성)→ DBMS Clinet (MariaDB Client App) ←요청 처리 결과-DBMS 통신 규칙-데이터 작업의 요청→ DBMS (MariaDB) -Data I/O→ 파일
+- <-결과 출력-명령어 (SQL 언어로 명령어 작성)-> DBMS Clinet (MariaDB Client App) <-요청 처리 결과-DBMS 통신 규칙-데이터 작업의 요청-> DBMS (MariaDB) -Data I/O-> 파일
 
 - 데이터를 파일에 저장
 - 파일에 저장된 데이터를 조회/변경/삭제
@@ -5644,13 +5644,13 @@ aver float not null);
 
 ### SQL
 
-1. DDL → 데이터를 저장하고 다룰 DB 객체를 정의
+1. DDL -> 데이터를 저장하고 다룰 DB 객체를 정의
 
 - Table, View, Reocedure, Function
 
-2. DQL → DB 객체의 데이터를 다룸 ⬆️
+2. DQL -> DB 객체의 데이터를 다룸 ⬆️
 
-- DML → DB 객체의 데이터를 다룬다 ⬆️
+- DML -> DB 객체의 데이터를 다룬다 ⬆️
 
 ### 테이블
 
@@ -5669,7 +5669,7 @@ insert into test1(no, name) values(1, 'aaa')
 ```
 
 - test1 = 테이블명
-- (no, name) = 컬럼명 ← 컬럼을 나열한 순서와 일치해야 한다.
+- (no, name) = 컬럼명 <- 컬럼을 나열한 순서와 일치해야 함
 - (1, 'aaa') = 컬럼에 들어갈 값
 - 컬럼의 순서와 일치
 
@@ -5694,19 +5694,19 @@ create table test1(
 - condidate key = 최소 키
 - primary key/alternate key = artificial key
 
-#### key ← 데이터를 구분할 때 사용할 컬럼들\*
+#### key <- 데이터를 구분할 때 사용할 컬럼들
 
-- [이메일] ← Candidate Key (최소 키)
+- [이메일] <- Candidate Key (최소 키)
   - 나중에 바꿀 때를 대비
-  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키'가 된다. → "Alternate Key"
-- [아이디] ← Candidate Key (최소 키)
+  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키' -> "Alternate Key"
+- [아이디] <- Candidate Key (최소 키)
   - DB 관리자가 주 키로 결정한 Key = "Primary Key"
-- [주민번호] ← Candidate Key (최소 키)
+- [주민번호] <- Candidate Key (최소 키)
   - 개인 정보 때문에 잘 적지 않음
-  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키'가 된다. → "Alternate Key"
-- [이름, 전화번호] ← Candidate Key (최소 키)
+  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키' -> "Alternate Key"
+- [이름, 전화번호] <- Candidate Key (최소 키)
   - 하나로 구분해도 되기 때문에 굳이 두 개의 값으로 구분할 필요 X
-  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키'가 된다. → "Alternate Key"
+  - 주 키로 선정되지 않은 나머지 후보키는 '대안 키' -> "Alternate Key"
 - ~~[아이디, 전화번호]~~
 - ~~[이메일, 주민번호]~~
 - ~~[이메일, 이름]~~
@@ -5714,52 +5714,136 @@ create table test1(
 - ~~[이름, 우편번호]~~
 - ~~[이름, 아이디, 전화번호]~~
 
-# Artificial Key
+### Artificial Key
 
-게시글: 제목, 내용, 작성일, 작성자, 조회수, 좋아요수 |게시글 번호|
+- 게시글: 제목, 내용, 작성일, 작성자, 조회수, 좋아요수 |게시글 번호|
 
-## Primary Key?
+#### Primary Key
 
 - 마땅히 사용할 Key가 없을 경우
-- → 임의의 컬럼을 만들어 PK로 지정한다. = Artificial Key (인공 키)
+- -> 임의의 컬럼을 만들어 PK로 지정 = Artificial Key (인공 키)
   - ex) 일련 번호
-- PK는 기본으로 not null이다.
+- PK는 기본으로 not null
 
-# Alternate key
+### Alternate key
 
-## constraint; 제약
+#### constraint; 제약
 
 - 유니크 라는 의미의 UK
-- 유니크 컬럼은 not null이라고 설정하지 않는 이상 null 값을 허용한다.
-- 처음부터 중복되어선 안되는 값은 유니크 컬럼으로 설정한다.
+- 유니크 컬럼은 not null이라고 설정하지 않는 이상 null 값을 허용
+- 처음부터 중복되어선 안되는 값은 유니크 컬럼으로 설정
 
-# View
+### View
 
-- 셀렉트 문을 가상으로 테이블로 사용한다.
+- 셀렉트 문을 가상으로 테이블로 사용
+- 어떤 테이블의 정보가 들어가 있는지는 테이블 마다 다름
 
-어떤 테이블의 정보가 들어가 있는지는 테이블 마다 다르다.
-
-# Commit
+### Commit
 
 1. autocommit = true
 
-   -1. insert→ MariaDB Client -2. 요청 전달→ MariaDB -3. insert→ Test1
-
-   ←결과 출력- MariaDB Client ←4. 입력 결과- MariaDB → Test1
+   - -1. insert-> MariaDB Client -2. 요청 전달-> MariaDB -3. insert-> Test1
+   - <-결과 출력- MariaDB Client <-4. 입력 결과- MariaDB -> Test1
 
 2. autocommit = false
 
-   -1. insert→ MariaDB Client -2. 요청 전달→ MariaDB → Test1
+   - -1. insert-> MariaDB Client -2. 요청 전달-> MariaDB -> Test1
+   - -4. commit/rollback-> -3. 실행 명령 저장-> insert (임시 DB)
+   - -5. commit/rollback 요청-> MariaDB -6. 임시 작업을 취소->
 
-   -4. commit/rollback→ -3. 실행 명령 저장→ insert (임시 DB)
-
-   -5. commit/rollback 요청→ MariaDB -6. 임시 작업을 취소→
-
-A 회사 ← 결제, 메일, 게시판 G/W
-
-트랜잭션 = commit/rollback
+- A 회사 <- 결제, 메일, 게시판 G/W
+- 트랜잭션 = commit/rollback
 
 ## :pushpin: Day 69
+
+### select
+
+- 사용자 ←출력-(SQL → 명령어 → )입력→ MariaDB Client (mysql.exe) ←처리 결과-데이터 처리 요청→ MariaDB Server ←I/O→ 파일
+
+#### DDL
+
+1. 테이블 정의/변경/삭제
+
+#### DML
+
+##### DML
+
+1. 입력/변경/삭제
+
+##### DQL
+
+1. 조회/검색
+
+### selection / projection
+
+- **no, name** ← 특정 컬럼 값만 선택하는 것 = projection
+- **working = 'Y'** ← 특정 조건에 해당하는 레코드(row)만 선택하는 것
+
+#### 순서
+
+- from → where → select
+
+```
+select *
+from test1
+where class like 'java%';
+```
+
+- %: 0개 이상의 문자가 옴
+
+```
+select *
+from test1
+where class like '%java%';
+```
+
+- %java%: java로 시작하는 모든 것
+
+```
+select *
+from test1
+where name like 's0_';
+```
+
+- \_: 딱 1자를 의미
+
+### Foreign Key
+
+1.  자바 객체
+
+- Board <>-writer- Member
+- Board <>-files- AttachedFile
+  - no
+  - title
+  - content
+  - registeredDate
+  - viewCount
+
+2.  테이블 간 관계 (ER-Diagram; ERD)
+
+> Entity | Relation
+
+- 객체 간의 관계 → 프로그래밍 하기 쉬운 쪽으로 객체 간의 관계를 설정
+- 테이블 간의 관계 → 데이터 중복을 최소화시키는 쪽으로 관계를 설정
+
+- ERD 표기법
+
+1.  Information Engineering Notation
+
+- 공학 → 경험으로 얻은 사실을 학문으로 체계화 시켜서 연구하는 것
+  - ⇒ 해당 분야에 종사하는 사람들이 시행착오를 줄이게 도와줌
+
+### Foreign Key (외부 키) - 다른 테이블의 PK 값
+
+- 게시글 (FK) -PK를 가리킴 (참조)→ (PK) 번호
+- 작성자 (FK) -PK를 가리킴 (참조)→ (PK) 번호
+
+- 자식 테이블 -참조→ 부모 테이블
+- 자식 테이블 → 부모 테이블
+
+- 데이터를 하나 삭제해도 그 데이터와 연결된 모든 데이터를 삭제 ⇒ 무결성
+- 일치성과 무결성을 기본으로 제공
+- 하나의 데이터가 다른 데이터를 종속
 
 ## :pushpin: Day 70
 
