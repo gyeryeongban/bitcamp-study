@@ -1,0 +1,19 @@
+create table test1 (
+    no int,
+    name varchar(50)
+);
+
+insert into test1(no, name) values(1, 'aaa');
+
+select * from test1;
+
+insert into test1(no, name) values(null, 'bbb');
+
+insert into test1(no, name) values(3, null);
+
+insert into test1(no, name) values(null, null);
+
+create table test1 (
+    no int not null,
+    name varchar(20)
+);
