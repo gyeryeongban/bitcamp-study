@@ -89,11 +89,10 @@ public class MariadbMemberDao implements MemberDao {
 
       stmt.setString(1, name);
 
-      try () {
+      try (ResultSet rs = stmt.executeQuery()) {
         if (!rs.next()) {
           return null;
         }
-
         Member member = new Member();
         member.setNo(rs.getInt("member_no"));
         member.setName(rs.getString("name"));
@@ -101,7 +100,6 @@ public class MariadbMemberDao implements MemberDao {
         member.setPhoto(rs.getString("photo"));
         member.setTel(rs.getString("tel"));
         member.setRegisteredDate(rs.getDate("created_dt"));
-
         return member;
       }
     }
@@ -122,7 +120,7 @@ public class MariadbMemberDao implements MemberDao {
       stmt.setInt(6, member.getNo());
 
       if (stmt.executeUpdate() == 0) {
-        throw new Exception("회원 데이터 저장 실패!");
+        throw new Exception("회원 데이터 변경 실패!");
       }
     }
   }
@@ -135,7 +133,7 @@ public class MariadbMemberDao implements MemberDao {
       stmt.setInt(1, no);
 
       if (stmt.executeUpdate() == 0) {
-        throw new Exception("회원 데이터 저장 실패!");
+        throw new Exception("회원 데이터 삭제 실패!");
       }
     }
   }

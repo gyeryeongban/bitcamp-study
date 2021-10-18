@@ -11,7 +11,7 @@ import com.eomcs.pms.domain.Project;
 import com.eomcs.pms.domain.Task;
 
 // 역할
-// - 게시글을 데이터를 서버를 통해 관리한다.
+// - 프로젝트 데이터를 DBMS 서버를 통해 관리한다.
 //
 public class MariadbProjectDao implements ProjectDao {
 
@@ -29,26 +29,18 @@ public class MariadbProjectDao implements ProjectDao {
   @Override
   public List<Project> findAll() throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select"
-            + " project_no,"
-            + "title,"
-            + "start_dt,"
-            + "end_dt,"
-            + "member_no"
-            + " from pms_project"
-            + " order by name asc");
+        "select" 
+            + " p.project_no,"
+            + " p.title,"
+            + " p.start_dt,"
+            + " p.end_dt,"
+            + " m.member_no,"
+            + " m.name,"
+            + " m.email"
+            + " from pms_project p"
+            + " inner join pms_member m on p.member_no=m.member_no"
+            + " order by project_no desc");
         ResultSet rs = stmt.executeQuery()) {
-
-      /* select
-      project_no,
-      title,
-      start_dt,
-      end_dt,
-      member_no
-      from pms_project p
-      inner join pms_member m on p.member_no=m.member_no
-      order by project_no desc);
-      ResultSet rs = stmt.executeQuery()) */
 
       ArrayList<Project> list = new ArrayList<>();
 
@@ -61,8 +53,8 @@ public class MariadbProjectDao implements ProjectDao {
 
         Member owner = new Member();
         owner.setNo(rs.getInt("member_no"));
-        owner.setName(rs.getString("member_name"));
-        owner.setEmail(rs.getString("member_email"));
+        owner.setName(rs.getString("name"));
+        owner.setEmail(rs.getString("email"));
 
         project.setOwner(owner);
 
@@ -104,5 +96,6 @@ public class MariadbProjectDao implements ProjectDao {
   }
 
 }
+
 
 
