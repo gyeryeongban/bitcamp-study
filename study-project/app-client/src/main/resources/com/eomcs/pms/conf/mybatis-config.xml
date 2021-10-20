@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-  <properties resource="com/eomcs/mybatis/jdbc.properties"></properties>
+  <properties resource="com/eomcs/pms/conf/jdbc.properties"></properties>
 
   <typeAliases>
-    <package name="com.eomcs.mybatis.vo"/>
+    <package name="com.eomcs.pms.domain"/>
   </typeAliases>
 
   <environments default="development">
@@ -23,7 +23,7 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/eomcs/mybatis/ex02/f/BoardMapper.xml"/>
+    <mapper resource="com/eomcs/pms/mapper/MemberMapper.xml"/>
   </mappers>
 </configuration>
 
