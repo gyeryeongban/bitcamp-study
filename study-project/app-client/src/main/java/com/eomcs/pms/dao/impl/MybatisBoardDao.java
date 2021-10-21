@@ -29,7 +29,7 @@ public class MybatisBoardDao implements BoardDao {
 
   @Override
   public List<Board> findByKeyword(String keyword) throws Exception {
-    return sqlSession;
+    return sqlSession.selectList("BoardMapper.findByKeyword", keyword);
   }
 
   @Override
