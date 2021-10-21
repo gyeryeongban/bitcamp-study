@@ -15,17 +15,20 @@
     <result column="created_dt" property="registeredDate"/>
   </resultMap>
   
-  <select id="findAll" resultMap="MemberMap">
-    select 
+  <sql id="select1">
+  select 
       member_no,
       name,
       email,
       tel,
       created_dt 
     from 
-      pms_member 
+      pms_member
+  </sql>
+  
+  <select id="findAll" resultMap="MemberMap">
     order by 
-      name asc
+    name asc
   </select>
   
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
