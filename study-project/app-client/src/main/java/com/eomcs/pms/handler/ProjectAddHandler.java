@@ -42,6 +42,7 @@ public class ProjectAddHandler implements Command {
       // 그래야 다음 작업에 영향을 끼치지 않는다.
       sqlSession.rollback();
     }
+
     System.out.println("프로젝트를 저장했습니다!");
   }
 }

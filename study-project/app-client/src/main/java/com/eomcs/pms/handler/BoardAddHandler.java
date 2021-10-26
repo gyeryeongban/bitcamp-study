@@ -26,6 +26,7 @@ public class BoardAddHandler implements Command {
     board.setWriter(AuthLoginHandler.getLoginUser());
 
     boardDao.insert(board);
+    sqlSession.commit();
 
     System.out.println("게시글을 저장했습니다.");
   }
