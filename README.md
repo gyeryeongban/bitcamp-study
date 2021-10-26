@@ -6184,4 +6184,112 @@ desc 테이블명;
 
 ## :pushpin: Day 79
 
+### Java EE (Enterprise Edition)
+
+> 기업용 App. 개발에 필요한 기술 명세 모음
+
+- 다수의 사용자
+  - 동시 접속 기능을 요구
+  - 보안 기능을 요구
+  - 자원 관리 기능을 요구
+- App 사용과 관리
+  - 서버 기술 요구
+    - Web App 기술
+    - 분산 컴포넌트 기술
+    - 접속 관리 기술
+
+#### Java EE 기술 명세
+
+- Web 기술
+
+  - 서블릿
+  - JSP
+  - JSTL
+  - JSF
+
+- EJB
+- Web Service
+
+### Java EE와 Implements (구현체)
+
+> Java EE 명세서에 따라 만든 서버
+
+#### Java EE
+
+- Servlet/JSP 등 웹 기술 -이 기술만 구현→
+  - Tomcat (Apache)
+  - Resin
+  - Jetty
+- EJB/Web Service 등
+- 보안/인증/관리 등
+
+- -모두 구현→
+
+- JEUS 유료
+- WebLogic 유료
+- WebSphere 유료
+- JBoss 유/무
+- Geronemo 무료
+- GlassFish 무료
+
+### Java EE Implements와 Servlet Container
+
+> Java EE 모든 기술을 지원
+> 웹 기술만 지원
+
+#### JEUS, WebLogic 등
+
+> Java EE 모든 기술 지원
+
+- 모두 실행 가능
+  EJB Container
+  - EJB
+  - Servlet
+  Servlet Container
+  - JSP
+
+  - Web Service
+
+#### Tomcat, Resin, Jetty 등
+
+> Java EE 기술 중에서 Servlet/JSP/JSTL/JSF/EL 등 웹 기술만 지원
+
+- 실행 불가
+  - EJB
+  - Web Service
+- 실행 가능
+  - Servlet
+  - JSP
+
+### Java EE 서버
+
+#### JEUS, WebLogic 등
+
+- Servlet Container
+- EJB Container
+
+#### Tomcat, Resin, Jetty 등
+
+- Servlet Container
+
+### Component vs Object
+
+- 기능 수행
+
+#### Component
+
+- 규모: 중간 부분 (모듈램)
+
+#### Object
+
+- 규모: 단일 부분 (컵)
+
+##### Component
+
+- 객체 - 객체 - 객체
+- 컴포넌트 ≥ 객체 1개
+
+- 객체 → Component
+- 객체 - 객체 → Component
+
 ## :pushpin: Day 80
