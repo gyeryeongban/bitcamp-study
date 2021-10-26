@@ -6443,16 +6443,38 @@ desc 테이블명;
 - QueryString
   - = 서버에 전달하는 값
 
-## no=1
+#### no=1
 
-= 서버에 전달하는 한 개의 값을
+- = 서버에 전달하는 한 개의 값을
 
-www.naver.com
+> www.naver.com
 
-## www
+#### www
 
-호스트명 (컴퓨터)
+- 호스트명 (컴퓨터)
 
-## naver.com
+#### naver.com
 
-도메인명
+- 도메인명
+
+### Handler와 SqlSession
+
+> 각 핸들러마다 SqlSession 객체를 따로 생성 ⇒ DAO 구현체도 중복 생성
+
+- MemberListHandler <>→ SqlSession
+- MemberDetailHandler <>→ SqlSession
+- MemberAddHandler <>→ SqlSession
+
+### SqlSession 객체 공유
+
+- Servlet Container <>→ 서블릿 풀 (pool)
+
+#### 서블릿 풀 (pool)
+
+- MemberListHandler
+- MemberDetailHandler
+- MemberAddHandler
+
+#### 옵저버 풀 (pool)
+
+- 옵저버
