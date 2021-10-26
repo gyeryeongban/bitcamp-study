@@ -2,21 +2,40 @@ package com.eomcs.pms.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
+
 
 @WebServlet("/member/add")
 public class MemberAddHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  MemberDao memberDao;
   SqlSession sqlSession;
+  MemberDao memberDao;
+
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    try {
+      // Mybatis의 SqlSession 객체 준비
+      sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+          "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
+
+      // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
+      memberDao = sqlSession.getMapper(MemberDao.class);
+
+    } catch (Exception e) {
+      throw new ServletException(e);
+    }
+  }
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -34,17 +53,20 @@ public class MemberAddHandler extends HttpServlet {
 
     Member member = new Member();
 
-    member.setName(request.getParameter("이름? "));
-    member.setEmail(request.getParameter("이메일? "));
-    member.setPassword(request.getParameter("암호? "));
-    member.setPhoto(request.getParameter("사진? "));
-    member.setTel(request.getParameter("전화? "));
+    member.setName(request.getParameter("name"));
+    member.setEmail(request.getParameter("email"));
+    member.setPassword(request.getParameter("password"));
+    member.setPhoto(request.getParameter("photo"));
+    member.setTel(request.getParameter("tel"));
 
     try {
       memberDao.insert(member);
       sqlSession.commit();
 
       out.println("회원을 등록했습니다.");
+
+      out.println("<a href='list'>[목록]</a><br>");
+
     } catch (Exception e) {
       throw new ServletException(e);
     }
@@ -58,3 +80,10 @@ public class MemberAddHandler extends HttpServlet {
     sqlSession.close();
   }
 }
+
+
+
+
+
+
+

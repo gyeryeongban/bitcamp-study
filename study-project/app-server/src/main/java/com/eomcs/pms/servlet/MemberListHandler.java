@@ -49,8 +49,8 @@ public class MemberListHandler implements Servlet {
     out.println("  <title>회원목록</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>[회원 목록]</h1>");
-
+    out.println("<h1>회원 목록</h1>");
+    out.println("<a href='form'>새회원</a><br>");
     try {
       Collection<Member> memberList = memberDao.findAll();
 
@@ -63,7 +63,7 @@ public class MemberListHandler implements Servlet {
             member.getRegisteredDate());
       }
     } catch (Exception e) {
-      throw new ServletException();
+      throw new ServletException(e);
     }
     out.println("</body>");
     out.println("</html>");
