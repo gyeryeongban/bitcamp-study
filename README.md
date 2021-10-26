@@ -6135,3 +6135,17 @@ using (bno)
 
 - ex) 선풍기 단계, 라디오 채널, 콘텍 렌즈와 안경
 - 회원 정보가 3개의 테이블 중 오직 한 개의 테이블만 관계를 맺을 수 있음
+
+## :pushpin: Day 74
+
+## :pushpin: Day 75
+
+## :pushpin: Day 76
+
+## :pushpin: Day 77
+
+## :pushpin: Day 78
+
+## :pushpin: Day 79
+
+## :pushpin: Day 80
