@@ -6138,13 +6138,49 @@ using (bno)
 
 ## :pushpin: Day 74
 
+### SQL 문법
+
+```
+// 상세보기
+desc 테이블명;
+```
+
 ## :pushpin: Day 75
 
-## :pushpin: Day 76
+### 프로젝트명 + 관리자 + 멤버 목록
+
+#### 방법 1
+
+1. 프로젝트 정보 + 관리자 정보
+2. 멤버 목록
+
+#### 방법 2
+
+1. 프로젝트 정보 + 관리자 정보 + 멤버 정보
 
 ## :pushpin: Day 77
 
 ## :pushpin: Day 78
+
+### Mybatis 순서
+
+> 잘 실행되는지 확인하려면 sql 문을 실행
+
+1. MybatisDao | 메서드 안 주석 처리
+2. ClientApp | MybatisDao로 변경
+3. MybatisDao에서 쿼리문 뜯어내 Mapper로 붙여넣기
+   1. ? → #{도메인 변수명}
+      1. 프리머티브 타입이나 String 타입은 {} 안 아무거나 지정 가능
+   2. 파라미터 받는 메서드 → parameterType= "타입"
+      1. findAll()
+      2. findByNo()
+      3. insert()
+         1. insert() 후 commit() 하는 거 잊지 말 것
+      4. findAllStatus()
+      5. update()
+         1. update() 후 commit() 하는 거 잊지 말 것
+      6. delete()
+         1. delete() 후 commit() 하는 거 잊지 말 것
 
 ## :pushpin: Day 79
 
