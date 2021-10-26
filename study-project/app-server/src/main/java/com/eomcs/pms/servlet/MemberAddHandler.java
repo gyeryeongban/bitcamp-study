@@ -24,7 +24,8 @@ public class MemberAddHandler extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberNo");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
@@ -53,7 +54,7 @@ public class MemberAddHandler extends HttpServlet {
       memberDao.insert(member);
       sqlSession.commit();
 
-      out.println("회원을 등록했습니다.");
+      out.println("회원을 등록했습니다.<br>");
 
       out.println("<a href='list'>[목록]</a><br>");
 

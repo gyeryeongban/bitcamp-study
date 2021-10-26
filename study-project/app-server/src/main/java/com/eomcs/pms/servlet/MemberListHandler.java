@@ -23,7 +23,7 @@ public class MemberListHandler extends GenericServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberNo");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
