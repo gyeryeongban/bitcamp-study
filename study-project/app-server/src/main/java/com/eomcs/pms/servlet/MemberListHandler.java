@@ -3,38 +3,27 @@ package com.eomcs.pms.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
-import javax.servlet.Servlet;
+import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
 
 
 @WebServlet("/member/list")
-public class MemberListHandler implements Servlet {
+public class MemberListHandler extends GenericServlet {
+  private static final long serialVersionUID = 1L;
 
-  SqlSession sqlSession;
   MemberDao memberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
-    try {
-      // Mybatis의 SqlSession 객체 준비
-      sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-          "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
-
-      // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
-      memberDao = sqlSession.getMapper(MemberDao.class);
-
-    } catch (Exception e) {
-      throw new ServletException(e);
-    }
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberNo");
   }
 
   @Override
@@ -67,22 +56,6 @@ public class MemberListHandler implements Servlet {
     }
     out.println("</body>");
     out.println("</html>");
-  }
-
-  @Override
-  public void destroy() {
-    sqlSession.close();
-  }
-
-
-  @Override
-  public String getServletInfo() {
-    return null;
-  }
-
-  @Override
-  public ServletConfig getServletConfig() {
-    return null;
   }
 }
 

@@ -6295,26 +6295,164 @@ desc 테이블명;
 
 ## :pushpin: Day 80
 
-# Table-DAO-Handler
+### Table-DAO-Handler
 
-[사용자 입력 → DAO를 사용해 처리 → 사용자에게 결과 출력]
+- 1개의 DAO만 owner가 되어야만 함 -> 유지 보수가 쉬워짐
+- 하나의 DAO가 두 개 이상의 Table의 owner가 될 수 X
+  - 데이터에 문제가 생겼을 때 추적하기가 쉬움
+- Handler는 한 개 이상의 DAO를 사용 가능
 
-Handler → DAO -owner (입력, 변경, 삭제 권한)→ Table
-
-DAO -owner→ Table
-
-         -owner→ Table
-
-DAO -viewer/owner→ Table
-
-ex) BoardDao → 등록/수정/삭제 및 다른 테이블의 데이터 조회
-
-1개의 DAO만 owner가 되어야만 한다. → 유지 보수가 쉬워진다.
-
-- 하나의 DAO가 두 개 이상의 Table의 owner가 될 수 없다.
-  - 데이터에 문제가 생겼을 때 추적하기가 쉽다.
-- Handler는 한 개 이상의 DAO를 사용할 수 있다.
-
-# 웹 애플리케이션과 서블릿의 관계
+### 웹 애플리케이션과 서블릿의 관계
 
 > 웹 애플리케이션의 작은 서비스 조각
+
+### 웹 애플리케이션 구동 과정
+
+#### HTTP Client
+
+- Web Browser
+
+#### HTTP Server
+
+- Web Server
+
+##### Web Application Server (WAS)
+
+- HTTP Server
+- Application Server
+
+#### 과정
+
+- Web Browser -1. 요청-> Web Server -2. 읽기-> HTML/CSS/JavaScript/Image -> Web Server -3. 응답-> Web Browser
+
+- Web Browser -1. 요청-> Web Server -2. 요청 전달-> Servlet Container -3. 실행 include forward-> Servlet -4. 작업 수행 = HTML 생성-> Servlet Contain -5. 작업 결과 전달-> Web Server -6. 응답-> Web Browser
+
+#### static resourse (실행 X)
+
+> 콘텐트가 변하지 않는 자원
+
+- HTML
+- CSS
+- JavaScript
+- Image
+
+#### dinamic resourse (실행 O)
+
+> 실행할 때마다 콘텐트가 변할 수 있는 자원
+
+- 클라이언트 쪽에서 실행하는 프로그램 코드
+  - => 작성하는 개발자 => "Front-end Developer"
+    - HTML
+    - CSS
+    - JavaScript
+- 서버 쪽에서 실행하는 프로그램 코드 (자바, SQL 등)
+- => 작업하는 개발자 => "Back-end Develop"
+
+### 서블릿 구동 과정
+
+- -요청→ Servlet Container -요청을 처리할 서블릿→ Servlet
+
+1. 객체 찾는다
+
+- → 없다면 → 객체 생성 → init() 호출 ← 객체가 작업할 때 사용할 도구 준비
+
+2. 객체.service() 호출 ← 클라이언트가 요청한 작업을 수행
+
+- -서버 종료 또는 웹 애플리케이션 종료→ Servlet Container -생성한 모든 서블릿 객체에 대해 destroy() 호출→ Servlet
+
+### 서블릿 만들기
+
+- <<인터페이스>> javax.servlet <- - - <<concreate>> 서블릿
+  - init()
+  - service()
+  - destroy()
+  - getServletInfo()
+  - getServletConfig()
+
+### HTML, CSS, JavaScript의 역할
+
+- HTML -화면에 출력할 내용을 구성→ 웹 페이지
+- CSS -콘텐트가 출력될 모양을 설정→ 웹 페이지
+- JavaScript -콘텐트의 동작 제어→ 웹 페# 서블릿 만들기
+
+### 서블릿 만들기
+
+- <<abstract>> HttpServlet - - -> <<abstract>> GenericServlet - - -> <<interface>> Servlet <- - - <<concrete>> 서블릿
+
+#### Servlet
+
+- init()
+- service()
+- destroy()
+- getServletInfo()
+- getServletConfig()
+
+#### 서블릿
+
+- init() {-}
+- service() {-}
+- destroy() {-}
+- getServletInfo() {-}
+- getServletConfig() {-}
+
+#### GenericServlet
+
+- init() {-}
+- destroy() {-}
+- getServletInfo() {-}
+- getServletConfig() {-}
+
+#### HttpServlet
+
+- service()
+- overloding → service() {-}
+- - doGet()
+- - doPost()
+- - doXxx()
+
+### 웹 서버에 요청할 때 URL 형식
+
+> http://localhost:8080/pms/member/detail?no=1
+
+#### http
+
+- 프로토콜
+
+#### localhost
+
+- 서버 주소
+  - ip 주소
+  - 도메인 이름
+
+#### 8080
+
+- 포트번호
+  - HTTP (80)
+  - HTTPS (443)
+
+#### pms
+
+- 웹 애플리케이션명
+
+#### /member/detail
+
+- 서블릿 path
+
+#### ?no=1
+
+- QueryString
+  - = 서버에 전달하는 값
+
+## no=1
+
+= 서버에 전달하는 한 개의 값을
+
+www.naver.com
+
+## www
+
+호스트명 (컴퓨터)
+
+## naver.com
+
+도메인명
