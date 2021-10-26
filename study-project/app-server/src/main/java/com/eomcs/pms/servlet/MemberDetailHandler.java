@@ -37,20 +37,22 @@ public class MemberDetailHandler extends GenericServlet {
   }
 
   @Override
-  public void service(ServletRequest req, ServletResponse res)
+  public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
-    res.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = res.getWriter();
+    response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
 
     out.println("<html>");
     out.println("<head>");
     out.println("  <title>회원상세</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>[회원 상세]</h1>");
+    out.println("<h1>회원 상세</h1>");
 
-    int no = Integer.parseInt(req.getParameter("no"));
+    out.println("[회원 상세 결과]");
+
+    int no = Integer.parseInt(request.getParameter("no"));
 
     try {
       Member member = memberDao.findByNo(no);

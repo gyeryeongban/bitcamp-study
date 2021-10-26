@@ -6169,9 +6169,9 @@ desc 테이블명;
 1. MybatisDao | 메서드 안 주석 처리
 2. ClientApp | MybatisDao로 변경
 3. MybatisDao에서 쿼리문 뜯어내 Mapper로 붙여넣기
-   1. ? → #{도메인 변수명}
+   1. ? -> #{도메인 변수명}
       1. 프리머티브 타입이나 String 타입은 {} 안 아무거나 지정 가능
-   2. 파라미터 받는 메서드 → parameterType= "타입"
+   2. 파라미터 받는 메서드 -> parameterType= "타입"
       1. findAll()
       2. findByNo()
       3. insert()
@@ -6216,14 +6216,14 @@ desc 테이블명;
 
 #### Java EE
 
-- Servlet/JSP 등 웹 기술 -이 기술만 구현→
+- Servlet/JSP 등 웹 기술 -이 기술만 구현->
   - Tomcat (Apache)
   - Resin
   - Jetty
 - EJB/Web Service 등
 - 보안/인증/관리 등
 
-- -모두 구현→
+- -모두 구현->
 
 - JEUS 유료
 - WebLogic 유료
@@ -6243,9 +6243,10 @@ desc 테이블명;
 
 - 모두 실행 가능
   EJB Container
+
   - EJB
   - Servlet
-  Servlet Container
+    Servlet Container
   - JSP
 
   - Web Service
@@ -6289,7 +6290,31 @@ desc 테이블명;
 - 객체 - 객체 - 객체
 - 컴포넌트 ≥ 객체 1개
 
-- 객체 → Component
-- 객체 - 객체 → Component
+- 객체 -> Component
+- 객체 - 객체 -> Component
 
 ## :pushpin: Day 80
+
+# Table-DAO-Handler
+
+[사용자 입력 → DAO를 사용해 처리 → 사용자에게 결과 출력]
+
+Handler → DAO -owner (입력, 변경, 삭제 권한)→ Table
+
+DAO -owner→ Table
+
+         -owner→ Table
+
+DAO -viewer/owner→ Table
+
+ex) BoardDao → 등록/수정/삭제 및 다른 테이블의 데이터 조회
+
+1개의 DAO만 owner가 되어야만 한다. → 유지 보수가 쉬워진다.
+
+- 하나의 DAO가 두 개 이상의 Table의 owner가 될 수 없다.
+  - 데이터에 문제가 생겼을 때 추적하기가 쉽다.
+- Handler는 한 개 이상의 DAO를 사용할 수 있다.
+
+# 웹 애플리케이션과 서블릿의 관계
+
+> 웹 애플리케이션의 작은 서비스 조각
