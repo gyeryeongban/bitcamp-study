@@ -49,7 +49,7 @@ if (member == null) {%>
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'><%=member.getRegisteredDate()%></span><br>
 <button>변경</button>
- <a href='MemberDelete.jsp?no=<%=member.getNo()%>'>[삭제]</a> <a href='MemberList.jsp'>[목록]</a><br>
+ <a href='delete?no=<%=member.getNo()%>'>[삭제]</a> <a href='list'>[목록]</a><br>
 </form>
 <%}%>
 </body>
