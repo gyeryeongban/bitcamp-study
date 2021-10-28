@@ -17,9 +17,6 @@ if (member == null) {
 }
 response.sendRedirect("MemberList.jsp");
 %>
-  회원을 삭제하였습니다.<br>     
-    <a href='MemberList.jsp'>[목록]<a><br>
-%>
 <%! // <== declaration element(tag)
 // 자바 서블릿 클래스를 만들 때 그 클래스에 들어갈 변수와 메서드를 이 태그 안에 작성한다.
     SqlSession sqlSession;

@@ -37,7 +37,7 @@ public class MemberUpdateHandler extends HttpServlet {
       Member member = memberDao.findByNo(no);
 
       if (member == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.<br>");
+        throw new Exception("해당 번호의 회원이 없습니다.");
 
       } else {
 
@@ -52,7 +52,7 @@ public class MemberUpdateHandler extends HttpServlet {
       }
 
       // 리다이렉트(redirect)
-      // 서버의 응답을 받는 즉시 지정한 URL로 요청하도록 웹 브라우저에게 요청한다.
+      // 서버의 응답을 받는 즉시 지정한 URL로 요청하도록 웹브라우저에게 명령한다.
       // 리다이렉트의 경우 서버는 응답할 때 내용을 보내지 않는다.
       response.sendRedirect("list");
 
@@ -66,7 +66,10 @@ public class MemberUpdateHandler extends HttpServlet {
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>회원변경결과</h1>");
-      out.println("목록 조회 오류!");
+      out.println("회원 변경 오류!");
+      out.println("<a href='list'>[목록]</a><br>");
+      out.println("</body>");
+      out.println("</html>");
       e.printStackTrace();
     }
   }
