@@ -1,5 +1,5 @@
+<%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="com.eomcs.pms.domain.Member"%>
-<%@page import="java.util.Collection"%>
 <%@page import="com.eomcs.pms.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -7,46 +7,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>회원목록</title>
+  <title>회원등록</title>
 </head>
 <body>
-<h1>회원 목록</h1>
-<a href='MemberForm.jsp'>새회원</a><br>
-<table border='1'>
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>이름</th>
-    <th>이메일</th>
-    <th>전화</th>
-    <th>등록일</th>
-  </tr>
-</thead>
-<tbody>
-<% // <== scriptlet (자바 코드 조각을 두는 태그)
-Collection<Member> memberList = memberDao.findAll();
+<h1>회원등록결과</h1>
+<%
+Member member = new Member();
 
-for (Member member : memberList) {
+member.setName(request.getParameter("name"));
+member.setEmail(request.getParameter("email"));
+member.setPassword(request.getParameter("password"));
+member.setPhoto(request.getParameter("photo"));
+member.setTel(request.getParameter("tel"));
+
+memberDao.insert(member);
+sqlSession.commit();
 %>
-<tr>
-    <td><%=member.getNo()%></td>
-    <td><a href='MemberDetail.jsp?no=<%=member.getNo()%>'><%=member.getName()%></a></td> 
-    <td><%=member.getEmail()%></td> 
-    <td><%=member.getTel()%></td> 
-    <td><%=member.getRegisteredDate()%></td>
-</tr>
-<%} %>
-</tbody>
-</table>
+회원을 등록했습니다.<br>
+<a href='MemberList.jsp'>[목록]</a><br>
 </body>
 </html>
 <%! // <== declaration element(tag)
 // 자바 서블릿 클래스를 만들 때 그 클래스에 들어갈 변수와 메서드를 이 태그 안에 작성한다.
+    SqlSession sqlSession;
     MemberDao memberDao;
-
+    
     public void jspInit() {
       ServletConfig config = getServletConfig();
       ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+      sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
       memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     }
 %>
