@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-
 <%
 Member member = new Member();
 
@@ -16,8 +15,8 @@ member.setTel(request.getParameter("tel"));
 
 memberDao.insert(member);
 sqlSession.commit();
+response.sendRedirect("MemberList.jsp");
 %>
-
 <%! // <== declaration element(tag)
 // 자바 서블릿 클래스를 만들 때 그 클래스에 들어갈 변수와 메서드를 이 태그 안에 작성한다.
     SqlSession sqlSession;
