@@ -6,11 +6,11 @@
 <head>
   <title>회원상세</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-      <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
+  <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-      <script src="../node_modules/bsweetalert2/dist/sweetalert2.js"></script>
+  <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
   
   <style>
     .container {
@@ -76,12 +76,26 @@ document.querySelector("#member-form").onsubmit = () => {
 	if (document.querySelector("#f-name").value == "" ||
 			document.querySelector("#f-email").value == "" ||
 			document.querySelector("#f-password").value == "") {
-		window.alert("필수 입력 항목이 비어 있습니다.")
+		//window.alert("필수 입력 항목이 비어 있습니다.")
 		Swal.fire("필수 입력 항목이 비어 있습니다.")
 		return false;
 	}
 };
+
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
