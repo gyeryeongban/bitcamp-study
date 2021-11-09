@@ -37,7 +37,9 @@ public class MemberDetailCotroller extends GenericServlet {
       }
 
       request.setAttribute("member", member);
-      request.getRequestDispatcher("/member/MemberDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "회원정보");
+      request.setAttribute("contentUrl", "/member/MemberList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

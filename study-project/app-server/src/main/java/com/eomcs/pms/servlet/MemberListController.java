@@ -36,6 +36,9 @@ public class MemberListController extends GenericServlet {
       // 뷰 컴포넌트가 준비한 데이터
       request.setAttribute("memberList", memberList);
 
+      request.setAttribute("pageTitle", "회원목록");
+      request.setAttribute("contentUrl", "/member/MemberList.jsp");
+
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/member/MemberList.jsp");
       요청배달자.forward(request, response);
 
