@@ -20,7 +20,7 @@
   </style>
 </head>
 <body>
-<div class="container">
+<div class="container" method='post'>
 <h1>회원 상세(MVC + EL + Bootstrap)</h1>
 <form id="member-form" action='update'>
 <div class="mb-3 row">
