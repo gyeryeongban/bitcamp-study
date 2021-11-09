@@ -1,7 +1,6 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +15,8 @@ public class MemberFormController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
-    RequestDispatcher 요청배달자 = request.getRequestDispatcher("/member/MemberForm.jsp");
-    요청배달자.forward(request, response);
+    // 출력을 담당할 뷰를 호출한다.
+    request.getRequestDispatcher("/member/MemberForm.jsp").forward(request, response);
   }
 }
 

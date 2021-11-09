@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  
 <style>
-
 tr a {
     text-decoration: none;
     color: black;
@@ -61,14 +59,7 @@ trList.forEach(function(trTag) {
 		//window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
 	};
 });
-
-
 </script>
-
-
-
-
-
 
 
 

@@ -19,8 +19,8 @@
 <body>
 <div class="container">
 
-<jsp:include page="/header.jsp"></jsp:include>
-<jsp:include page="/sidebar.jsp"></jsp:include>
+<jsp:include page="/header.jsp"/>
+<jsp:include page="/sidebar.jsp"/>
  
 <div id="content">
 <pre>
@@ -29,9 +29,10 @@ Exception error = (Exception) request.getAttribute("error");
 error.printStackTrace(new PrintWriter(out));
 %>
 </pre>
-</div><!-- #content -->
+</div><!-- #content --> 
 
-<jsp:include page="/footer.jsp"></jsp:include>
+<jsp:include page="/footer.jsp"/>
+
 </div><!-- .container -->
 
 </body>

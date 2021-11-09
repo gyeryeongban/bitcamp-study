@@ -32,7 +32,7 @@ public class MemberAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.setCharacterEncoding("UTF-8");
+    //request.setCharacterEncoding("UTF-8");
 
     Member member = new Member();
 
@@ -46,19 +46,16 @@ public class MemberAddController extends HttpServlet {
       memberDao.insert(member);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-
       request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
-    } catch (Exception e) {
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
 
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/member/MemberList.jsp");
+    } catch (Exception e) {
+      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
+      request.setAttribute("error", e);
+
+      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
     }
-
-    // 리프래시(refresh)
-    // 웹브라우저에게 서버가 보내준 HTML을 출력한 후 
-    // 1초가 경과하면 지정한 URL을 다시 요청하도록 명령한다.
   }
 }
 

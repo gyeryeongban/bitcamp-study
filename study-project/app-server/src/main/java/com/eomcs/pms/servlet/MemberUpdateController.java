@@ -37,7 +37,7 @@ public class MemberUpdateController extends HttpServlet {
 
       if (member == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
-      }
+      } 
 
       member.setName(request.getParameter("name"));
       member.setEmail(request.getParameter("email"));

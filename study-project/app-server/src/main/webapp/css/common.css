@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .container {
-  xborder: 1px solid red;
-  width: 640px;
+    xborder: 1px solid red;
+    width: 640px;
 }
-
+ 
 header {
 	xborder: 1px solid red;
 	xheight: 80px;
@@ -26,3 +26,4 @@ aside {
 	xborder: 1px dashed yellow;
 	margin-left: 100px; 
 }
+

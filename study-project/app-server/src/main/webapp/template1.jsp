@@ -18,14 +18,15 @@
 <body>
 <div class="container">
 
-<jsp:include page="/header.jsp"></jsp:include>
-<jsp:include page="/sidebar.jsp"></jsp:include>
+<jsp:include page="/header.jsp"/>
+<jsp:include page="/sidebar.jsp"/>
  
 <div id="content">
-<jsp:include page=${contentUrl}></jsp:include>
-</div><!-- #content -->
+<jsp:include page="${contentUrl}"/>
+</div><!-- #content --> 
 
-<jsp:include page="/footer.jsp"></jsp:include>
+<jsp:include page="/footer.jsp"/>
+
 </div><!-- .container -->
 
 </body>
