@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <aside>
-왼쪽 화면 출력!
+<c:if test="${not empty sessionScope.loginUser}">
+		<c:if test="${empty sessionScope.loginUser.photo}">
+		<img alt="사진없음">
+		</c:if>
+		<c:if test="${not empty sessionScope.loginUser.photo}">
+		<img src="${contextPath}/upload/member/${sessionScope.loginUser.photo}_100x100.jpg">
+		</c:if>
+		<br>
+		${sessionScope.loginUser.photo}<br>
+		${sessionScope.loginUser.name}<br>
+</c:if>
 </aside>

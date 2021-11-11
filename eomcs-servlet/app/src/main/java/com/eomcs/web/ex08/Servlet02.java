@@ -34,8 +34,7 @@ public class Servlet02 extends HttpServlet {
 
     out.println("<html><head>");
 
-    // HTML을 출력하는 경우
-    // 응답 헤더가 아니라 HTML 헤더에 리프래시 명령을 설정할 수 있다.
+    // c
     out.println("<meta http-equiv='Refresh' content='3;url=s100'>");
 
     out.println("</head><body>");

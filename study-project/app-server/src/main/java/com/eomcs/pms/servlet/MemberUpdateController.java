@@ -13,6 +13,10 @@ import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/member/update")
@@ -54,6 +58,30 @@ public class MemberUpdateController extends HttpServlet {
         photoPart.write(getServletContext().getRealPath("/upload/member") + "/" + filename);
         member.setPhoto(filename);
       }
+
+      Thumbnails.of(getServletContext().getRealPath("/update/member") + "/" + filename)
+      .size(80, 80)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_20x20";
+        }
+      });
+
+      Thumbnails.of(getServletContext().getRealPath("/update/member") + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_20x20";
+        }
+      });
 
       memberDao.update(member);
       sqlSession.commit();
