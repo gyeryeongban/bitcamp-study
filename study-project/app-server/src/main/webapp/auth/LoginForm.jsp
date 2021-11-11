@@ -4,12 +4,6 @@
 <h1>로그인</h1>
 <form action='login' method='post'>
 <div class="mb-3 row">
-  <label for='f-name' class="col-sm-2 col-form-label">이름</label>
-  <div class="col-sm-6">
-    <input id='f-name' type='text' name='name' class="form-control">
-  </div>
-</div>
-<div class="mb-3 row">
   <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
   <div class="col-sm-10">
     <input id='f-email' type='email' name='email' class="form-control">
@@ -23,9 +17,7 @@
 </div>
 <button class="btn btn-primary btn-sm">로그인</button><br>
 </form>
-</div><!-- .container -->
-</body>
-</html>
+
 
 
 

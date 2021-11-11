@@ -49,7 +49,6 @@ public class MemberUpdateController extends HttpServlet {
       member.setName(request.getParameter("name"));
       member.setEmail(request.getParameter("email"));
       member.setPassword(request.getParameter("password"));
-      member.setPhoto(request.getParameter("photo"));
       member.setTel(request.getParameter("tel"));
 
       Part photoPart = request.getPart("photo");
@@ -57,31 +56,29 @@ public class MemberUpdateController extends HttpServlet {
         String filename = UUID.randomUUID().toString();
         photoPart.write(getServletContext().getRealPath("/upload/member") + "/" + filename);
         member.setPhoto(filename);
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/member") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/member") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
       }
-
-      Thumbnails.of(getServletContext().getRealPath("/update/member") + "/" + filename)
-      .size(80, 80)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_20x20";
-        }
-      });
-
-      Thumbnails.of(getServletContext().getRealPath("/update/member") + "/" + filename)
-      .size(100, 100)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_20x20";
-        }
-      });
 
       memberDao.update(member);
       sqlSession.commit();

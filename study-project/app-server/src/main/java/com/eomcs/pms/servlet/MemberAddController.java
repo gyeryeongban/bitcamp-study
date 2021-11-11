@@ -37,10 +37,8 @@ public class MemberAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
-    //request.setCharacterEncoding("UTF-8");
-
     try {
+
       Member member = new Member();
 
       member.setName(request.getParameter("name"));
@@ -54,21 +52,32 @@ public class MemberAddController extends HttpServlet {
         photoPart.write(getServletContext().getRealPath("/upload/member") + "/" + filename);
         member.setPhoto(filename);
 
-        Thumbnails.of(getServletContext().getRealPath("/update/member") + "/" + filename)
-        .size(80, 80)
+        Thumbnails.of(getServletContext().getRealPath("/upload/member") + "/" + filename)
+        .size(20, 20)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
-        //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
         .toFiles(new Rename() {
           @Override
           public String apply(String name, ThumbnailParameter param) {
             return name + "_20x20";
           }
         });
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/member") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
       }
 
       memberDao.insert(member);
       sqlSession.commit();
+
       response.setHeader("Refresh", "1;url=list");
       request.setAttribute("pageTitle", "회원목록");
       request.setAttribute("contentUrl", "/member/MemberAdd.jsp");

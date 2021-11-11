@@ -12,25 +12,25 @@ import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
 
 @WebServlet("/auth/login")
-public class AuthLoginController extends HttpServlet {
+public class AuthLoginHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
 
   @Override
-  public void init() throws ServletException {
+  public void init() {
     ServletContext 웹애플리케이션공용저장소 = getServletContext();
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    try {
-      String email = request.getParameter("email");
-      String password = request.getParameter("password");
+    String email = request.getParameter("email");
+    String password = request.getParameter("password");
 
+    try {
       Member member = memberDao.findByEmailAndPassword(email, password);
 
       if (member != null) {
@@ -44,14 +44,15 @@ public class AuthLoginController extends HttpServlet {
         request.setAttribute("pageTitle", "로그인오류!");
         request.setAttribute("contentUrl", "/auth/LoginFail.jsp");
         request.getRequestDispatcher("/template1.jsp").forward(request, response);
-      }
 
+      }
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
+
 
 
 
