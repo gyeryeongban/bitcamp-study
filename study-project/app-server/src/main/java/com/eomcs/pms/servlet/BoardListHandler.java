@@ -18,21 +18,18 @@ public class BoardListHandler extends HttpServlet {
   BoardDao boardDao;
 
   @Override
-  public void init() {
+  public void init() throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = getServletContext();
     boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
   }
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    System.out.println("[게시글 목록]");
-
     try {
       Collection<Board> boardList = boardDao.findAll();
 
       request.setAttribute("boardList", boardList);
-
       request.setAttribute("pageTitle", "게시글목록");
       request.setAttribute("contentUrl", "/board/BoardList.jsp");
 
@@ -40,7 +37,6 @@ public class BoardListHandler extends HttpServlet {
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }

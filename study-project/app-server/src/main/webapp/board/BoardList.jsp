@@ -15,16 +15,16 @@ tr:hover {
 }
 </style>
 
-<h1>회원 목록(MVC + EL + JSTL + Bootstrap)</h1>
-<a href='form' class="btn btn-outline-primary btn-sm">새회원</a><br>
+<h1>게시글 목록</h1>
+<a href='form' class="btn btn-outline-primary btn-sm">새 글</a><br>
 <table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
-    <th>이름</th>
-    <th>이메일</th>
-    <th>전화</th>
+    <th>제목</th>
+    <th>작성자</th>
     <th>등록일</th>
+    <th>조회수</th>
   </tr>
 </thead>
 <tbody>
@@ -32,13 +32,10 @@ tr:hover {
 <c:forEach items="${boardList}" var="board">
 <tr data-no="${board.no}">
     <td>${board.no}</td>
-    <td><a href='detail?no=${board.no}'>${board.name}</a></td> 
-    <%-- 
-    <td>${board.name}</td> 
-    --%>
-    <td>${board.email}</td> 
-    <td>${board.tel}</td> 
-    <td>${board.registeredDate}</td>
+    <td><a href='detail?no=${board.no}'>${board.title}</a></td> 
+    <td>${board.writer.name}</td> 
+    <td>${board.registeredDate}</td> 
+    <td>${board.viewCount}</td>
 </tr>
 </c:forEach>
 
