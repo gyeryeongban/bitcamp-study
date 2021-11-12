@@ -1,7 +1,6 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,8 +32,8 @@ public class BoardAddController extends HttpServlet {
     try {
       Board board = new Board();
 
-      board.setTitle(request.getParameter("name"));
-      board.setContent(request.getParameter("email"));
+      board.setTitle(request.getParameter("title"));
+      board.setContent(request.getParameter("content"));
       board.setWriter((Member) request.getSession().getAttribute("loginUser"));
 
       boardDao.insert(board);
@@ -43,12 +42,8 @@ public class BoardAddController extends HttpServlet {
       response.sendRedirect("list");
 
     } catch (Exception e) {
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
-
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
