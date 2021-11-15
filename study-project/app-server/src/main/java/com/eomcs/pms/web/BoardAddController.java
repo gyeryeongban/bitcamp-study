@@ -1,30 +1,55 @@
 package com.eomcs.pms.web;
 
+import java.io.IOException;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Member;
-import com.eomcs.pms.service.BoardService;
 
-@RequestMapping("/board/add")
-public class BoardAddController implements Controller {
+@WebServlet("/board/add")
+public class BoardAddController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-  BoardService boardService;
+  SqlSession sqlSession;
+  BoardDao boardDao;
 
-  public BoardAddController(BoardService boardService) {
-    this.boardService = boardService;
+  @Override
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
   }
 
   @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    try {
+      Board board = new Board();
 
-    Board board = new Board();
-    board.setTitle(request.getParameter("title"));
-    board.setContent(request.getParameter("content"));
+      board.setTitle(request.getParameter("title"));
+      board.setContent(request.getParameter("content"));
+      board.setWriter((Member) request.getSession().getAttribute("loginUser"));
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    board.setWriter(loginUser);
-    boardService.add(board);
-    return "redirect:list";
+      boardDao.insert(board);
+      sqlSession.commit();
+
+      request.setAttribute("contentUrl", "redirect:list");
+
+    } catch (Exception e) {
+      request.setAttribute("error", e);
+    }
   }
 }
+
+
+
+
+
+
+

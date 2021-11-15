@@ -1,27 +1,48 @@
 package com.eomcs.pms.web;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.Collection;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.pms.service.BoardService;
 
-@RequestMapping("/board/list")
-public class BoardListController implements Controller {
+@WebServlet("/board/list")
+public class BoardListController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-  BoardService boardService;
+  BoardDao boardDao;
 
-  public BoardListController(BoardService boardService) {
-    this.boardService = boardService;
+  @Override
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
+    boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
   }
 
   @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    response.setContentType("text/html;charset=UTF-8");
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    try {
+      Collection<Board> boardList = boardDao.findAll();
 
-    String keyword = request.getParameter("keyword");
-    List<Board> list = boardService.list(keyword);
-    request.setAttribute("list", list);
-    return "/board/list.jsp";
+      request.setAttribute("boardList", boardList);
+
+      request.setAttribute("pageTitle", "게시글목록");
+      request.setAttribute("contentUrl", "/board/BoardList.jsp");
+
+    } catch (Exception e) {
+      request.setAttribute("error", e);
+    }
   }
 }
+
+
+
+
+
+
+

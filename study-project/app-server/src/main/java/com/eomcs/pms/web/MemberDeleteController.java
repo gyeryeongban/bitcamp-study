@@ -1,25 +1,55 @@
 package com.eomcs.pms.web;
 
+import java.io.IOException;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.eomcs.pms.service.MemberService;
+import org.apache.ibatis.session.SqlSession;
+import com.eomcs.pms.dao.MemberDao;
+import com.eomcs.pms.domain.Member;
 
-public class MemberDeleteController implements Controller {
+@WebServlet("/member/delete")
+public class MemberDeleteController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-  MemberService memberService;
+  SqlSession sqlSession;
+  MemberDao memberDao;
 
-  public MemberDeleteController(MemberService memberService) {
-    this.memberService = memberService;
+  @Override
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    int no = Integer.parseInt(request.getParameter("no"));
-    if (memberService.delete(no) == 0) {
-      throw new Exception("해당 번호의 회원이 없습니다.");
+    try {
+      int no = Integer.parseInt(request.getParameter("no"));
+      Member member = memberDao.findByNo(no);
+      if (member == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
 
+      memberDao.delete(no);
+      sqlSession.commit();
+
+      request.setAttribute("contentUrl", "redirect:list");
+
+    } catch (Exception e) {
+      request.setAttribute("error", e);
     }
-    return "redirect:list";
   }
 }
+
+
+
+
+
+
+
