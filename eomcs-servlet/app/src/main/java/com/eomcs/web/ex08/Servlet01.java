@@ -28,7 +28,7 @@ public class Servlet01 extends HttpServlet {
     //    예1: 로그인 후 메인페이지로 자동 이동
     //    예2: 메일을 전송한 후 메일 목록 페이지로 자동 이동
     //    예3: 게시글 등록한 후 게시글 목록으로 자동 이동
-    // 예4: 결제 완료 후 결제 상태 페이지로 자동 이동
+    //    예4: 결제 완료 후 결제 상태 페이지로 자동 이동
     //
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -64,7 +64,7 @@ public class Servlet01 extends HttpServlet {
       // 즉시 클라이언트로 응답한다.
       // 즉 반복문 다음에 헤더를 설정하기 전에 이미 버퍼 내용이 출력된다.
       // 응답이 완료된 후에 응답 헤더의 값을 변경하거나 추가해봐야 소용없다.
-
+      //
       out.println(i + " ===> 1234567890123456789012345678901234567890");
     }
 
