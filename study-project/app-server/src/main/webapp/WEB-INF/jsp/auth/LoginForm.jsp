@@ -16,15 +16,14 @@
   </div>
 </div>
 <div class="mb-3 row">
-<label for='f-saveEmail' class="col-sm-label"></label>
-  <div class="col-sm-6">
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" name="saveEmail" ${not empty cookie.email ? "cheaked" : ""}>
-  <label class="form-check-label" for="flexCheckDefault">
-    이메일 저장
-  </label>
-</div>
-</div>
+  <label for='f-saveEmail' class="col-sm-2 col-form-label"></label>
+  <div class="col-sm-10">
+	<div class="form-check">
+	  <input id="f-saveEmail" class="form-check-input" 
+	  type="checkbox" name="saveEmail" ${not empty cookie.email ? "checked" : ""}>
+	  <label class="form-check-label" for="flexCheckDefault">이메일 저장</label>
+	</div>
+  </div>
 </div>
 <button class="btn btn-primary btn-sm">로그인</button><br>
 </form>
